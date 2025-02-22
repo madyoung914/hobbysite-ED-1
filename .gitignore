@@ -1,0 +1,4 @@
+.env
+csci40env/
+**/*.pyc
+**/__pycache__
