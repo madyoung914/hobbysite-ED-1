@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Task {{ task.name }}{% endblock %}
+{% block content %}
+        <u1>
+            {% for merch in merchs %}
+            <li>{{ merch }}</li>
+            {% endfor %}
+        </u1>
+{% endblock %}
