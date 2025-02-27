@@ -17,3 +17,9 @@ def merch_list(request):
     }
 
     return render(request, 'merchstore/merch_list.html', ctx)
+
+def merch_detail(request): 
+    ctx = {
+        "word": 'Hi'
+    }
+    return render(request, 'merchstore/merch_detail.html', ctx)
