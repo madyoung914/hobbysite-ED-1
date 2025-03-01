@@ -4,10 +4,8 @@
 {% block title %}{{ article.title }}{% endblock %}
 
 {% block content %}
-    <h2>{{ article.title }}</h2>
-    <ul>
-        <!--{% for ingredient in recipe.ingredients.all  %}
-            <li>{{ ingredient.ingredient.name }} : {{ ingredient.quantity }}</li>
-        {% endfor %}-->
-    </ul>  
+<h2>{{ article.title }}</h2>
+<p>Category: {{ article.category }} | Created: {{ article.created_on }} | Last Updated: {{ article.updated_on }}</p>
+<p>{{ article.entry }}</p>
+    </ul>
 {% endblock %}

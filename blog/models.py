@@ -21,12 +21,15 @@ class Article(models.Model):
         null=True
         ) 
     entry = models.TextField()
-    #createdOn = date time field only gets set when the model is created
-    #updatedOn = date time field always updates on last model update
-    #should be sorted by date created in descending order
-
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
+  
     def get_absolute_url(self):
         return reverse('blog:article-detail', args=[self.pk])
 
     def __str__(self):
         return self.title
+    
+    class Meta:
+        ordering = ['-created_on']
+
