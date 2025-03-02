@@ -1,12 +1,15 @@
 {% extends 'base.html' %}
+{% load static %}
 
+{% block title %}Online Wiki{% endblock %}
 
 {% block content %}
-    <ul>
-        {% for article in object_list %}
-            <li>
-                <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
-            </li>
-        {% endfor %}
-    </ul>
+    <h1>📚 Online Wiki</h1>
+
+    {% for article in object_list %}
+        <h3><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h3>
+        <p>🏷️ Category: {{ article.category.name }} | 🕒 Created On: {{ article.created_on}} | ✅ Last Updated: {{ article.updated_on}}</p>
+        <hr>
+    {% endfor %}
+
 {% endblock %}
