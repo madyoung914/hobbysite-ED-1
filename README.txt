@@ -1,5 +1,5 @@
-Kino De Torres
-Abdul Wahab Iburahim
-Ian Luis Mercada
-Alyssa Maegan Tan
-Madeleine Young
+De Torres, Kino
+Iburahim, Abdul Wahab 
+Mercado, Ian Luis 
+Tan, Alyssa Maegan 
+Young, Madeleine
