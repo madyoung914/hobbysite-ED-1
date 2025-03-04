@@ -19,17 +19,16 @@ class Article(models.Model):
         ArticleCategory,
         on_delete=models.SET_NULL,
         null=True
-        ) 
+        )
     entry = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
-  
+
     def get_absolute_url(self):
         return reverse('blog:article-detail', args=[self.pk])
 
     def __str__(self):
         return self.title
-    
+
     class Meta:
         ordering = ['-created_on']
-

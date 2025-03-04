@@ -4,12 +4,12 @@
 {% block title %}Articles List{% endblock %}
 
 {% block content %}
-<h2>Articles</h2>
+    <h2>Articles</h2>
     <ul>
         {% for article in object_list %}
             <li>
                 <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
-                | {{ article.category }} | {{ article.created_on }} | {{ article.updated_on }}
+                | Category: {{ article.category }} | Published: {{ article.created_on }} | Last Updated: {{ article.updated_on }}
             </li>
         {% endfor %}
     </ul>
