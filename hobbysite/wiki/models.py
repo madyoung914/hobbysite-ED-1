@@ -18,17 +18,17 @@ class Article(models.Model):
     category = models.ForeignKey(
         ArticleCategory,
         on_delete=models.SET_NULL,
-        null=True,
-        )
+        null=True
+    )
     entry = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title
-    
+
     def get_absolute_url(self):
         return reverse('wiki:article-detail', args=[self.pk])
-    
+
     class Meta:
         ordering = ['-created_on']
