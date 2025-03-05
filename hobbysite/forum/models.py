@@ -24,8 +24,8 @@ class Post(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
-    def get_aboslute_url(self):
-        return reverse('forum:thread-detail')
+    def get_absolute_url(self):
+        return reverse('forum:thread-detail', args=[self.pk])
     
     def __str__(self):
         return self.title

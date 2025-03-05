@@ -5,10 +5,11 @@
 
 {% block content %}
     <h2>Threads</h2>
+    <p>{{ object_list. }}</p>
     <ul>
         {% for thread in object_list %}
             <li>
-                <a href="{{ thread.get_absolute_url }}">{{thread.name}}</a>
+                <a href="{{ thread.get_absolute_url }}">{{thread.title}}</a>
             </li>
         {% endfor %}
     </ul>
