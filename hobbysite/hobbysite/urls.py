@@ -19,6 +19,5 @@ from django.urls import include, path
 
 urlpatterns = [
     path('forum/', include('forum.urls', namespace="forum")),
-    #path('article/<int:pk>', ForumDetailView.as_view(), name='forum-detail'),
     path('admin/', admin.site.urls),
 ]
