@@ -5,9 +5,6 @@
 
 {% block content %}
     <h2>{{ article.title }}</h2>
-    <ul>
-        <!--{% for ingredient in recipe.ingredients.all  %}
-            <li>{{ ingredient.ingredient.name }} : {{ ingredient.quantity }}</li>
-        {% endfor %}-->
-    </ul>  
+    <p>Category: {{ article.category }} | Published: {{ article.created_on }} | Last Updated: {{ article.updated_on }}</p>
+    <p>{{ article.entry }}</p>
 {% endblock %}
