@@ -18,6 +18,7 @@ class Commission(models.Model):
     class Meta:
         ordering = ['-UpdatedOn']  
 
+
 class Comment(models.Model):
     commission = models.ForeignKey(
         Commission,

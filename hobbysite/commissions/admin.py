@@ -4,6 +4,7 @@ from .models import Commission, Comment
 class Commentline(admin.TabularInline):
     model = Comment
 
+
 class CommissionAdmin(admin.ModelAdmin):
     model = Commission
     inlines = [Commentline,]

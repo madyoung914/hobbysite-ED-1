@@ -7,6 +7,7 @@ class CommissionListView(ListView):
     model = Commission
     template_name = 'commissions/CommissionList.html' 
 
+
 class CommissionDetailView(DetailView):
     model = Commission
     template_name = 'commissions/CommissionDetail.html' 
