@@ -14,6 +14,9 @@ class Commission(models.Model):
 
     def get_absolute_url(self):
         return reverse('commissions:commissionDetail', args=[self.pk])
+    
+    class Meta:
+        ordering = ['-UpdatedOn']  
 
 class Comment(models.Model):
     commission = models.ForeignKey(

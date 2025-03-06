@@ -7,6 +7,5 @@ class Commentline(admin.TabularInline):
 class CommissionAdmin(admin.ModelAdmin):
     model = Commission
     inlines = [Commentline,]
-# Register your models here.
 
 admin.site.register(Commission, CommissionAdmin)
