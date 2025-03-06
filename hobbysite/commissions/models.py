@@ -13,7 +13,7 @@ class Commission(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('Commission:commissionDetail', args=[self.pk])
+        return reverse('commissions:commissionDetail', args=[self.pk])
 
 class Comment(models.Model):
     commission = models.ForeignKey(

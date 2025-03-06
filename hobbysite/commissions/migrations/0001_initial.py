@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
                 ('entry', models.TextField()),
                 ('CreatedOn', models.DateTimeField(auto_now_add=True)),
                 ('UpdatedOn', models.DateTimeField(auto_now=True)),
-                ('commission', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comments', to='Commission.commission')),
+                ('commission', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comments', to='commissions.commission')),
             ],
         ),
     ]
