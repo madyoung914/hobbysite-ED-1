@@ -24,3 +24,6 @@ class Comment(models.Model):
     entry = models.TextField()
     CreatedOn = models.DateTimeField(auto_now_add=True)
     UpdatedOn = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        ordering = ['-UpdatedOn']  
