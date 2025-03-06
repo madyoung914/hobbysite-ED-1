@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Threads List{% endblock %}
+
+{% block content %}
+    <h2>Threads</h2>
+    <ul>
+        {% for thread in object_list %}
+            <li>
+                <a href="{{ thread.get_absolute_url }}">{{thread.title}}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
