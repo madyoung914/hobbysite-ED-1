@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Articles List{% endblock %}
+
+{% block content %}
+    <h2>Articles</h2>
+    <ul>
+        {% for article in object_list %}
+            <li>
+                <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+                | Category: {{ article.category }} | Published: {{ article.created_on }} | Last Updated: {{ article.updated_on }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
