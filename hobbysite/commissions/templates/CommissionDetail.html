@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Commission App{% endblock %}
+{% block content %}
+
+<h3>{{object.title}}</h3>
+
+    <ul>
+        <li>Created On: {{object.CreatedOn}}</li>
+        <li>Updated On: {{object.UpdatedOn}}</li>
+    </ul>
+    
+    <p>
+        <b>Description</b>
+        <br>
+        {{object.description}}
+    </p>
+
+    <p> <b>People Required: </b> {{object.peopleRequired}}</p>
+    
+    <b>Comments</b>
+    <ul>
+        {% for comment in object.comments.all %}
+            <li><p>{{comment.entry}}
+                <br>
+                Updated on: {{comment.UpdatedOn}}
+                <br>
+                Created on: {{comment.CreatedOn}}
+                
+            </p></li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
