@@ -9,3 +9,4 @@ urlpatterns = [
 
 app_name = "wiki"
 
+
