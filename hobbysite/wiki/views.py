@@ -10,3 +10,4 @@ class ArticleListView(ListView):
 class ArticleDetailView(DetailView):
     model = Article
     template_name = 'wiki/article_detail.html'
+

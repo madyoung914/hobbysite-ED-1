@@ -5,7 +5,7 @@
 
 {% block content %}
     <h1>📚 Online Wiki</h1>
-
+    
     {% for article in object_list %}
         <h3><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h3>
         <p>
