@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'forum',
     'merchstore',
     'commissions',
-    'blog'
+    'blog',
+    'user_management',
 ]
 
 MIDDLEWARE = [
@@ -125,10 +126,15 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    BASE_DIR / "static",  # Ensure this points to your project-level static folder
+    BASE_DIR / "static",
 ]
+LOGIN_REDIRECT_URL = '/merchstore/items' #THIS IS TEMPORARY UNTIL THE HOMEPAGE IS MADE
+LOGOUT_REDIRECT_URL = 'accounts/login'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+MEDIA_ROOT = BASE_DIR/'media'
+MEDIA_URL = '/media/'
