@@ -1,5 +1,4 @@
-from django.views.generic.list import ListView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView
 
 from .forms import UserForm
 from .models import Profile

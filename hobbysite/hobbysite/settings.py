@@ -128,7 +128,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
-LOGIN_REDIRECT_URL = '/merchstore/items' #THIS IS TEMPORARY UNTIL THE HOMEPAGE IS MADE
+LOGIN_REDIRECT_URL = '/merchstore/items'  # THIS IS TEMPORARY UNTIL THE HOMEPAGE IS MADE
 LOGOUT_REDIRECT_URL = 'accounts/login'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
