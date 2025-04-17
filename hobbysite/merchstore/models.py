@@ -37,10 +37,12 @@ class Product(models.Model):
                                     null=True,
                                     related_name="type")
     owner = models.ForeignKey(Profile,
-                              on_delete=models.CASCADE,
+                              on_delete=models.CASCADE, null=True,
                               related_name='owner')
     stock = models.PositiveIntegerField()
-    status = models.CharField(choices=PRODUCT_STATUS, default="AVL")
+    status = models.CharField(max_length=15,
+                              choices=PRODUCT_STATUS,
+                              default="AVL")
 
     def __str__(self):
         return self.name
@@ -55,10 +57,12 @@ class Product(models.Model):
 class Transaction(models.Model):
     buyer = models.ForeignKey(Profile,
                               on_delete=models.SET_NULL,
+                              null=True,
                               related_name='buyer')
     product = models.ForeignKey(Product,
                                 on_delete=models.SET_NULL,
+                                null=True,
                                 related_name="product")
     amount = models.PositiveIntegerField()
-    status = models.CharField(choices=TRANSACTION_STATUS)
+    status = models.CharField(max_length=15, choices=TRANSACTION_STATUS)
     created_on = models.DateTimeField(auto_now_add=True)
