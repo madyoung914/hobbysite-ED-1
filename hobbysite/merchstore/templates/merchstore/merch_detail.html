@@ -5,7 +5,12 @@
 {% block title %}{{ object.name }}{% endblock %}
 {% block content %}
     <h3>{{ object.name }}</h3>
+    <h4>Owner: {{ object.owner }}</h4>
     <p>Description: {{ object.description }}</p>
     <p>Product Type: {{ object.producttype }}</p>
     <p>Price (₱): {{ object.price }}</p>
+    <p>Stock: {{object.stock }}</p>
+    <p>Product Status: {{ object.status }}</p>
+
+    <a href="{% url 'merchstore:merchstore-list' %}">Go back to merchstore</a>
 {% endblock %}
