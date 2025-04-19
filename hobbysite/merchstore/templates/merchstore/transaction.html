@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>My Transactions (w others)</h2>
+
+{% for transaction in object_list %}
+    {% if transaction.product.owner.user == user %}
+        <h4>{{ transaction.product }}</h4>
+        <li>Buyer: {{ transaction.buyer }}</li>
+        <li>Amount: {{ transaction.amount }}</li>
+        <li>Status: {{ transaction.status }}</li>
+        <li>Bought on: {{ transaction.created_on }}</li>
+    {% endif %}
+
+{% endfor %}
+
+<a href="{% url 'merchstore:merchstore-list' %}">Go back to merchstore page</a>
+
+{% endblock %}
