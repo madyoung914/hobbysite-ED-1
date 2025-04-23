@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<h2>Recipe Book
+    {% if request.user.is_authenticated %}
+        <h1>Hello {{ request.user.username }}</h1>
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
+    {% else %}
+        <h1>Not logged yet</h1>
+        <a href="{% url 'main_interface:homepage' %}">Go here</a>
+    {% endif %}
+
+{% endblock %}

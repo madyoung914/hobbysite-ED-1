@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'commissions',
     'blog',
     'user_management',
+    'main_interface',
 ]
 
 MIDDLEWARE = [
@@ -128,8 +129,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
-LOGIN_REDIRECT_URL = '/merchstore/items'  # THIS IS TEMPORARY UNTIL THE HOMEPAGE IS MADE
-LOGOUT_REDIRECT_URL = '/profile'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Default primary key field type

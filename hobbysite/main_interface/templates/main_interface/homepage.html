@@ -4,12 +4,17 @@
 {% block content %}
 <h2>Recipe Book
     {% if request.user.is_authenticated %}
+        <h1>Hello {{ request.user.username }}</h1>
         <form method="POST" action="{% url 'logout' %}">
             {% csrf_token %}
             <button type="submit">Logout</button>
         </form>
     {% else %}
+        <h1>Want to login?</h1>
         <a href="{% url 'login' %}">Login</a>
+        <br>
+        <h1>Need to create a new account?</h1>
+        <p>smthg here for user creation</p>
     {% endif %}
 </h2>
 
@@ -22,4 +27,6 @@
     <a href="{% url 'forum:threads-list' %}">Go to forum</a>
     <br>
     <a href="{% url 'wiki:articles-list' %}">Go to wiki</a>
+    <br>
+    <a href="{% url 'user_management:profile' %}">Go to profile</a>
 {% endblock %}
