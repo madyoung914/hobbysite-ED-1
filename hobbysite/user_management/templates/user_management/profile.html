@@ -9,6 +9,9 @@
             {% csrf_token %}
             <button type="submit">Logout</button>
         </form>
+
+        <p>Name: {{ request.user.profile.name }}</p>
+        <p>Email: {{ request.user.profile.email }}</p>
     {% else %}
         <h1>Not logged yet</h1>
         <a href="{% url 'main_interface:homepage' %}">Go here</a>
