@@ -6,13 +6,30 @@
 {% block content %}
     <h1>📚 Online Wiki</h1>
     
-    {% for article in object_list %}
-        <h3><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h3>
-        <p>
-            🏷️ Category: {{ article.category.name }} | 
-            🕒 Created On: {{ article.created_on }} | 
-            ✅ Last Updated: {{ article.updated_on }}
-        </p>
+    <h2>Your Articles</h2>
+        {% if user_articles %}
+            <ul>
+                {% for article in user_articles %}
+                    <li>
+                        <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>You have not written any articles.</p>
+        {% endif %}
+
         <hr>
-    {% endfor %}
+
+        <h2>All Articles by Category</h2>
+        {% for category, articles in articles_by_category.items %}
+            <h3>{{ category }}</h3>
+            <ul>
+                {% for article in articles %}
+                    <li>
+                        <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endfor %}
 {% endblock %}
