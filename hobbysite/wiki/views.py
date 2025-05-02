@@ -1,8 +1,9 @@
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import DetailView, ListView, CreateView
-from django.urls import reverse_lazy
+from django.urls import reverse
 
-from .models import Article, Profile
+from .models import Article, Profile, Comment
+from .forms import CommentForm, ArticleForm
 
 
 class ArticleListView(ListView):
@@ -36,4 +37,40 @@ class ArticleListView(ListView):
 class ArticleDetailView(DetailView):
     model = Article
     template_name = 'wiki/article_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        article = self.get_object()
+
+        related_articles = Article.objects.filter(
+            category=article.category
+        ).exclude(pk=article.pk)[:2]  # gets the first 2 results
+
+        comments = Comment.objects.filter(article=article).order_by('-created_on')
+
+        # provides comments only if user is authenticated
+        if self.request.user.is_authenticated:
+            context['comment_form'] = CommentForm()
+
+        context['related_articles'] = related_articles
+        context['comments'] = comments
+
+        return context
+
+    def post(self, request, *args, **kwargs):
+        article = self.get_object()  
+        profile = get_object_or_404(Profile, user=request.user) 
+        form = CommentForm(request.POST)
+
+        if form.is_valid():  
+            comment = form.save(commit=False)  # doesnt save yet
+            comment.article = article  
+            comment.author = profile  
+            comment.save()  
+            
+            return self.get(request, *args, **kwargs) 
+
+        else:  
+            context = self.get_context_data(comment_form=form) 
+            return self.render_to_response(context) 
 
