@@ -1,5 +1,6 @@
 from turtle import title
 from django.db import models
+from user_management.models import Profile
 from django.urls import reverse
 
 class Commission(models.Model):
@@ -44,18 +45,25 @@ class Comment(models.Model):
         ordering = ['-UpdatedOn']
 
 class Job(models.Model):
+    class OrderStatus(models.TextChoices):
+        OPEN = 'O', 'Open'
+        FULL = 'F', 'Full'
+
     commission = models.ForeignKey(
         Commission,
         on_delete=models.CASCADE,
-        related_name='comments'
+        related_name='jobs'
     )
     role = models.CharField(max_length=255)
     manpowerRequired = models.IntegerField()
-    status = models.CharField(default='Open')
+    status = models.CharField(
+        choices = OrderStatus.choices,
+        default = OrderStatus.OPEN
+        )
     
     def updateStatus(self,numApps):
         if numApps==self.manpowerRequired:
-            self.status = 'Full'
+            self.status = self.OrderStatus.FULL
             self.save()
     CreatedOn = models.DateTimeField(auto_now_add=True)
     UpdatedOn = models.DateTimeField(auto_now=True)
@@ -63,22 +71,33 @@ class Job(models.Model):
     class Meta:
         ordering = ['-UpdatedOn']
 
-class Job(models.Model):
-    commission = models.ForeignKey(
+class JobApplicantion(models.Model):
+    
+    class AppStatus(models.TextChoices):
+        PENDING = 'P', 'Pending'
+        ACCEPTED = 'A', 'Accepted'
+        REJECTED = 'R', 'Rejected'
+
+    job = models.ForeignKey(
         Commission,
         on_delete=models.CASCADE,
-        related_name='comments'
+        related_name='jobApplication'
     )
+    applicant = models.ForeignKey(
+        Profile,
+        on_delete=models.CASCADE,
+        null=True
+        related_name='jobApplication'
+    )
+    status = models.CharField(
+        choices = AppStatus.choices,
+        default = AppStatus.PENDING
+        )
     role = models.CharField(max_length=255)
     manpowerRequired = models.IntegerField()
     status = models.CharField(default='Open')
     
-    def updateStatus(self,numApps):
-        if numApps==self.manpowerRequired:
-            self.status = 'Full'
-            self.save()
-    CreatedOn = models.DateTimeField(auto_now_add=True)
-    UpdatedOn = models.DateTimeField(auto_now=True)
-
+    AppliedOn = models.DateTimeField(auto_now_add=True)
+    
     class Meta:
-        ordering = ['-UpdatedOn']
+        ordering = ['-AppliedOn']
