@@ -1,9 +1,10 @@
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import DetailView, ListView, CreateView
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 
 from .models import Article, Profile, Comment
 from .forms import CommentForm, ArticleForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class ArticleListView(ListView):
@@ -50,7 +51,7 @@ class ArticleDetailView(DetailView):
 
         # provides comments only if user is authenticated
         if self.request.user.is_authenticated:
-            context['comment_form'] = CommentForm()
+            context['form'] = CommentForm()
 
         context['related_articles'] = related_articles
         context['comments'] = comments
@@ -73,4 +74,19 @@ class ArticleDetailView(DetailView):
         else:  
             context = self.get_context_data(comment_form=form) 
             return self.render_to_response(context) 
+
+
+
+class ArticleCreateView(LoginRequiredMixin, CreateView):
+    model = Article
+    template_name = 'wiki/article_form.html'
+    fields = ['title', 'entry', 'category', 'header_image']
+
+    def form_valid(self, form):
+        profile = get_object_or_404(Profile, user=self.request.user) 
+        form.instance.author = profile
+        return super().form_valid(form)
+    
+    def get_success_url(self):
+        return reverse_lazy('wiki:article-detail', kwargs={'pk': self.object.pk})
 
