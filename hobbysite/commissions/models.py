@@ -71,7 +71,7 @@ class Job(models.Model):
     class Meta:
         ordering = ['-UpdatedOn']
 
-class JobApplicantion(models.Model):
+class JobApplication(models.Model):
     
     class AppStatus(models.TextChoices):
         PENDING = 'P', 'Pending'
@@ -86,7 +86,7 @@ class JobApplicantion(models.Model):
     applicant = models.ForeignKey(
         Profile,
         on_delete=models.CASCADE,
-        null=True
+        null=True,
         related_name='jobApplication'
     )
     status = models.CharField(
