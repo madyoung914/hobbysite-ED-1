@@ -2,10 +2,10 @@
 {% load static %}
 
 {% block content %}
-  <h1>Create Article</h1>
+  <h1>{{ form_title }}</h1>
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Create</button>
+    <button type="submit">Post</button>
   </form>
 {% endblock %}

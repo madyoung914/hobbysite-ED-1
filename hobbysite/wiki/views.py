@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, redirect
-from django.views.generic import DetailView, ListView, CreateView
+from django.views.generic import DetailView, ListView, CreateView, UpdateView
 from django.urls import reverse, reverse_lazy
 
 from .models import Article, Profile, Comment
@@ -76,12 +76,16 @@ class ArticleDetailView(DetailView):
             return self.render_to_response(context) 
 
 
-
 class ArticleCreateView(LoginRequiredMixin, CreateView):
     model = Article
     template_name = 'wiki/article_form.html'
     fields = ['title', 'entry', 'category', 'header_image']
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form_title'] = 'Create a new article'
+        return context
+    
     def form_valid(self, form):
         profile = get_object_or_404(Profile, user=self.request.user) 
         form.instance.author = profile
@@ -90,3 +94,16 @@ class ArticleCreateView(LoginRequiredMixin, CreateView):
     def get_success_url(self):
         return reverse_lazy('wiki:article-detail', kwargs={'pk': self.object.pk})
 
+
+class ArticleUpdateView(LoginRequiredMixin, UpdateView):
+    model = Article
+    form_class = ArticleForm
+    template_name = 'wiki/article_form.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form_title'] = 'Update article'
+        return context
+
+    def get_success_url(self):
+        return reverse_lazy('wiki:article-detail', kwargs={'pk': self.object.pk})
