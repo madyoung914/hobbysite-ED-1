@@ -5,12 +5,12 @@ from .models import Thread
 
 class ThreadListView(ListView):
     model = Thread
-    template_name = 'forum/post_list.html'
+    template_name = 'forum/thread_list.html'
 
 
 class ThreadDetailView(DetailView):
     model = Thread
-    template_name = 'forum/post_detail.html'
+    template_name = 'forum/thread_detail.html'
 
 
 class ThreadCreateView(DetailView):
