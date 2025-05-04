@@ -6,6 +6,3 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.TextField(max_length=63)
     email = models.EmailField()
-
-for user in User.objects.all():
-    Profile.objects.get_or_create(user=user)

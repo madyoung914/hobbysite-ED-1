@@ -6,7 +6,7 @@
 {% block content %}
     <h2>{{ object.title }}</h2>
     <p>Category: {{ object.category }} | Created On: {{ object.created_on }} | 
-        Updated On: {{ object.updated_on }}</p>
+        Updated On: {{ object.updated_on }} | Created By: {{ object.author.name }}</p>
     <p>{{ object.entry }} </p>
 {% endblock %}
 
