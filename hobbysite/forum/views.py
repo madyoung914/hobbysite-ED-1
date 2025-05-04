@@ -1,6 +1,8 @@
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, UpdateView
 from .models import Thread, ThreadCategory
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class ThreadListView(ListView):
@@ -20,11 +22,12 @@ class ThreadDetailView(DetailView):
     template_name = 'forum/thread_detail.html'
 
 
-class ThreadCreateView(DetailView):
+class ThreadCreateView(LoginRequiredMixin, CreateView):
     model = Thread
+    fields = '__all__'
     template_name = 'forum/thread_add.html'
 
 
-class ThreadUpdateView(DetailView):
+class ThreadUpdateView(UpdateView):
     model = Thread
     template_name = 'forum/thread_edit.html'

@@ -1,9 +1,16 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}{{ object.title }}{% endblock %}
+{% block title %}New Thread{% endblock %}
 
 {% block content %}
-   
-{% endblock %}
+    <h4> Create New Thread </h4>
 
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Upload Image</button>
+    </form>
+
+    <a href="{% url 'forum:threads-list' %}">Back to thread list</a>
+{% endblock %}
