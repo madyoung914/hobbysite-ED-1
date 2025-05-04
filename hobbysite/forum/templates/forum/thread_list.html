@@ -5,11 +5,17 @@
 
 {% block content %}
     <h1>💬 Threads</h1>
+
+    {% for category in grouped_threads %}
+    <h2>{{ category.name }}</h2>
     <ul>
-        {% for thread in object_list %}
-            <li>
-                <a href="{{ thread.get_absolute_url }}">{{thread.title}}</a>
-            </li>
+        {% for thread in category.thread_set.all %}
+        <li>
+            <a href="{{ thread.get_absolute_url }}">{{thread.title}}</a>
+        </li>
+        {% empty %}
+        <li>No threads in this category.</li>
         {% endfor %}
     </ul>
+    {% endfor %}
 {% endblock %}
