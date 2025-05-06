@@ -6,7 +6,6 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import ProductForm, TransactionForm
-from django.contrib.auth import login
 
 
 class ProductTypeListView(ListView):
@@ -23,34 +22,45 @@ class ProductDetailView(DetailView):
         ctx['form'] = TransactionForm()
         return ctx
 
-    def post(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        form = TransactionForm(request.POST)
-
+    def process_transaction_form(self, form_data):
+        form = TransactionForm(form_data)
         if form.is_valid() and form.instance.amount <= self.object.stock and form.instance.amount != 0:
-            # but also submit button should not be clickable if stock is 0
             self.object.stock -= form.instance.amount
-
-            user = request.user
-            login(request, user)
 
             transaction = form.save(commit=False)
             transaction.product = self.object
-            transaction.buyer = request.user.profile
+            transaction.buyer = self.request.user.profile
 
             if self.object.stock == 0:
                 self.object.status = 'OOS'
 
             transaction.status = 'CART'
-
             transaction.save()
             self.object.save()
 
             return redirect(reverse('merchstore:merch-cart'))
         else:
-            context = self.get_context_data(**kwargs)
+            context = self.get_context_data()
             context['form'] = form
             return self.render_to_response(context)
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+
+        if request.user.is_authenticated and 'temporary' in request.session:
+            saved_data = request.session.pop('temporary')
+            return self.process_transaction_form(saved_data)
+
+        return super().get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+
+        if not request.user.is_authenticated:
+            request.session['temporary'] = request.POST.dict()
+            return redirect('%s?next=%s' % (reverse('login'), request.path))
+
+        return self.process_transaction_form(request.POST)
 
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
