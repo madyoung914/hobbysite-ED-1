@@ -16,7 +16,12 @@ class UserCreateView(CreateView):
     model = User
     form_class = CreateUserForm
     template_name = "main_interface/register.html"
+<<<<<<< HEAD
 
+=======
+    slug_field = 'product_slug'
+    
+>>>>>>> 4d69ea7 (added the last feature of merchstore)
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         ctx['form'] = CreateUserForm()
