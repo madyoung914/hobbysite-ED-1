@@ -59,21 +59,32 @@ class ArticleDetailView(DetailView):
         return context
 
     def post(self, request, *args, **kwargs):
-        article = self.get_object()  
-        profile = get_object_or_404(Profile, user=request.user) 
-        form = CommentForm(request.POST)
+        article = self.get_object()
+        profile = get_object_or_404(Profile, user=request.user)
 
-        if form.is_valid():  
-            comment = form.save(commit=False)  # doesnt save yet
-            comment.article = article  
-            comment.author = profile  
-            comment.save()  
-            
-            return self.get(request, *args, **kwargs) 
+        comment_id = request.POST.get('comment_id')
 
-        else:  
-            context = self.get_context_data(comment_form=form) 
-            return self.render_to_response(context) 
+        if comment_id: 
+            comment = get_object_or_404(Comment, id=comment_id, article=article)
+
+            if comment.author == profile:
+                comment.entry = request.POST.get('entry', comment.entry)
+                comment.save()
+
+            return redirect('wiki:article-detail', pk=article.pk)
+
+        else:  # creating a new comment
+            form = CommentForm(request.POST)
+            if form.is_valid():
+                comment = form.save(commit=False)
+                comment.article = article
+                comment.author = profile
+                comment.save()
+                return redirect('wiki:article-detail', pk=article.pk)
+
+            context = self.get_context_data()
+            context['form'] = form
+            return self.render_to_response(context)
 
 
 class ArticleCreateView(LoginRequiredMixin, CreateView):

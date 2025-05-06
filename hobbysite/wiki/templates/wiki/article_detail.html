@@ -6,11 +6,10 @@
 {% block content %}
     <h1>{{ article.title }}</h1>
 
-    {% if article.header_image %}
-        <img src="{{ article.header_image.url }}" alt="{{ article.header_image.url }}" style="width: 100%; height: 300px; object-fit: cover; object-position: middle;">
-    {% endif %}
+    <img src="{{ article.header_image.url }}" alt="{{ article.header_image.url }}" style="width: 100%; height: 300px; object-fit: cover; object-position: middle;">
 
     <p>
+        🏷️ Created by: {{ article.author}} |
         🏷️ Category: {{ article.category.name }} |
         🕒 Created On: {{ article.created_on }} |
         ✅ Last Updated: {{ article.updated_on }}
@@ -23,9 +22,7 @@
         <a href="{% url 'wiki:article-edit' pk=object.pk %}">Edit Article</a>
     {% endif %}
 
-
     <p><a href="{% url 'wiki:articles-list' %}">⬅️Back to Article List</a>
-
 
     <h3>Read More from {{ article.category.name }}</h3>
     <ul>
@@ -50,17 +47,32 @@
 
     <hr>
     <h3>Comments</h3>
+
     {% for comment in comments %}
         <div style="margin-bottom: 1em;">
-            <strong>{{ comment.author.name }}</strong> | {{ comment.created_on|date:"M d, Y H:i" }} 
-            {% if comment.updated_on != comment.created_on %}
-                (Edited: {{ comment.updated_on|date:"M d, Y H:i" }})
+            {% if user.is_authenticated and comment.author.user == user and request.GET.comment_id == comment.id|stringformat:"s" %}
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                    <textarea name="entry">{{ comment.entry }}</textarea>
+                    <br>
+                    <button type="submit">Update</button>
+                    <a href="{% url 'wiki:article-detail' article.pk %}">Cancel</a>
+                </form>
+            {% else %}
+                <strong>{{ comment.author }}</strong> | {{ comment.created_on|date:"M d, Y H:i" }}
+                {% if comment.updated_on != comment.created_on %} (Edited: {{ comment.updated_on|date:"M d, Y H:i" }} ) {% endif %}
+                {% if user.is_authenticated and comment.author.user == user %}
+                    <a href="?comment_id={{ comment.id }}">Edit</a>
+                {% endif %}
+                
+                <br>
+                {{ comment.entry }}
+                
             {% endif %}
-
-            <br>
-            {{ comment.entry }}
         </div>
     {% empty %}
         <p>No comments yet.</p>
     {% endfor %}
+
 {% endblock %}
