@@ -6,6 +6,7 @@ from django.shortcuts import redirect
 from .forms import CommissionForm, JobFormSet
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import login
 
 class CommissionListView(ListView):
     model = Commission
@@ -26,10 +27,20 @@ class CreateCommissionView(LoginRequiredMixin, CreateView):
         context['form'] = CommissionForm()
         return context
 
+
+
     def post(self, request, *args, **kwargs):
         form = CommissionForm(request.POST)
         if form.is_valid():
-            form.instance.author = self.request.user.profile
+
+            user = request.user
+            login(request, user)
+
+            commission = form.save(commit=False)
+            commission.commission_author = request.user.profile
+
+            commission.save()
+            self.object.save()
             return super().form_valid(form)
         else:
             self.object_list = self.get_queryset(**kwargs)
