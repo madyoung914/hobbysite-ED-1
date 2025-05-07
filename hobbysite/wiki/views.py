@@ -2,8 +2,8 @@ from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import DetailView, ListView, CreateView, UpdateView
 from django.urls import reverse, reverse_lazy
 
-from .models import Article, Profile, Comment
-from .forms import CommentForm, ArticleForm
+from .models import Article, Profile, Comment, ImageGallery
+from .forms import CommentForm, ArticleForm, ImageGalleryForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
@@ -53,6 +53,7 @@ class ArticleDetailView(DetailView):
         if self.request.user.is_authenticated:
             context['form'] = CommentForm()
 
+        context['images'] = ImageGallery.objects.filter(article=article)
         context['related_articles'] = related_articles
         context['comments'] = comments
 
@@ -118,3 +119,40 @@ class ArticleUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('wiki:article-detail', kwargs={'pk': self.object.pk})
+
+
+class ImageGalleryView(LoginRequiredMixin,CreateView):
+    model = ImageGallery
+    fields = ['image', 'description']
+    template_name = 'wiki/image_gallery.html'  
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form_title'] = 'Upload Image'
+        context['article'] = get_object_or_404(Article, pk=self.kwargs['pk'])
+        return context
+
+    def form_valid(self, form):
+        form.instance.article = get_object_or_404(Article, pk=self.kwargs['pk'])
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('wiki:article-detail', kwargs={'pk': self.kwargs['pk']})
+
+class ImageGalleryUpdateView(LoginRequiredMixin,UpdateView):
+    model = ImageGallery
+    fields = ['image', 'description']
+    template_name = 'wiki/image_gallery.html' 
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form_title'] = 'Update Images'
+        image_instance = self.get_object()
+        context['article'] = image_instance.article
+        return context
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('wiki:article-detail', kwargs={'pk': self.object.article.pk})

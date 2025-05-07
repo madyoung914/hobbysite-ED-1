@@ -22,6 +22,22 @@
         <a href="{% url 'wiki:article-edit' pk=object.pk %}">Edit Article</a>
     {% endif %}
 
+    {% if images %}
+        <h3>Image Gallery</h3>
+        {% for image in images %}
+            <img src="{{ image.image.url }}" alt="{{ image.description }}" style="width: 300px; height: 300px; object-fit: cover; object-position: middle;">
+            {% if user.is_authenticated and article.author.user == user %}
+                <a href="{% url 'wiki:image-update' image.pk %}">Edit Image</a>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    <br>
+    {% if user.is_authenticated and article.author.user == user %}
+        <a href="{% url 'wiki:image-upload' article.pk %}">➕ Upload Image</a>
+    {% endif %}
+    
+
+
     <p><a href="{% url 'wiki:articles-list' %}">⬅️Back to Article List</a>
 
     <h3>Read More from {{ article.category.name }}</h3>

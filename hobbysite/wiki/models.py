@@ -62,3 +62,11 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ['created_on']
+
+
+class ImageGallery(models.Model):
+    article = models.ForeignKey(Article, 
+                                related_name='images', 
+                                on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='wiki/', null=False,)  
+    description = models.CharField(max_length=255, blank=True, null=True) 
