@@ -8,4 +8,4 @@ class Profile(models.Model):
     email = models.EmailField()
 
     def __str__(self):
-        return self.user.username
+        return self.name
