@@ -35,21 +35,6 @@ class Commission(models.Model):
         ordering = ['-UpdatedOn']
 
 
-class Comment(models.Model):
-    commission = models.ForeignKey(
-        Commission,
-        on_delete=models.CASCADE,
-        related_name='comments'
-    )
-    entry = models.TextField()
-    CreatedOn = models.DateTimeField(auto_now_add=True)
-    UpdatedOn = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        ordering = ['-UpdatedOn']
-
-
-
 class Job(models.Model):
     class OrderStatus(models.TextChoices):
         OPEN = 'O', 'Open'
