@@ -19,7 +19,8 @@ class Thread(models.Model):
     author = models.ForeignKey(
         Profile,
         on_delete=models.SET_NULL,
-        null=True
+        null=True,
+        related_name="threads",
     )
     category = models.ForeignKey(
         ThreadCategory,
@@ -45,7 +46,8 @@ class Comment(models.Model):
     author = models.ForeignKey(
         Profile,
         on_delete=models.SET_NULL,
-        null=True
+        null=True,
+        related_name='thread_comments'
     )
     thread = models.ForeignKey(
         Thread,
