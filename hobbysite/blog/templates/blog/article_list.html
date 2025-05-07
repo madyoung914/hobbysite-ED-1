@@ -6,12 +6,14 @@
 {% block content %}
     <h1>🖥️ Blog</h1>
     <h2>User's Articles</h2>
+    <ul>
     {% for article in object_list %}
         {% if article.author == user %}
-            <li><a href="{% url 'blog:article-add' %}">{{ article }}</a></li>
+            <li><a href="{{ article.get_absolute_url }}">{{ article }}</a></li>
         {% endif %}
         <p></p>
     {% endfor %}
+    </ul>
     
     <h2>All Articles</h2>
     {% for category in categories %}
@@ -19,7 +21,7 @@
         <ul>
         {% for article in object_list %}
             {% if article.category == category and article.author != user %}
-                <li><a href="{% url 'blog:article-add' %}">{{ article }}</a></li>
+                <li><a href="{{ article.get_absolute_url }}">{{ article }}</a></li>
             {% endif %}
             <p></p>
         {% endfor %}
