@@ -11,7 +11,6 @@ class ThreadListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
         categories = ThreadCategory.objects.all().prefetch_related('thread_set')
         context['grouped_threads'] = categories
         return context
@@ -20,6 +19,17 @@ class ThreadListView(ListView):
 class ThreadDetailView(DetailView):
     model = Thread
     template_name = 'forum/thread_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        thread_category = self.object.category
+        
+        related_threads = Thread.objects.filter(category=thread_category).exclude(id=self.object.id).order_by('?')[:4]
+
+        categories = ThreadCategory.objects.all().prefetch_related('thread_set')
+        context['related_threads'] = related_threads
+        return context    
 
 
 class ThreadCreateView(LoginRequiredMixin, CreateView):

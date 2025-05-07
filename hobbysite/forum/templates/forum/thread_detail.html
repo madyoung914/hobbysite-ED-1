@@ -8,5 +8,20 @@
     <p>Category: {{ object.category }} | Created On: {{ object.created_on }} | 
         Updated On: {{ object.updated_on }} | Created By: {{ object.author.name }}</p>
     <p>{{ object.entry }} </p>
+
+    <h4>Some related <u>{{ object.category.name }}</u> threads:</h4>
+    <ul>
+    {% for thread in related_threads %}
+    <li>
+        <a href="{{ thread.get_absolute_url }}">{{ thread.title }}</a>
+    </li>
+    {% empty %}
+    <li>No other threads in this category.</li>
+    {% endfor %}
+    </ul>
+    
+    <br>
+    <a href="{% url 'forum:threads-list' %}">Back to Thread List</a>
+
 {% endblock %}
 
