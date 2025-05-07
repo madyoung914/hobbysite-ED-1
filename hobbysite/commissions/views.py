@@ -24,7 +24,7 @@ class CreateCommissionView(LoginRequiredMixin, CreateView):
     template_name = 'commissions/commission_add.html'
 
     def form_valid(self, form):
-        form.instance.commission_author = self.request.user.profile
+        form.instance.author = self.request.user.profile
         return super().form_valid(form)
 
     def get_success_url(self):
