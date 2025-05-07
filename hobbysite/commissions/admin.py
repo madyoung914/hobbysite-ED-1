@@ -1,9 +1,7 @@
 from django.contrib import admin
-from .models import Commission, Comment, Job, JobApplication
+from .models import Commission, Job, JobApplication
 
 
-class Commentline(admin.TabularInline):
-    model = Comment
 
 class JobInLine(admin.TabularInline):
     model = Job
