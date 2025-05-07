@@ -27,6 +27,7 @@ class Thread(models.Model):
         null=True
         )
     entry = models.TextField()
+    thread_image = models.ImageField(upload_to='images/', null=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
@@ -50,7 +51,7 @@ class Comment(models.Model):
         Thread,
         on_delete=models.CASCADE,
         )
-    entry = models.TextField(),
+    entry = models.TextField(null=True)
     created_on = models.DateTimeField(auto_now_add=True, null=True)
     updated_on = models.DateTimeField(auto_now=True, null=True)
 

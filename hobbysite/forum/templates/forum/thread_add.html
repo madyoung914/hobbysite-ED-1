@@ -9,8 +9,9 @@
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form }}
-        <button type="submit">Upload Image</button>
+        <button type="submit">Create thread</button>
     </form>
 
     <a href="{% url 'forum:threads-list' %}">Back to thread list</a>
+   
 {% endblock %}
