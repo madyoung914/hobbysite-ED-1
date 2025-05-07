@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Threads List{% endblock %}
+
+{% block content %}
+    <h1>💬 Threads</h1>
+
+    {% if user.is_authenticated %}
+    <h2>Your Threads</h2>
+    <ul>
+      {% for thread in object_list %}
+        {% if user.username == thread.author.name %}
+        <li>
+            <a href="{{ thread.get_absolute_url }}">{{ thread.title }}</a>
+        </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+    {% endif %}    
+    
+
+    {% for category in grouped_threads %}
+        <h2>{{ category.name }}</h2>
+        <ul>
+            {% for thread in category.thread_set.all %}
+                {% if user.username != thread.author.name %}
+                    <li>
+                        <a href="{{ thread.get_absolute_url }}">{{ thread.title }}</a>
+                    </li>
+                {% endif %}
+            {% empty %}
+            <li>No threads in this category.</li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+
+    <h4></h4>
+    <a href="{% url 'forum:thread-add' %}">Create New Thread</a>
+    
+    
+{% endblock %}
