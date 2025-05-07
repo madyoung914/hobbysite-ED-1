@@ -7,6 +7,7 @@ from .forms import CommissionForm, JobFormSet
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login
+from django.urls import reverse, reverse_lazy
 
 class CommissionListView(ListView):
     model = Commission
@@ -22,31 +23,13 @@ class CreateCommissionView(LoginRequiredMixin, CreateView):
     form_class = CommissionForm
     template_name = 'commissions/commission_add.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['form'] = CommissionForm()
-        return context
+    def form_valid(self, form):
+        form.instance.commission_author = self.request.user.profile
+        return super().form_valid(form)
 
-
-
-    def post(self, request, *args, **kwargs):
-        form = CommissionForm(request.POST)
-        if form.is_valid():
-
-            user = request.user
-            login(request, user)
-
-            commission = form.save(commit=False)
-            commission.commission_author = request.user.profile
-
-            commission.save()
-            self.object.save()
-            return super().form_valid(form)
-        else:
-            self.object_list = self.get_queryset(**kwargs)
-            context = self.get_context_data(**kwargs)
-            context['form'] = form
-            return self.render_to_response(context)
+    def get_success_url(self):
+        return reverse_lazy("commissions:commissionDetail",
+                            kwargs={"pk": self.object.pk})
 
 class CommissionUpdateView(UpdateView):
     model = Commission

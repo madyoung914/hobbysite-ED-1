@@ -3,6 +3,7 @@
 {% block title %}Commission App{% endblock %}
 {% block content %}
     <h1>🗣️ Commissions</h1>
+    <h2>Hi {{ user.get_username }}!</h2>
     <ul>
         {% for commission in object_list %}
         <li>

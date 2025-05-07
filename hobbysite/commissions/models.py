@@ -21,7 +21,7 @@ class Commission(models.Model):
     author = models.ForeignKey(Profile,
                               on_delete=models.SET_NULL,
                               null=True,
-                              related_name='author')
+                              related_name='commission_author')
     CreatedOn = models.DateTimeField(auto_now_add=True)
     UpdatedOn = models.DateTimeField(auto_now=True)
 
