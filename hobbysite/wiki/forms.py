@@ -1,5 +1,5 @@
 from django import forms
-from .models import Comment, Article, ImageGallery
+from wiki.models import Comment, Article, ImageGallery
 
 
 class ArticleForm(forms.ModelForm):
