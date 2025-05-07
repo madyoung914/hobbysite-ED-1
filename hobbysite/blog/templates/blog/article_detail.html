@@ -6,5 +6,40 @@
 {% block content %}
     <h2>{{ article.title }}</h2>
     <p>Author: {{ article.author.name }} | Category: {{ article.category }} | Published: {{ article.created_on }} | Last Updated: {{ article.updated_on }}</p>
+    <img src="{{ article.header_image.url }}">
+    
     <p>{{ article.entry }}</p>
+    <a href="{% url 'blog:articles-list' %}">Go to Articles List</a>
+
+    {% if user == article.author %}
+        <a href="{% url 'blog:article-edit' pk=article.pk %}">Edit Article</a>
+    {% endif %}
+    
+    <h2>Comments</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Submit</button>
+    </form>
+    <ul>
+    {% for comment in comments %}
+        <li>
+            <h3>{{ comment.author }}</h3>
+            <p>{{ comment.created_on }}</p>
+            <p>{{ comment.entry }}</p>
+        </li>
+    {% endfor %}
+    {{ comments }}
+    </ul>
+    <h2>Other Articles by {{ article.author.name }}</h2>
+    <ul>
+    {% for a in articles %}
+        {% if a != article %}
+        <li>
+            <a href="{% url 'blog:article-detail' pk=a.pk %}">{{ a.title }}</a>
+        </li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+    <p>{{ articles }}</p>
 {% endblock %}

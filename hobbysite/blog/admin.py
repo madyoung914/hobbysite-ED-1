@@ -15,9 +15,10 @@ class ArticleCategoryAdmin(admin.ModelAdmin):
     inlines = [ArticleInline, ]
 
 
-class Comment(admin.ModelAdmin):
+class CommentAdmin(admin.ModelAdmin):
     model = Comment
 
 
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(ArticleCategory, ArticleCategoryAdmin)
+admin.site.register(Comment, CommentAdmin)

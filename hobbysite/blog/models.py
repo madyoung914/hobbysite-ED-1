@@ -27,7 +27,7 @@ class Article(models.Model):
         on_delete=models.SET_NULL,
         null=True
         )
-    #header_image
+    header_image = models.ImageField(null=False, upload_to='images/')
     entry = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
@@ -60,7 +60,7 @@ class Comment(models.Model):
         return reverse('blog:comment', args=[self.pk])
 
     def __str__(self):
-        return self.author
+        return self.author.name
 
     class Meta:
         ordering = ['created_on']

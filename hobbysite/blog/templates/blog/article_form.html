@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Create Article{% endblock %}
+{% block title %}Article{% endblock %}
 
 <h2>Add Article Page</h2>
 
 {% block content %}
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form }}
         <button type="submit">Submit</button>
