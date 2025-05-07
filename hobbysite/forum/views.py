@@ -51,7 +51,7 @@ class ThreadDetailView(FormMixin, DetailView):
 
 class ThreadCreateView(LoginRequiredMixin, CreateView):
     model = Thread
-    fields = ['title', 'category', 'entry', 'thread_image']
+    fields = ['title', 'category', 'entry', 'image']
     template_name = 'forum/thread_add.html'
     success_url = reverse_lazy('forum:threads-list')
 
@@ -65,7 +65,7 @@ class ThreadCreateView(LoginRequiredMixin, CreateView):
 
 class ThreadUpdateView(LoginRequiredMixin, UpdateView):
     model = Thread
-    fields = ['title', 'category', 'entry', 'thread_image']
+    fields = ['title', 'category', 'entry', 'image']
     template_name = 'forum/thread_edit.html'
     success_url = reverse_lazy('forum:threads-list')
     

@@ -9,8 +9,8 @@
         Updated On: {{ object.updated_on }} | Created By: {{ object.author.name }}</p>
     <p>{{ object.entry }} </p>
 
-    {% if object.thread_image %}
-        <img src="{{ object.thread_image.url }}" alt="Thread image" style="max-width: 80%;">
+    {% if object.image %}
+        <img src="{{ object.image.url }}" alt="Thread image" style="max-width: 100%;">
     {% endif %}
     <br>
     {% if user.is_authenticated and object.author.name == user.username %}
