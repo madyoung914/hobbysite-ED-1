@@ -17,7 +17,8 @@ class JobAdmin(admin.ModelAdmin):
 
 class CommissionAdmin(admin.ModelAdmin):
     model = Commission
-    inlines = [Commentline, JobInLine,]
+    inlines = [JobInLine,]
 
 
 admin.site.register(Commission, CommissionAdmin)
+admin.site.register(Job, JobAdmin)

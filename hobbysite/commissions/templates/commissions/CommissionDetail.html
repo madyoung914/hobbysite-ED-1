@@ -5,30 +5,30 @@
 
 <h3>{{object.title}}</h3>
 
-    <ul>
-        <li>Created On: {{object.CreatedOn}}</li>
-        <li>Updated On: {{object.UpdatedOn}}</li>
-    </ul>
-    
-    <p>
-        <b>Description</b>
-        <br>
-        {{object.description}}
-    </p>
+<ul>
+    <li>Created On: {{object.CreatedOn}}</li>
+    <li>Updated On: {{object.UpdatedOn}}</li>
+</ul>
 
-    <p> <b>People Required: </b> {{object.peopleRequired}}</p>
-    
-    <b>Comments</b>
-    <ul>
-        {% for comment in object.comments.all %}
-            <li><p>{{comment.entry}}
-                <br>
-                Updated on: {{comment.UpdatedOn}}
-                <br>
-                Created on: {{comment.CreatedOn}}
-                
-            </p></li>
-        {% endfor %}
-    </ul>
+<p>
+    <b>Description</b>
+    <br>
+    {{object.description}}
+</p>
+
+
+
+<ul>
+    {% for job in object.jobs.all %}
+    <li>
+        <p>
+            <b>{{job.role}}</b> <br>
+            Number of People: {{job.manpowerRequired}} <br>
+            Status: {{job.get_status_display}}
+
+        </p>
+    </li>
+    {% endfor %}
+</ul>
 
 {% endblock %}

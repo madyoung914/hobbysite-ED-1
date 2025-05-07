@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    {{ job_formset.management_form }}
+    {% for form in job_formset %}
+        <p>{{ form.as_p }}</p>
+    {% endfor %}
+
+    <button type="submit">Submit</button>
+
+
+</form>
+{% endblock %}
