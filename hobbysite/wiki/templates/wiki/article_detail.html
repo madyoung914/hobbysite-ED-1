@@ -4,12 +4,88 @@
 {% block title %}{{ article.title }}{% endblock %}
 
 {% block content %}
+    <img src="{{ article.header_image.url }}" alt="{{ article.header_image.url }}" style="width: 100%; height: 300px; object-fit: cover; object-position: middle;">
     <h1>{{ article.title }}</h1>
+    
     <p>
-        🏷️ Category: {{ article.category.name }} | 
-        🕒 Created On: {{ article.created_on }} | 
+        🏷️ Created by: {{ article.author.name }} |
+        🏷️ Category: {{ article.category.name }} |
+        🕒 Created On: {{ article.created_on }} |
         ✅ Last Updated: {{ article.updated_on }}
+        {% if user.is_authenticated and object.author.user == user %}
+            | <a href="{% url 'wiki:article-edit' pk=object.pk %}">Edit Article</a>
+        {% endif %}
     </p>
     <hr>
+
     <p>{{ article.entry }}</p>
+
+    {% if images %}
+        <h3>Image Gallery 🖼️</h3>
+            {% for image in images %}
+                <img src="{{ image.image.url }}" alt="{{ image.description }}" style="width: 300px; height: 300px; object-fit: cover; object-position: middle;">
+                
+                {% if user.is_authenticated and article.author.user == user %}
+                    <a href="{% url 'wiki:image-update' image.pk %}">✏️Edit Image</a>
+                {% endif %}
+            {% endfor %}
+    {% endif %}
+    <br>
+
+    {% if user.is_authenticated and article.author.user == user %}
+        <a href="{% url 'wiki:image-upload' article.pk %}">➕Upload an Image</a>
+    {% endif %} 
+    <hr>
+
+    <h3>Read More from {{ article.category.name }}</h3>
+        <ul>
+            {% for related in related_articles %}
+                <li><a href="{{ related.get_absolute_url }}">{{ related.title }}</a></li>
+            {% empty %}
+                <li>No other articles in this category.</li>
+            {% endfor %}
+        </ul>
+    <a href="{% url 'wiki:articles-list' %}">⬅️Back to Article List</a>
+    <hr>
+
+    <h3>Leave a Comment:</h3>
+    {% if user.is_authenticated %}
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Post Comment</button>
+        </form>
+    {% else %}
+        <p>You must be logged in.</p>
+    {% endif %}
+    <hr>
+
+    <h3>Comments</h3>
+    {% for comment in comments %}
+        <div style="margin-bottom: 1em;">
+            {% if user.is_authenticated and comment.author.user == user and request.GET.comment_id == comment.id|stringformat:"s" %}
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                    <textarea name="entry">{{ comment.entry }}</textarea>
+                    <br>
+                    <button type="submit">Update</button>
+                    <a href="{% url 'wiki:article-detail' article.pk %}">Cancel</a>
+                </form>
+            {% else %}
+                <b>{{ comment.author.name }}</b> | {{ comment.created_on|date:"M d, Y H:i" }}
+                {% if comment.updated_on != comment.created_on %} 
+                    (Edited: {{ comment.updated_on|date:"M d, Y H:i" }} ) 
+                {% endif %}
+
+                {% if user.is_authenticated and comment.author.user == user %}
+                    <a href="?comment_id={{ comment.id }}">Edit</a>
+                {% endif %}
+                <br>
+                {{ comment.entry }}      
+            {% endif %}
+        </div>
+    {% empty %}
+        <p>No comments yet.</p>
+    {% endfor %}
 {% endblock %}
