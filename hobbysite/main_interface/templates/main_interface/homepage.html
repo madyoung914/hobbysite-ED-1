@@ -28,5 +28,7 @@
     <br>
     <a href="{% url 'wiki:articles-list' %}">Go to wiki</a>
     <br>
-    <a href="{% url 'user_management:profile' %}">Go to profile</a>
+    {% if user.is_authenticated %}
+        <a href="{% url 'user_management:profile'  username=user.username %}">Go to profile</a>
+    {% endif %}
 {% endblock %}
