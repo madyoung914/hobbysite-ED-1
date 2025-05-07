@@ -8,7 +8,7 @@
     <h2>User's Articles</h2>
     <ul>
     {% for article in object_list %}
-        {% if article.author == user %}
+        {% if article.author == account %}
             <li><a href="{{ article.get_absolute_url }}">{{ article }}</a></li>
         {% endif %}
         <p></p>
@@ -20,7 +20,7 @@
     <h3>{{ category }}</h3>
         <ul>
         {% for article in object_list %}
-            {% if article.category == category and article.author != user %}
+            {% if article.category == category and article.author != account %}
                 <li><a href="{{ article.get_absolute_url }}">{{ article }}</a></li>
             {% endif %}
             <p></p>

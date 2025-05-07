@@ -18,7 +18,8 @@ class ArticleListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['categories'] = ArticleCategory.objects.all
-        context['user'] = Profile.objects.get(user=self.request.user)
+        if self.request.user.is_authenticated:
+            context['account'] = Profile.objects.get(user=self.request.user) 
         return context
 
 
@@ -49,7 +50,8 @@ class ArticleDetailView(FormMixin, DetailView):
         context = super().get_context_data(**kwargs)
         context['articles'] = Article.objects.filter(author=self.object.author)
         context['comments'] = Comment.objects.filter(article=self.object).reverse
-        context['user'] = Profile.objects.get(user=self.request.user)
+        if self.request.user.is_authenticated:
+            context['user'] = Profile.objects.get(user=self.request.user)
         return context
 
 
