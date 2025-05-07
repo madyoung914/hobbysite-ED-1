@@ -8,7 +8,7 @@
     <h1>{{ article.title }}</h1>
     
     <p>
-        🏷️ Created by: {{ article.author}} |
+        🏷️ Created by: {{ article.author.name }} |
         🏷️ Category: {{ article.category.name }} |
         🕒 Created On: {{ article.created_on }} |
         ✅ Last Updated: {{ article.updated_on }}
@@ -73,7 +73,7 @@
                     <a href="{% url 'wiki:article-detail' article.pk %}">Cancel</a>
                 </form>
             {% else %}
-                <b>{{ comment.author }}</b> | {{ comment.created_on|date:"M d, Y H:i" }}
+                <b>{{ comment.author.name }}</b> | {{ comment.created_on|date:"M d, Y H:i" }}
                 {% if comment.updated_on != comment.created_on %} 
                     (Edited: {{ comment.updated_on|date:"M d, Y H:i" }} ) 
                 {% endif %}
