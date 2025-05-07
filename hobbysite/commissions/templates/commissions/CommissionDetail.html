@@ -3,6 +3,8 @@
 {% block title %}Commission App{% endblock %}
 {% block content %}
 
+
+
 <h3>{{object.title}}</h3>
 
 <ul>
@@ -30,5 +32,7 @@
     </li>
     {% endfor %}
 </ul>
+
+<a href="{% url 'commissions:commissionList' %}"> Go back to Commission List </a>
 
 {% endblock %}
