@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import DetailView, ListView, CreateView, UpdateView
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse_lazy
 
 from .models import Article, Profile, Comment, ImageGallery
 from .forms import CommentForm, ArticleForm, ImageGalleryForm
@@ -25,9 +25,9 @@ class ArticleListView(ListView):
 
         articles_by_category = {}
         for article in other_articles:
-            category = article.category #gets the category
-            if category not in articles_by_category: #checks if category was already stated
-                articles_by_category[category] = [] #creates new list for a new category if category was not already stated
+            category = article.category
+            if category not in articles_by_category:
+                articles_by_category[category] = []
             articles_by_category[category].append(article)
 
         context['user_articles'] = user_articles
@@ -42,14 +42,12 @@ class ArticleDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         article = self.get_object()
+        comments = Comment.objects.filter(article=article).order_by('-created_on')
 
         related_articles = Article.objects.filter(
             category=article.category
-        ).exclude(pk=article.pk)[:2]  # gets the first 2 results
+        ).exclude(pk=article.pk)[:2]
 
-        comments = Comment.objects.filter(article=article).order_by('-created_on')
-
-        # provides comments only if user is authenticated
         if self.request.user.is_authenticated:
             context['form'] = CommentForm()
 
@@ -62,11 +60,14 @@ class ArticleDetailView(DetailView):
     def post(self, request, *args, **kwargs):
         article = self.get_object()
         profile = get_object_or_404(Profile, user=request.user)
-
         comment_id = request.POST.get('comment_id')
 
-        if comment_id: 
-            comment = get_object_or_404(Comment, id=comment_id, article=article)
+        if comment_id:
+            comment = get_object_or_404(
+                Comment,
+                id=comment_id,
+                article=article
+            )
 
             if comment.author == profile:
                 comment.entry = request.POST.get('entry', comment.entry)
@@ -74,7 +75,7 @@ class ArticleDetailView(DetailView):
 
             return redirect('wiki:article-detail', pk=article.pk)
 
-        else:  # creating a new comment
+        else:
             form = CommentForm(request.POST)
             if form.is_valid():
                 comment = form.save(commit=False)
@@ -97,14 +98,17 @@ class ArticleCreateView(LoginRequiredMixin, CreateView):
         context = super().get_context_data(**kwargs)
         context['form_title'] = 'Create a new article'
         return context
-    
+
     def form_valid(self, form):
-        profile = get_object_or_404(Profile, user=self.request.user) 
+        profile = get_object_or_404(Profile, user=self.request.user)
         form.instance.author = profile
         return super().form_valid(form)
-    
+
     def get_success_url(self):
-        return reverse_lazy('wiki:article-detail', kwargs={'pk': self.object.pk})
+        return reverse_lazy(
+            'wiki:article-detail',
+            kwargs={'pk': self.object.pk}
+        )
 
 
 class ArticleUpdateView(LoginRequiredMixin, UpdateView):
@@ -118,10 +122,13 @@ class ArticleUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
     def get_success_url(self):
-        return reverse_lazy('wiki:article-detail', kwargs={'pk': self.object.pk})
+        return reverse_lazy(
+            'wiki:article-detail',
+            kwargs={'pk': self.object.pk}
+        )
 
 
-class ImageGalleryView(LoginRequiredMixin,CreateView):
+class ImageGalleryView(LoginRequiredMixin, CreateView):
     model = ImageGallery
     fields = ['image', 'description']
     template_name = 'wiki/image_gallery.html'  
@@ -137,12 +144,16 @@ class ImageGalleryView(LoginRequiredMixin,CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('wiki:article-detail', kwargs={'pk': self.kwargs['pk']})
+        return reverse_lazy(
+            'wiki:article-detail',
+            kwargs={'pk': self.kwargs['pk']}
+        )
 
-class ImageGalleryUpdateView(LoginRequiredMixin,UpdateView):
+
+class ImageGalleryUpdateView(LoginRequiredMixin, UpdateView):
     model = ImageGallery
-    fields = ['image', 'description']
-    template_name = 'wiki/image_gallery.html' 
+    form_class = ImageGalleryForm
+    template_name = 'wiki/image_gallery.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -155,4 +166,7 @@ class ImageGalleryUpdateView(LoginRequiredMixin,UpdateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('wiki:article-detail', kwargs={'pk': self.object.article.pk})
+        return reverse_lazy(
+            'wiki:article-detail',
+            kwargs={'pk': self.object.article.pk}
+        )

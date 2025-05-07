@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from user_management.models import Profile
 
+
 class ArticleCategory(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
@@ -16,7 +17,7 @@ class ArticleCategory(models.Model):
 class Article(models.Model):
     title = models.CharField(max_length=255)
     author = models.ForeignKey(
-        Profile, 
+        Profile,
         on_delete=models.SET_NULL,
         null=True,
     )
@@ -58,15 +59,17 @@ class Comment(models.Model):
     updated_on = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'Comment by {self.author} on {self.article}'
+        return f'Comment by {self.author.user} on {self.article}'
 
     class Meta:
         ordering = ['created_on']
 
 
 class ImageGallery(models.Model):
-    article = models.ForeignKey(Article, 
-                                related_name='images', 
-                                on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='wiki/', null=False,)  
-    description = models.CharField(max_length=255, blank=True, null=True) 
+    article = models.ForeignKey(
+        Article,
+        related_name='images',
+        on_delete=models.CASCADE
+    )
+    image = models.ImageField(upload_to='wiki/', null=False,)
+    description = models.CharField(max_length=255, blank=True, null=True)

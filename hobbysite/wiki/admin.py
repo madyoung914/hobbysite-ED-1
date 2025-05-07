@@ -1,8 +1,10 @@
 from django.contrib import admin
 from .models import Article, ArticleCategory, ImageGallery
 
+
 class ImageGalleryInline(admin.TabularInline):
     model = ImageGallery
+
 
 class ArticleAdmin(admin.ModelAdmin):
     model = Article
@@ -10,6 +12,7 @@ class ArticleAdmin(admin.ModelAdmin):
     list_filter = ('category', 'created_on', 'updated_on')
     search_fields = ('title',)
     inlines = [ImageGalleryInline]
+
 
 class ArticleCategoryAdmin(admin.ModelAdmin):
     model = ArticleCategory

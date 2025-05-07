@@ -1,10 +1,11 @@
 from django import forms
 from .models import Comment, Article, ImageGallery
 
+
 class ArticleForm(forms.ModelForm):
     class Meta:
         model = Article
-        fields = ['title', 'entry','category','header_image']
+        fields = ['title', 'entry', 'category', 'header_image']
 
 
 class CommentForm(forms.ModelForm):
