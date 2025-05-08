@@ -24,15 +24,35 @@
     {% for job in object.jobs.all %}
     <li>
         <p>
-            <b>{{job.role}}</b> <br>
+            {% if request.user.profile != object.author %}
+            <b>{{job.role}}</b>
+            {% else %}
+            <a href={{job.get_absolute_url}}><b>{{job.role}}</b></a>
+            {% endif%}
+            <br>
             Number of People: {{job.manpowerRequired}} <br>
             Status: {{job.get_status_display}}
-
+            {% if request.user.profile != object.author %}
+            {% if job.id in applied_job_ids %}
+            <br>
+            <b>Applied</b>
+            {% else %}
+            <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="job_id" value="{{ job.id }}">
+                {{ form.as_p }}
+                <button type="submit">Apply Job</button>
+            </form>
+            {% endif %}
+            {% endif %}
         </p>
     </li>
     {% endfor %}
 </ul>
 
+{% if request.user.profile == object.author %}
+<a href="{% url 'commissions:commissionEdit' pk=object.pk %}"> Edit Commission </a> <br>
+{% endif %}
 <a href="{% url 'commissions:commissionList' %}"> Go back to Commission List </a>
 
 {% endblock %}

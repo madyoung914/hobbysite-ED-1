@@ -1,7 +1,13 @@
 from django import forms
 from django.forms import inlineformset_factory
-from .models import Commission, Job
+from .models import Commission, Job, JobApplication
 
+
+class JobApplicationForm(forms.ModelForm):
+    class Meta:
+        model = JobApplication
+        fields = '__all__'
+        exclude = ['job','applicant','status' ]
 
 class CommissionForm(forms.ModelForm):
     class Meta:

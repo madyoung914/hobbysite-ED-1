@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Commission App{% endblock %}
+{% block content %}
+<h1>🗣️ Commissions</h1>
+<ul>
+    {% for application in object.jobApplication.all %}
+    <li>
+        <h4> {{application.applicant.name}}</h4>
+        <p> {{application.get_status_display}} </p>
+
+        {% if application.status == "P" %}
+            <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="app_id" value="{{ application.id }}">
+                {{ form.as_p }}
+                <button type="submit" name="action" value="accept">Accept</button>
+                <button type="submit" name="action" value="reject">Reject</button>
+            </form>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'commissions:commissionList' %}"> Go back to Commission List </a>
+
+{% endblock %}

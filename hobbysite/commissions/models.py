@@ -5,18 +5,31 @@ from django.urls import reverse
 
 class Commission(models.Model):
     
-    class OrderStatus(models.TextChoices):
+    class CommStatus(models.TextChoices):
         OPEN = 'O', 'Open'
         FULL = 'F', 'Full'
         COMPLETE = 'C', 'Complete'
         Discontinued = 'D', 'Discontinued'
     
+    class CommManager:
+        def get_queryset(self):
+            return super().get_queryset().annotate(
+                status_order=models.Case(
+                    models.When(status=Commission.CommStatus.OPEN, then=models.Value(1)),
+                    models.When(status=Commission.CommStatus.FULL, then=models.Value(2)),
+                    models.When(status=Commission.CommStatus.COMPLETE, then=models.Value(3)),
+                    models.When(status=Commission.CommStatus.DISCONTINUED, then=models.Value(4)),
+                    default=models.Value(5),
+                    output_field=models.IntegerField(),
+                )
+            ).order_by('status_order')
+
     title = models.CharField(max_length=255)
     description = models.TextField()
     status = models.CharField(
         max_length=255,
-        choices = OrderStatus.choices,
-        default = OrderStatus.OPEN
+        choices = CommStatus.choices,
+        default = CommStatus.OPEN
         )
     author = models.ForeignKey(Profile,
                               on_delete=models.SET_NULL,
@@ -31,14 +44,26 @@ class Commission(models.Model):
     def get_absolute_url(self):
         return reverse('commissions:commissionDetail', args=[self.pk])
 
-    class Meta:
-        ordering = ['-UpdatedOn']
+    objects = CommManager()
+    
+        
 
 
 class Job(models.Model):
-    class OrderStatus(models.TextChoices):
+    class JobStatus(models.TextChoices):
         OPEN = 'O', 'Open'
         FULL = 'F', 'Full'
+
+    class JobManager:
+        def get_queryset(self):
+            return super().get_queryset().annotate(
+                status_order=models.Case(
+                    models.When(status=Commission.CommStatus.OPEN, then=models.Value(1)),
+                    models.When(status=Commission.CommStatus.FULL, then=models.Value(2)),
+                    default=models.Value(3),
+                    output_field=models.IntegerField(),
+                )
+            ).order_by('status_order')
 
     commission = models.ForeignKey(
         Commission,
@@ -50,15 +75,12 @@ class Job(models.Model):
     manpowerRequired = models.IntegerField()
     status = models.CharField(
         max_length=255,
-        choices = OrderStatus.choices,
-        default = OrderStatus.OPEN
+        choices = JobStatus.choices,
+        default = JobStatus.OPEN
         )
-    
-    def updateStatus(self,numApps):
-        if numApps==self.manpowerRequired:
-            self.status = self.OrderStatus.FULL
-            self.save()
     CreatedOn = models.DateTimeField(auto_now_add=True)
+
+    objects = JobManager()
 
     def __str__(self):
         return self.role

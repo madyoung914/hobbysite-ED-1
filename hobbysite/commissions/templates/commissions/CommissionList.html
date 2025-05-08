@@ -3,6 +3,26 @@
 {% block title %}Commission App{% endblock %}
 {% block content %}
 <h1>🗣️ Commissions</h1>
+
+<h3>Created:</h3>
+<ul>
+
+    {% for commission in createdCommissions %}
+    <li>
+        <a href={{commission.get_absolute_url}}>{{commission.title}}</a>
+    </li>
+    {% endfor %}
+</ul>
+<h3>Applied:</h3>
+<ul>
+    {% for commission in appliedCommissions %}
+    <li>
+        <a href={{commission.get_absolute_url}}>{{commission.title}}</a>
+    </li>
+    {% endfor %}
+</ul>
+
+<h3>All:</h3>
 <ul>
     {% for commission in object_list %}
     <li>

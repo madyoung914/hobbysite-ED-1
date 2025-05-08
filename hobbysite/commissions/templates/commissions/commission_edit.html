@@ -6,13 +6,17 @@
     {% csrf_token %}
     {{ form.as_p }}
 
+    <br>
+    <p>Jobs: </p>
+
     {{ job_formset.management_form }}
     {% for form in job_formset %}
-        <p>{{ form.as_p }}</p>
+    <p>{{ form.as_p }}</p>
+    <br>
     {% endfor %}
 
     <button type="submit">Submit</button>
-
-
 </form>
+
+<a href="{% url 'commissions:commissionList' %}"> Go back to Commission List </a>
 {% endblock %}
