@@ -1,3 +1,4 @@
+from pickle import TRUE
 from django.shortcuts import render
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -137,6 +138,20 @@ class CommissionUpdateView(UpdateView):
             self.object = form.save()
             job_formset.instance = self.object
             job_formset.save()  
+
+            commFull = False
+            
+            for job in self.object.jobs.all():
+                if job.status != 'F':
+                    commFull = False
+                    break
+                else:
+                    commFull= True 
+
+            if(commFull):
+                self.object.status = 'F'
+
+            self.object.save()
             return redirect(self.get_success_url())
         else:
             return self.form_invalid(form)
