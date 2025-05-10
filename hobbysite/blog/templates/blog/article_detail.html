@@ -29,7 +29,6 @@
             <p>{{ comment.entry }}</p>
         </li>
     {% endfor %}
-    {{ comments }}
     </ul>
     <h2>Other Articles by {{ article.author.name }}</h2>
     <ul>
@@ -41,5 +40,4 @@
         {% endif %}
     {% endfor %}
     </ul>
-    <p>{{ articles }}</p>
 {% endblock %}

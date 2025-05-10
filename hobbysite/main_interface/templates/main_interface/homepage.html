@@ -4,7 +4,7 @@
 {% block content %}
 <h2>Recipe Book
     {% if request.user.is_authenticated %}
-        <h1>Hello {{ request.user.username }}</h1>
+        <h1>Hello {{ request.user.profile.name }}</h1>
         <form method="POST" action="{% url 'logout' %}">
             {% csrf_token %}
             <button type="submit">Logout</button>

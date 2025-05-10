@@ -14,7 +14,8 @@ class UserCreateView(CreateView):
 
     def form_valid(self, form):
         new_user = form.save()
-        Profile.objects.create(user=new_user, name=new_user.username, email=new_user.email)
+        display_name = form.cleaned_data['display_name']
+        Profile.objects.create(user=new_user, name=display_name, email=new_user.email)
         return super().form_valid(form)
 
     def get_success_url(self):
