@@ -35,8 +35,8 @@ class Commission(models.Model):
                               on_delete=models.SET_NULL,
                               null=True,
                               related_name='commission')
-    CreatedOn = models.DateTimeField(auto_now_add=True)
-    UpdatedOn = models.DateTimeField(auto_now=True)
+    createdOn = models.DateTimeField(auto_now_add=True)
+    updatedOn = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title
@@ -76,7 +76,7 @@ class Job(models.Model):
         choices = JobStatus.choices,
         default = JobStatus.OPEN
         )
-    CreatedOn = models.DateTimeField(auto_now_add=True)
+    createdOn = models.DateTimeField(auto_now_add=True)
 
     objects = JobManager()
 
@@ -110,7 +110,7 @@ class JobApplication(models.Model):
         choices = AppStatus.choices,
         default = AppStatus.PENDING
         )
-    AppliedOn = models.DateTimeField(auto_now_add=True)
+    appliedOn = models.DateTimeField(auto_now_add=True)
     
     class Meta:
         ordering = ['-AppliedOn']
