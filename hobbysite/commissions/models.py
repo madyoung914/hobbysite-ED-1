@@ -113,4 +113,4 @@ class JobApplication(models.Model):
     appliedOn = models.DateTimeField(auto_now_add=True)
     
     class Meta:
-        ordering = ['-AppliedOn']
+        ordering = ['-appliedOn']
