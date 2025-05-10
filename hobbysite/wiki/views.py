@@ -131,7 +131,7 @@ class ArticleUpdateView(LoginRequiredMixin, UpdateView):
 class ImageGalleryView(LoginRequiredMixin, CreateView):
     model = ImageGallery
     fields = ['image', 'description']
-    template_name = 'wiki/article_form.html'  
+    template_name = 'wiki/image_gallery.html'  
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -153,7 +153,7 @@ class ImageGalleryView(LoginRequiredMixin, CreateView):
 class ImageGalleryUpdateView(LoginRequiredMixin, UpdateView):
     model = ImageGallery
     form_class = ImageGalleryForm
-    template_name = 'wiki/article_form.html'
+    template_name = 'wiki/image_gallery.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
