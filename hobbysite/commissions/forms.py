@@ -13,12 +13,12 @@ class CommissionForm(forms.ModelForm):
     class Meta:
         model = Commission
         fields = '__all__'
-        exclude = ['CreatedOn','UpdatedOn','author' ]
+        exclude = ['createdOn','updatedOn','author' ]
 
 class JobForm(forms.ModelForm):
     class Meta:
         model = Job
         fields = '__all__'
-        exclude = ['CreatedOn', ]
+        exclude = ['createdOn', ]
 
 JobFormSet = inlineformset_factory(Commission, Job, form = JobForm, fields=['role', 'manpowerRequired', 'status'], extra=1, can_delete=True)

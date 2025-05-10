@@ -12,7 +12,7 @@ from django.urls import reverse, reverse_lazy
 
 class CommissionListView(ListView):
     model = Commission
-    template_name = 'commissions/CommissionList.html' 
+    template_name = 'commissions/commission_list.html' 
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
@@ -34,7 +34,7 @@ class CommissionListView(ListView):
 
 class CommissionDetailView(DetailView):
     model = Commission
-    template_name = 'commissions/CommissionDetail.html' 
+    template_name = 'commissions/commission_detail.html' 
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
@@ -105,8 +105,8 @@ class JobView(DetailView):
                 self.object.status = 'F'
             
             self.object.save()
-
             commission = self.object.commission
+
             if(commission.jobs.filter(status='F').count() == commission.jobs.all().count()):
                 commission.status = 'F'
                 commission.save()
@@ -115,6 +115,7 @@ class JobView(DetailView):
         else:
             context = self.get_context_data(**kwargs)
             context['form'] = form
+
             return self.render_to_response(context)
 
 class CreateCommissionView(LoginRequiredMixin, CreateView):
@@ -152,7 +153,6 @@ class CommissionUpdateView(UpdateView):
             job_formset.save()  
 
             commFull = False
-            
             for job in self.object.jobs.all():
                 if job.status != 'F':
                     commFull = False
