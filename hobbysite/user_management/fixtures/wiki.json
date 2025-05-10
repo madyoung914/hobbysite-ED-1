@@ -1,0 +1,394 @@
+[
+  {
+    "model": "wiki.articlecategory",
+    "pk": 1,
+    "fields": {
+      "name": "Politics",
+      "description": "Lorem ipsum"
+    }
+  },
+  {
+    "model": "wiki.articlecategory",
+    "pk": 2,
+    "fields": {
+      "name": "Science",
+      "description": "Learn and explore the world of science"
+    }
+  },
+  {
+    "model": "wiki.articlecategory",
+    "pk": 3,
+    "fields": {
+      "name": "Culture",
+      "description": "Traditions and heritage from around the globe"
+    }
+  },
+  {
+    "model": "wiki.articlecategory",
+    "pk": 4,
+    "fields": {
+      "name": "Technology",
+      "description": "Exploring innovations and the latest tech trends"
+    }
+  },
+  {
+    "model": "wiki.articlecategory",
+    "pk": 5,
+    "fields": {
+      "name": "Health",
+      "description": "Stay updated with health and wellness news"
+    }
+  },
+  {
+    "model": "wiki.article",
+    "pk": 1,
+    "fields": {
+      "title": "Elections are near, who are you voting?",
+      "author": 9,
+      "category": 1,
+      "entry": "An overview of the political candidates and their platforms for the upcoming elections. Stay informed and make your vote count.",
+      "header_image": "wiki/_118283913_29xp-meme-mobilemasterat3x-v3.jpg",
+      "created_on": "2025-05-10T13:55:40.625Z",
+      "updated_on": "2025-05-10T13:55:40.625Z"
+    }
+  },
+  {
+    "model": "wiki.article",
+    "pk": 2,
+    "fields": {
+      "title": "The James Webb Space Telescope Discoveries",
+      "author": 3,
+      "category": 2,
+      "entry": "New images and findings from the JWST show never-before-seen galaxies and the chemical compositions of distant worlds.",
+      "header_image": "wiki/_118283913_29xp-meme-mobilemasterat3x-v3.jpg",
+      "created_on": "2025-05-10T13:56:10.000Z",
+      "updated_on": "2025-05-10T13:56:10.000Z"
+    }
+  },
+  {
+    "model": "wiki.article",
+    "pk": 3,
+    "fields": {
+      "title": "Why Food is Central to Filipino Culture",
+      "author": 6,
+      "category": 3,
+      "entry": "Filipino culture places deep importance on food, from family gatherings to fiestas. Let’s explore the traditions behind our favorite dishes.",
+      "header_image": "wiki/_118283913_29xp-meme-mobilemasterat3x-v3.jpg",
+      "created_on": "2025-05-10T13:56:40.000Z",
+      "updated_on": "2025-05-10T13:56:40.000Z"
+    }
+  },
+  {
+    "model": "wiki.article",
+    "pk": 4,
+    "fields": {
+      "title": "Artificial Intelligence: The Future of Tech",
+      "author": 7,
+      "category": 4,
+      "entry": "AI is rapidly changing the landscape of technology, from healthcare to automation. Here's what the future holds for AI.",
+      "header_image": "wiki/_118283913_29xp-meme-mobilemasterat3x-v3.jpg",
+      "created_on": "2025-05-10T13:57:00.000Z",
+      "updated_on": "2025-05-10T13:57:00.000Z"
+    }
+  },
+  {
+    "model": "wiki.article",
+    "pk": 5,
+    "fields": {
+      "title": "The Importance of Mental Health Awareness",
+      "author": 4,
+      "category": 5,
+      "entry": "Mental health awareness is crucial for reducing stigma and promoting self-care. Let's look at ways to support mental health in our communities.",
+      "header_image": "wiki/_118283913_29xp-meme-mobilemasterat3x-v3.jpg",
+      "created_on": "2025-05-10T13:57:30.000Z",
+      "updated_on": "2025-05-10T13:57:30.000Z"
+    }
+  },
+  {
+    "model": "wiki.article",
+    "pk": 6,
+    "fields": {
+      "title": "Global Warming and its Impact on Politics",
+      "author": 5,
+      "category": 1,
+      "entry": "Global warming is not just an environmental issue, it’s affecting political policies and global economies. Learn how leaders are responding.",
+      "header_image": "wiki/_118283913_29xp-meme-mobilemasterat3x-v3.jpg",
+      "created_on": "2025-05-10T13:58:00.000Z",
+      "updated_on": "2025-05-10T13:58:00.000Z"
+    }
+  },
+  {
+    "model": "wiki.article",
+    "pk": 7,
+    "fields": {
+      "title": "The Rise of Populism Around the World",
+      "author": 8,
+      "category": 1,
+      "entry": "Populist movements are spreading globally. What does this mean for democracy and governance? Find out the pros and cons of this growing trend.",
+      "header_image": "wiki/_118283913_29xp-meme-mobilemasterat3x-v3.jpg",
+      "created_on": "2025-05-10T13:58:20.000Z",
+      "updated_on": "2025-05-10T13:58:20.000Z"
+    }
+  },
+  {
+    "model": "wiki.article",
+    "pk": 8,
+    "fields": {
+      "title": "Mars Colonization: What’s Next?",
+      "author": 2,
+      "category": 2,
+      "entry": "The quest to colonize Mars is advancing rapidly. Here's a look at the latest developments and the challenges we still face in reaching the Red Planet.",
+      "header_image": "wiki/_118283913_29xp-meme-mobilemasterat3x-v3.jpg",
+      "created_on": "2025-05-10T13:58:40.000Z",
+      "updated_on": "2025-05-10T13:58:40.000Z"
+    }
+  },
+  {
+    "model": "wiki.article",
+    "pk": 9,
+    "fields": {
+      "title": "The Mysteries of Black Holes",
+      "author": 1,
+      "category": 2,
+      "entry": "Black holes have fascinated scientists for decades. Let’s dive into the latest theories and discoveries about these cosmic enigmas.",
+      "header_image": "wiki/_118283913_29xp-meme-mobilemasterat3x-v3.jpg",
+      "created_on": "2025-05-10T13:59:00.000Z",
+      "updated_on": "2025-05-10T13:59:00.000Z"
+    }
+  },
+  {
+    "model": "wiki.article",
+    "pk": 10,
+    "fields": {
+      "title": "Revisiting the Civilizations of the Ancient World",
+      "author": 5,
+      "category": 3,
+      "entry": "History has much to teach us, from the Egyptians to the Incas. Let’s explore what we can learn from these lost civilizations.",
+      "header_image": "wiki/_118283913_29xp-meme-mobilemasterat3x-v3.jpg",
+      "created_on": "2025-05-10T13:59:20.000Z",
+      "updated_on": "2025-05-10T13:59:20.000Z"
+    }
+  },
+  {
+    "model": "wiki.article",
+    "pk": 11,
+    "fields": {
+      "title": "Celebrating the Arts of Africa",
+      "author": 6,
+      "category": 3,
+      "entry": "African art is a rich and diverse expression of culture. From sculpture to textiles, we explore the impact of these artistic traditions.",
+      "header_image": "wiki/_118283913_29xp-meme-mobilemasterat3x-v3.jpg",
+      "created_on": "2025-05-10T13:59:40.000Z",
+      "updated_on": "2025-05-10T13:59:40.000Z"
+    }
+  },
+  {
+    "model": "wiki.article",
+    "pk": 12,
+    "fields": {
+      "title": "The Digital Revolution: How Technology Changed Art",
+      "author": 8,
+      "category": 3,
+      "entry": "Technology has drastically altered the way we create and appreciate art. Learn how digital tools are reshaping the artistic landscape.",
+      "header_image": "wiki/_118283913_29xp-meme-mobilemasterat3x-v3.jpg",
+      "created_on": "2025-05-10T14:00:00.000Z",
+      "updated_on": "2025-05-10T14:00:00.000Z"
+    }
+  },
+  {
+    "model": "wiki.article",
+    "pk": 13,
+    "fields": {
+      "title": "Quantum Computers: The New Frontier",
+      "author": 7,
+      "category": 4,
+      "entry": "Quantum computing promises to revolutionize industries. Here's a glimpse into what quantum computers can do and the hurdles they still face.",
+      "header_image": "wiki/_118283913_29xp-meme-mobilemasterat3x-v3.jpg",
+      "created_on": "2025-05-10T14:00:20.000Z",
+      "updated_on": "2025-05-10T14:00:20.000Z"
+    }
+  },
+  {
+    "model": "wiki.article",
+    "pk": 14,
+    "fields": {
+      "title": "Blockchain Beyond Cryptocurrency",
+      "author": 9,
+      "category": 4,
+      "entry": "Blockchain technology has potential far beyond crypto. Let’s explore how it’s impacting industries like healthcare, supply chain, and voting.",
+      "header_image": "wiki/_118283913_29xp-meme-mobilemasterat3x-v3.jpg",
+      "created_on": "2025-05-10T14:00:40.000Z",
+      "updated_on": "2025-05-10T14:00:40.000Z"
+    }
+  },
+  {
+    "model": "wiki.article",
+    "pk": 15,
+    "fields": {
+      "title": "The Benefits of Meditation for Mental Clarity",
+      "author": 2,
+      "category": 5,
+      "entry": "Meditation can improve mental clarity and emotional well-being. Learn how adopting a regular practice can enhance your quality of life.",
+      "header_image": "wiki/_118283913_29xp-meme-mobilemasterat3x-v3.jpg",
+      "created_on": "2025-05-10T14:01:00.000Z",
+      "updated_on": "2025-05-10T14:01:00.000Z"
+    }
+  },
+  {
+    "model": "wiki.article",
+    "pk": 16,
+    "fields": {
+      "title": "The Importance of Staying Active in Your 50s",
+      "author": 4,
+      "category": 5,
+      "entry": "Exercise is crucial at any age, but staying active after 50 can be particularly beneficial for long-term health.",
+      "header_image": "wiki/_118283913_29xp-meme-mobilemasterat3x-v3.jpg",
+      "created_on": "2025-05-10T14:01:20.000Z",
+      "updated_on": "2025-05-10T14:01:20.000Z"
+    }
+  },
+  {
+    "model": "wiki.imagegallery",
+    "pk": 1,
+    "fields": {
+      "article": 1,
+      "image": "wiki/new.jpg",
+      "description": null
+    }
+  },
+  {
+    "model": "wiki.imagegallery",
+    "pk": 2,
+    "fields": {
+      "article": 2,
+      "image": "wiki/new.jpg",
+      "description": null
+    }
+  },
+  {
+    "model": "wiki.imagegallery",
+    "pk": 3,
+    "fields": {
+      "article": 3,
+      "image": "wiki/new.jpg",
+      "description": null
+    }
+  },
+  {
+    "model": "wiki.imagegallery",
+    "pk": 4,
+    "fields": {
+      "article": 4,
+      "image": "wiki/new.jpg",
+      "description": null
+    }
+  },
+  {
+    "model": "wiki.imagegallery",
+    "pk": 5,
+    "fields": {
+      "article": 5,
+      "image": "wiki/new.jpg",
+      "description": null
+    }
+  },
+  {
+    "model": "wiki.imagegallery",
+    "pk": 6,
+    "fields": {
+      "article": 6,
+      "image": "wiki/new.jpg",
+      "description": null
+    }
+  },
+  {
+    "model": "wiki.imagegallery",
+    "pk": 7,
+    "fields": {
+      "article": 7,
+      "image": "wiki/new.jpg",
+      "description": null
+    }
+  },
+  {
+    "model": "wiki.imagegallery",
+    "pk": 8,
+    "fields": {
+      "article": 8,
+      "image": "wiki/new.jpg",
+      "description": null
+    }
+  },
+  {
+    "model": "wiki.imagegallery",
+    "pk": 9,
+    "fields": {
+      "article": 9,
+      "image": "wiki/new.jpg",
+      "description": null
+    }
+  },
+  {
+    "model": "wiki.imagegallery",
+    "pk": 10,
+    "fields": {
+      "article": 10,
+      "image": "wiki/new.jpg",
+      "description": null
+    }
+  },
+  {
+    "model": "wiki.imagegallery",
+    "pk": 11,
+    "fields": {
+      "article": 11,
+      "image": "wiki/new.jpg",
+      "description": null
+    }
+  },
+  {
+    "model": "wiki.imagegallery",
+    "pk": 12,
+    "fields": {
+      "article": 12,
+      "image": "wiki/new.jpg",
+      "description": null
+    }
+  },
+  {
+    "model": "wiki.imagegallery",
+    "pk": 13,
+    "fields": {
+      "article": 13,
+      "image": "wiki/new.jpg",
+      "description": null
+    }
+  },
+  {
+    "model": "wiki.imagegallery",
+    "pk": 14,
+    "fields": {
+      "article": 14,
+      "image": "wiki/new.jpg",
+      "description": null
+    }
+  },
+  {
+    "model": "wiki.imagegallery",
+    "pk": 15,
+    "fields": {
+      "article": 15,
+      "image": "wiki/new.jpg",
+      "description": null
+    }
+  },
+  {
+    "model": "wiki.imagegallery",
+    "pk": 16,
+    "fields": {
+      "article": 16,
+      "image": "wiki/new.jpg",
+      "description": null
+    }
+  }
+]

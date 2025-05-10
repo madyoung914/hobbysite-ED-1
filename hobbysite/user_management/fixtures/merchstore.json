@@ -1,0 +1,199 @@
+[
+    {
+        "model": "merchstore.product",
+        "pk": 7,
+        "fields": {
+            "name": "Bluetooth Speaker",
+            "description": "Loud and portable",
+            "price": 900,
+            "producttype": 1,
+            "owner": 1,
+            "stock": 40,
+            "status": "AVL"
+        }
+    },
+    {
+        "model": "merchstore.product",
+        "pk": 8,
+        "fields": {
+            "name": "Power Bank",
+            "description": "Charges on the go",
+            "price": 600,
+            "producttype": 1,
+            "owner": 2,
+            "stock": 25,
+            "status": "SALE"
+        }
+    },
+    {
+        "model": "merchstore.product",
+        "pk": 9,
+        "fields": {
+            "name": "Smart Watch",
+            "description": "Track your fitness",
+            "price": 1500,
+            "producttype": 1,
+            "owner": 3,
+            "stock": 20,
+            "status": "AVL"
+        }
+    },
+    {
+        "model": "merchstore.product",
+        "pk": 10,
+        "fields": {
+            "name": "USB Hub",
+            "description": "Expand your ports",
+            "price": 350,
+            "producttype": 1,
+            "owner": 4,
+            "stock": 60,
+            "status": "SALE"
+        }
+    },
+    {
+        "model": "merchstore.product",
+        "pk": 11,
+        "fields": {
+            "name": "Wireless Charger",
+            "description": "Fast wireless charging",
+            "price": 800,
+            "producttype": 1,
+            "owner": 5,
+            "stock": 30,
+            "status": "AVL"
+        }
+    },
+
+    {
+        "model": "merchstore.product",
+        "pk": 12,
+        "fields": {
+            "name": "Hoodie",
+            "description": "Warm and cozy",
+            "price": 500,
+            "producttype": 2,
+            "owner": 6,
+            "stock": 45,
+            "status": "SALE"
+        }
+    },
+    {
+        "model": "merchstore.product",
+        "pk": 13,
+        "fields": {
+            "name": "Jacket",
+            "description": "Stylish outerwear",
+            "price": 800,
+            "producttype": 2,
+            "owner": 7,
+            "stock": 35,
+            "status": "AVL"
+        }
+    },
+    {
+        "model": "merchstore.product",
+        "pk": 14,
+        "fields": {
+            "name": "Cap",
+            "description": "Cool baseball cap",
+            "price": 200,
+            "producttype": 2,
+            "owner": 8,
+            "stock": 75,
+            "status": "SALE"
+        }
+    },
+    {
+        "model": "merchstore.product",
+        "pk": 15,
+        "fields": {
+            "name": "Shorts",
+            "description": "Casual summer wear",
+            "price": 300,
+            "producttype": 2,
+            "owner": 9,
+            "stock": 50,
+            "status": "AVL"
+        }
+    },
+    {
+        "model": "merchstore.product",
+        "pk": 16,
+        "fields": {
+            "name": "Sweater",
+            "description": "Perfect for winter",
+            "price": 600,
+            "producttype": 2,
+            "owner": 10,
+            "stock": 20,
+            "status": "SALE"
+        }
+    },
+
+    {
+        "model": "merchstore.product",
+        "pk": 17,
+        "fields": {
+            "name": "Bracelet",
+            "description": "Leather wrist bracelet",
+            "price": 250,
+            "producttype": 3,
+            "owner": 11,
+            "stock": 40,
+            "status": "AVL"
+        }
+    },
+    {
+        "model": "merchstore.product",
+        "pk": 18,
+        "fields": {
+            "name": "Necklace",
+            "description": "Silver chain",
+            "price": 700,
+            "producttype": 3,
+            "owner": 1,
+            "stock": 15,
+            "status": "SALE"
+        }
+    },
+    {
+        "model": "merchstore.product",
+        "pk": 19,
+        "fields": {
+            "name": "Belt",
+            "description": "Classic leather belt",
+            "price": 400,
+            "producttype": 3,
+            "owner": 2,
+            "stock": 25,
+            "status": "AVL"
+        }
+    },
+    {
+        "model": "merchstore.product",
+        "pk": 20,
+        "fields": {
+            "name": "Earrings",
+            "description": "Gold-plated earrings",
+            "price": 950,
+            "producttype": 3,
+            "owner": 3,
+            "stock": 18,
+            "status": "SALE"
+        }
+    },
+    {
+        "model": "merchstore.product",
+        "pk": 21,
+        "fields": {
+            "name": "Ring",
+            "description": "Stainless steel ring",
+            "price": 500,
+            "producttype": 3,
+            "owner": 4,
+            "stock": 22,
+            "status": "AVL"
+        }
+    }
+]
