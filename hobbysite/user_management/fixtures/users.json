@@ -3,140 +3,216 @@
     "model": "auth.user",
     "pk": 1,
     "fields": {
+      "password": "pbkdf2_sha256$600000$UpSxVG5OG7KxYoAmuByec2$9yUO7fZ8FFXL0vFjYvU8ZAmI7WKu0n58OvPbq/fRHRE=",
+      "last_login": null,
+      "is_superuser": true,
       "username": "kino",
       "first_name": "Kino",
       "last_name": "De Torres",
-      "is_superuser": true,
+      "email": "kino.detorres@example.com",
       "is_staff": true,
       "is_active": true,
-      "password": "pbkdf2_sha256$600000$UpSxVG5OG7KxYoAmuByec2$9yUO7fZ8FFXL0vFjYvU8ZAmI7WKu0n58OvPbq/fRHRE=",
-      "email": "kino.detorres@example.com"
+      "date_joined": "2025-05-10T13:22:37.883Z",
+      "groups": [],
+      "user_permissions": []
     }
   },
   {
     "model": "auth.user",
     "pk": 2,
     "fields": {
+      "password": "pbkdf2_sha256$600000$UpSxVG5OG7KxYoAmuByec2$9yUO7fZ8FFXL0vFjYvU8ZAmI7WKu0n58OvPbq/fRHRE=",
+      "last_login": null,
+      "is_superuser": false,
       "username": "emilyc",
       "first_name": "Emily",
       "last_name": "Carter",
-      "is_superuser": false,
+      "email": "emily.carter@example.com",
       "is_staff": false,
       "is_active": true,
-      "password": "pbkdf2_sha256$600000$UpSxVG5OG7KxYoAmuByec2$9yUO7fZ8FFXL0vFjYvU8ZAmI7WKu0n58OvPbq/fRHRE=",
-      "email": "emily.carter@example.com"
+      "date_joined": "2025-05-10T13:22:37.888Z",
+      "groups": [],
+      "user_permissions": []
     }
   },
   {
     "model": "auth.user",
     "pk": 3,
     "fields": {
+      "password": "pbkdf2_sha256$600000$UpSxVG5OG7KxYoAmuByec2$9yUO7fZ8FFXL0vFjYvU8ZAmI7WKu0n58OvPbq/fRHRE=",
+      "last_login": null,
+      "is_superuser": false,
       "username": "davidl",
       "first_name": "David",
       "last_name": "Lopez",
-      "is_superuser": false,
+      "email": "david.lopez@example.com",
       "is_staff": false,
       "is_active": true,
-      "password": "pbkdf2_sha256$600000$UpSxVG5OG7KxYoAmuByec2$9yUO7fZ8FFXL0vFjYvU8ZAmI7WKu0n58OvPbq/fRHRE=",
-      "email": "david.lopez@example.com"
+      "date_joined": "2025-05-10T13:22:37.888Z",
+      "groups": [],
+      "user_permissions": []
     }
   },
   {
     "model": "auth.user",
     "pk": 4,
     "fields": {
+      "password": "pbkdf2_sha256$600000$UpSxVG5OG7KxYoAmuByec2$9yUO7fZ8FFXL0vFjYvU8ZAmI7WKu0n58OvPbq/fRHRE=",
+      "last_login": null,
+      "is_superuser": false,
       "username": "sarahm",
       "first_name": "Sarah",
       "last_name": "Mitchell",
-      "is_superuser": false,
+      "email": "sarah.mitchell@example.com",
       "is_staff": false,
       "is_active": true,
-      "password": "pbkdf2_sha256$600000$UpSxVG5OG7KxYoAmuByec2$9yUO7fZ8FFXL0vFjYvU8ZAmI7WKu0n58OvPbq/fRHRE=",
-      "email": "sarah.mitchell@example.com"
+      "date_joined": "2025-05-10T13:22:37.889Z",
+      "groups": [],
+      "user_permissions": []
     }
   },
   {
     "model": "auth.user",
     "pk": 5,
     "fields": {
+      "password": "pbkdf2_sha256$600000$UpSxVG5OG7KxYoAmuByec2$9yUO7fZ8FFXL0vFjYvU8ZAmI7WKu0n58OvPbq/fRHRE=",
+      "last_login": null,
+      "is_superuser": false,
       "username": "michaelb",
       "first_name": "Michael",
       "last_name": "Bennett",
-      "is_superuser": false,
+      "email": "michael.bennett@example.com",
       "is_staff": false,
       "is_active": true,
-      "password": "pbkdf2_sha256$600000$UpSxVG5OG7KxYoAmuByec2$9yUO7fZ8FFXL0vFjYvU8ZAmI7WKu0n58OvPbq/fRHRE=",
-      "email": "michael.bennett@example.com"
+      "date_joined": "2025-05-10T13:22:37.889Z",
+      "groups": [],
+      "user_permissions": []
     }
   },
   {
     "model": "auth.user",
     "pk": 6,
     "fields": {
+      "password": "pbkdf2_sha256$600000$UpSxVG5OG7KxYoAmuByec2$9yUO7fZ8FFXL0vFjYvU8ZAmI7WKu0n58OvPbq/fRHRE=",
+      "last_login": null,
+      "is_superuser": false,
       "username": "ashleyr",
       "first_name": "Ashley",
       "last_name": "Reed",
-      "is_superuser": false,
+      "email": "ashley.reed@example.com",
       "is_staff": false,
       "is_active": true,
-      "password": "pbkdf2_sha256$600000$UpSxVG5OG7KxYoAmuByec2$9yUO7fZ8FFXL0vFjYvU8ZAmI7WKu0n58OvPbq/fRHRE=",
-      "email": "ashley.reed@example.com"
+      "date_joined": "2025-05-10T13:22:37.889Z",
+      "groups": [],
+      "user_permissions": []
     }
   },
   {
     "model": "auth.user",
     "pk": 7,
     "fields": {
+      "password": "pbkdf2_sha256$600000$UpSxVG5OG7KxYoAmuByec2$9yUO7fZ8FFXL0vFjYvU8ZAmI7WKu0n58OvPbq/fRHRE=",
+      "last_login": null,
+      "is_superuser": false,
       "username": "jasonw",
       "first_name": "Jason",
       "last_name": "Wright",
-      "is_superuser": false,
+      "email": "jason.wright@example.com",
       "is_staff": false,
       "is_active": true,
-      "password": "pbkdf2_sha256$600000$UpSxVG5OG7KxYoAmuByec2$9yUO7fZ8FFXL0vFjYvU8ZAmI7WKu0n58OvPbq/fRHRE=",
-      "email": "jason.wright@example.com"
+      "date_joined": "2025-05-10T13:22:37.890Z",
+      "groups": [],
+      "user_permissions": []
     }
   },
   {
     "model": "auth.user",
     "pk": 8,
     "fields": {
+      "password": "pbkdf2_sha256$600000$UpSxVG5OG7KxYoAmuByec2$9yUO7fZ8FFXL0vFjYvU8ZAmI7WKu0n58OvPbq/fRHRE=",
+      "last_login": null,
+      "is_superuser": false,
       "username": "oliviat",
       "first_name": "Olivia",
       "last_name": "Turner",
-      "is_superuser": false,
+      "email": "olivia.turner@example.com",
       "is_staff": false,
       "is_active": true,
-      "password": "pbkdf2_sha256$600000$UpSxVG5OG7KxYoAmuByec2$9yUO7fZ8FFXL0vFjYvU8ZAmI7WKu0n58OvPbq/fRHRE=",
-      "email": "olivia.turner@example.com"
+      "date_joined": "2025-05-10T13:22:37.890Z",
+      "groups": [],
+      "user_permissions": []
     }
   },
   {
     "model": "auth.user",
     "pk": 9,
     "fields": {
+      "password": "pbkdf2_sha256$600000$UpSxVG5OG7KxYoAmuByec2$9yUO7fZ8FFXL0vFjYvU8ZAmI7WKu0n58OvPbq/fRHRE=",
+      "last_login": null,
+      "is_superuser": false,
       "username": "danielt",
       "first_name": "Daniel",
       "last_name": "Thompson",
-      "is_superuser": false,
+      "email": "daniel.thompson@example.com",
       "is_staff": false,
       "is_active": true,
-      "password": "pbkdf2_sha256$600000$UpSxVG5OG7KxYoAmuByec2$9yUO7fZ8FFXL0vFjYvU8ZAmI7WKu0n58OvPbq/fRHRE=",
-      "email": "daniel.thompson@example.com"
+      "date_joined": "2025-05-10T13:22:37.890Z",
+      "groups": [],
+      "user_permissions": []
     }
   },
   {
     "model": "auth.user",
     "pk": 10,
     "fields": {
+      "password": "pbkdf2_sha256$600000$UpSxVG5OG7KxYoAmuByec2$9yUO7fZ8FFXL0vFjYvU8ZAmI7WKu0n58OvPbq/fRHRE=",
+      "last_login": null,
+      "is_superuser": false,
       "username": "laureng",
       "first_name": "Lauren",
       "last_name": "Garcia",
-      "is_superuser": false,
+      "email": "lauren.garcia@example.com",
       "is_staff": false,
       "is_active": true,
-      "password": "pbkdf2_sha256$600000$UpSxVG5OG7KxYoAmuByec2$9yUO7fZ8FFXL0vFjYvU8ZAmI7WKu0n58OvPbq/fRHRE=",
-      "email": "lauren.garcia@example.com"
+      "date_joined": "2025-05-10T13:22:37.890Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 11,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$9hwL3b9OgbY9fDJ4w7FC9F$hMeZUMKmIixBTiRyklW2wTtjCvm8nj02B8DN3IXiB7M=",
+      "last_login": "2025-05-10T15:00:12Z",
+      "is_superuser": true,
+      "username": "hatGuy",
+      "first_name": "",
+      "last_name": "",
+      "email": "hatguy000@email.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2025-05-10T13:29:54Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 12,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$oBBnfJZUvOuPYta6brIBkf$EUE8ZMPSbmmzKdqFUueO5S7xrfHtwuXaAdfGa1JlaRU=",
+      "last_login": null,
+      "is_superuser": true,
+      "username": "Admin",
+      "first_name": "",
+      "last_name": "",
+      "email": "adminBoss@email.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2025-05-10T15:34:40Z",
+      "groups": [],
+      "user_permissions": []
     }
   }
 ]
