@@ -19,13 +19,14 @@ class Article(models.Model):
     author = models.ForeignKey(
         userModels.Profile,
         on_delete=models.SET_NULL,
-        null=True
-        )
+        null=True,
+        related_name="blog_author"
+    )
     category = models.ForeignKey(
         ArticleCategory,
         on_delete=models.SET_NULL,
         null=True
-        )
+    )
     header_image = models.ImageField(null=False, upload_to='images/')
     entry = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
@@ -40,11 +41,13 @@ class Article(models.Model):
     class Meta:
         ordering = ['-created_on']
 
+
 class Comment(models.Model):
     author = models.ForeignKey(
         userModels.Profile,
         on_delete=models.SET_NULL,
-        null=True
+        null=True,
+        related_name="blog_comment_author"
     )
     article = models.ForeignKey(
         Article,
@@ -54,9 +57,16 @@ class Comment(models.Model):
     entry = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
-    
-    def __str__(self):
-        return self.author.name
 
     class Meta:
         ordering = ['created_on']
+
+
+class ImageGallery(models.Model):
+    article = models.ForeignKey(
+        Article,
+        related_name='images',
+        on_delete=models.CASCADE,
+    )
+    image = models.ImageField(upload_to='wiki/', null=False,)
+    description = models.CharField(max_length=255, blank=True, null=True)

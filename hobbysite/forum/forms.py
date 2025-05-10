@@ -14,4 +14,6 @@ class CommentForm(forms.ModelForm):
 class ThreadForm(forms.ModelForm):
     class Meta:
         model = Thread
-        exclude = ['author']
+        exclude = ['author', 'image']
+    
+    image = forms.ImageField(required=False)

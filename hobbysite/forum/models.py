@@ -26,9 +26,9 @@ class Thread(models.Model):
         ThreadCategory,
         on_delete=models.SET_NULL,
         null=True
-        )
+    )
     entry = models.TextField()
-    image = models.ImageField(upload_to='images/', null=True)
+    image = models.ImageField(upload_to='images/', null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
@@ -52,11 +52,10 @@ class Comment(models.Model):
     thread = models.ForeignKey(
         Thread,
         on_delete=models.CASCADE,
-        )
+    )
     entry = models.TextField(null=True)
     created_on = models.DateTimeField(auto_now_add=True, null=True)
     updated_on = models.DateTimeField(auto_now=True, null=True)
 
     class Meta:
         ordering = ['created_on']
-    

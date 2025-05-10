@@ -4,9 +4,9 @@
 {% block title %}{{ article.title }}{% endblock %}
 
 {% block content %}
-    <h2>{{ article.title }}</h2>
+    <img src="{{ article.header_image.url }}" alt="{{ article.header_image.url }}" style="width: 100%; height: 300px; object-fit: cover; object-position: middle;">
+    <h1>{{ article.title }}</h1>
     <p>Author: {{ article.author.name }} | Category: {{ article.category }} | Published: {{ article.created_on }} | Last Updated: {{ article.updated_on }}</p>
-    <img src="{{ article.header_image.url }}">
     
     <p>{{ article.entry }}</p>
     <a href="{% url 'blog:articles-list' %}">Go to Articles List</a>
@@ -15,12 +15,32 @@
         <a href="{% url 'blog:article-edit' pk=article.pk %}">Edit Article</a>
     {% endif %}
     
+    {% if images %}
+        <h3>Image Gallery 🖼️</h3>
+            {% for image in images %}
+                <img src="{{ image.image.url }}" alt="{{ image.description }}" style="width: 300px; height: 300px; object-fit: cover; object-position: middle;">
+                
+                {% if user.is_authenticated and article.author.user == user %}
+                    <a href="{% url 'blog:image-update' image.pk %}">✏️Edit Image</a>
+                {% endif %}
+            {% endfor %}
+    {% endif %}
+    <br>
+
+    {% if article.author == user %}
+        <a href="{% url 'blog:image-upload' article.pk %}">➕Upload an Image</a>
+    {% endif %} 
+    
     <h2>Comments</h2>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form }}
-        <button type="submit">Submit</button>
-    </form>
+    {% if user.is_authenticated %}
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Post Comment</button>
+        </form>
+    {% else %}
+        <p>You must be logged in.</p>
+    {% endif %}
     <ul>
     {% for comment in comments %}
         <li>
@@ -41,3 +61,7 @@
     {% endfor %}
     </ul>
 {% endblock %}
+
+
+    
+    

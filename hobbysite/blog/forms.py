@@ -1,5 +1,5 @@
 from django import forms
-from .models import Article, Comment
+from .models import Article, Comment, ImageGallery
 
 
 class ArticleForm(forms.ModelForm):
@@ -8,17 +8,13 @@ class ArticleForm(forms.ModelForm):
         fields = ['title', 'category', 'entry', 'header_image']
 
 
-class ArticleEditForm(forms.ModelForm):
-    class Meta:
-        model = Article
-        fields = ['title', 'category', 'entry', 'header_image']
-
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ['entry']
 
-#class RecipeImageForm(forms.ModelForm):
- #   class Meta:
-  #      model = RecipeImage
-   #     fields = ['image', 'description']
+
+class ImageGalleryForm(forms.ModelForm):
+    class Meta:
+        model = ImageGallery
+        fields = ['image', 'description']
