@@ -73,9 +73,9 @@
                     <a href="{% url 'wiki:article-detail' article.pk %}">Cancel</a>
                 </form>
             {% else %}
-                <b>{{ comment.author.name }}</b> | {{ comment.created_on|date:"M d, Y H:i" }}
+                <b>{{ comment.author.name }}</b> | {{ comment.created_on }}
                 {% if comment.updated_on != comment.created_on %} 
-                    (Edited: {{ comment.updated_on|date:"M d, Y H:i" }} ) 
+                    (Edited: {{ comment.updated_on }} ) 
                 {% endif %}
 
                 {% if user.is_authenticated and comment.author.user == user %}
