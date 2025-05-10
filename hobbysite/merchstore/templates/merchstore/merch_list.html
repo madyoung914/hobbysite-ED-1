@@ -4,52 +4,53 @@
 
 {% block title %}All Items{% endblock %}
 {% block content %}
-        <h1>🛒 Merch Store</h1>
-        <h2>Hi {{ user.get_username }}!</h2>
-        <br>
+<h1>🛒 Merch Store</h1>
+<h2>Hi {{ user.get_username }}!</h2>
+<br>
         {% if not request.user.is_authenticated %}
-            <h3> ALL PRODUCTS </h3>
+<h3> ALL PRODUCTS </h3>
             {% for product_type in object_list %}
-                <h4>{{ product_type.name }}: {{ product_type.description }}</h4>
+<h4>{{ product_type.name }}: {{ product_type.description }}</h4>
                     {% for product in product_type.type.all %}
-                    <li>
-                        <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
-                    </li>
+<li>
+    <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+</li>
                     {% endfor %}
-                    <br>
+<br>
             {% endfor %}
 
         {% else %}
-            
-            <h3>{{ user.get_username }}'s PRODUCTS</h3>
+
+<h3>{{ user.get_username }}'s PRODUCTS</h3>
             {% for product_type in object_list %}
-            <h4>{{ product_type.name }}: {{ product_type.description }}</h4>
+<h4>{{ product_type.name }}: {{ product_type.description }}</h4>
                     {% for product in product_type.type.all %}
                         {% if product.owner.user == user %}
-                        <li>
-                            <a href="{{ product.get_absolute_url }}">{{ product.owner.user.get_username }}: {{ product.name }}</a>
-                        </li>
+<li>
+    <a href="{{ product.get_absolute_url }}">{{ product.owner.user.get_username }}: {{ product.name }}</a>
+</li>
                         {% endif %}
-                        <br>
+<br>
                     {% endfor %}
             {% endfor %}
 
-            <h3> ALL PRODUCTS</h3>
+<h3> ALL PRODUCTS</h3>
             {% for product_type in object_list %}
-            <h4>{{ product_type.name }}: {{ product_type.description }}</h4>
+<h4>{{ product_type.name }}: {{ product_type.description }}</h4>
                     {% for product in product_type.type.all %}
                         {% if product.owner.user != user %}
-                        <li>
-                            <a href="{{ product.get_absolute_url }}">{{ product.owner.user.get_username }}: {{ product.name }}</a>
-                        </li>
+<li>
+    <a href="{{ product.get_absolute_url }}">{{ product.owner.user.get_username }}: {{ product.name }}</a>
+</li>
                         {% endif %}
-                        <br>
+<br>
                     {% endfor %}
             {% endfor %}
         {% endif %}
 
-        <br>
-        <h4>Want to create a new product? Click <a href="{% url 'merchstore:merch-add' %}">Here</a>
-        <a href="{% url 'user_management:profile' %}">Go pack to profile</a>
-        
-{% endblock %}
+<br>
+<h4>
+    Want to create a new product? Click <a href="{% url 'merchstore:merch-add' %}">Here</a>
+    <a href="{% url 'user_management:profile' %}">Go pack to profile</a>
+
+    {% endblock %}
