@@ -9,9 +9,9 @@ class Commission(models.Model):
         OPEN = 'O', 'Open'
         FULL = 'F', 'Full'
         COMPLETE = 'C', 'Complete'
-        Discontinued = 'D', 'Discontinued'
+        DISCONTINUED = 'D', 'Discontinued'
     
-    class CommManager:
+    class CommManager(models.Manager):
         def get_queryset(self):
             return super().get_queryset().annotate(
                 status_order=models.Case(
@@ -46,15 +46,13 @@ class Commission(models.Model):
 
     objects = CommManager()
     
-        
-
 
 class Job(models.Model):
     class JobStatus(models.TextChoices):
         OPEN = 'O', 'Open'
         FULL = 'F', 'Full'
 
-    class JobManager:
+    class JobManager(models.Manager):
         def get_queryset(self):
             return super().get_queryset().annotate(
                 status_order=models.Case(

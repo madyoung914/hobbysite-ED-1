@@ -27,7 +27,7 @@ class CommissionListView(ListView):
 
         ctx['createdCommissions'] = createdCommissions
         ctx['appliedCommissions'] = appliedCommissions
-        ctx['form'] = JobApplicationForm()
+
         return ctx
 
 
@@ -97,7 +97,19 @@ class JobView(DetailView):
                 application.status = 'R'
 
             application.save()
+            
+            if(self.object.manpowerRequired == self.object.jobApplication.filter(status='A').count()):
+                for jobApp in self.object.jobApplication.filter(status='P'):
+                    jobApp.status = 'R'
+                    jobApp.save()
+                self.object.status = 'F'
+            
             self.object.save()
+
+            commission = self.object.commission
+            if(commission.jobs.filter(status='F').count() == commission.jobs.all().count()):
+                commission.status = 'F'
+                commission.save()
             
             return redirect(self.object.get_absolute_url())
         else:
