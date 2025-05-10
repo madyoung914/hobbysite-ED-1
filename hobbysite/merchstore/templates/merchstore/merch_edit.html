@@ -2,13 +2,11 @@
 
 {% block content %}
 
-<p> is this working</p>
-
 <form method = "POST">
     {% csrf_token %}
     {{ form.as_p }} 
     <button type="submit" data-show-if="object.stock != 0">Submit</button>
 </form>
 
-<a href="{% url 'merchstore:merchstore-item' pk=object.pk %}">Go pack to page</a>
+<a href="{% url 'merchstore:merchstore-item' pk=object.pk %}">Go back to page</a>
 {% endblock %}

@@ -23,17 +23,18 @@ class ThreadDetailView(FormMixin, DetailView):
     template_name = 'forum/thread_detail.html'
     form_class = CommentForm
 
-    
     def get_success_url(self):
-        return reverse('forum:thread-detail', kwargs={'pk': self.object.pk})
+        return reverse_lazy('forum:thread-detail', kwargs={'pk': self.object.pk})
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         thread = self.object
-        thread_category = thread.category        
-        related_threads = Thread.objects.filter(category=thread_category).exclude(id=thread.id).order_by('?')[:4]
+        thread_category = thread.category
+        related_threads = Thread.objects.filter(
+            category=thread_category).exclude(id=thread.id).order_by('?')[:4]
         context['related_threads'] = related_threads
-        context['comments'] = Comment.objects.filter(thread=self.object).order_by('created_on')
+        context['comments'] = Comment.objects.filter(
+            thread=self.object).order_by('created_on')
         context['form'] = self.get_form()
         return context
 
@@ -49,23 +50,30 @@ class ThreadDetailView(FormMixin, DetailView):
         else:
             return self.form_invalid(form)
 
+
 class ThreadCreateView(LoginRequiredMixin, CreateView):
     model = Thread
     fields = ['title', 'category', 'entry', 'image']
     template_name = 'forum/thread_add.html'
-    success_url = reverse_lazy('forum:threads-list')
 
     def form_valid(self, form):
         form.instance.author = self.request.user.profile
+        return super().form_valid(form)
 
-        # If your model uses User directly
-        # form.instance.author = self.request.user
+    def get_success_url(self):
+        return reverse_lazy(
+            'forum:thread-detail',
+            kwargs={'pk': self.object.pk}
+        )
 
-        return super().form_valid(form)    
 
 class ThreadUpdateView(LoginRequiredMixin, UpdateView):
     model = Thread
     fields = ['title', 'category', 'entry', 'image']
     template_name = 'forum/thread_edit.html'
-    success_url = reverse_lazy('forum:threads-list')
-    
+
+    def get_success_url(self):
+        return reverse_lazy(
+            'forum:thread-detail',
+            kwargs={'pk': self.object.pk}
+        )

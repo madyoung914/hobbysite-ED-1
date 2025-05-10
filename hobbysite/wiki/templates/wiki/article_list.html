@@ -33,4 +33,11 @@
             {% endfor %}
         </ul>
     {% endfor %}
+    
+    {% if request.user.is_authenticated %}
+        <br>
+        <a href="{% url 'user_management:profile' username=user.username %}">Go back to profile</a>
+    {% endif %}
+    <br>
+    <a href="{% url 'main_interface:homepage'%}">Go back to homepage</a>
 {% endblock %}
