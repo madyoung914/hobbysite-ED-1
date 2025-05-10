@@ -4,7 +4,9 @@
 
 {% block title %}All Items{% endblock %}
 {% block content %}
+
         <h1>🛒 Merch Store</h1>
+
         <h2>Hi {{ user.get_username }}!</h2>
         <br>
         {% if not request.user.is_authenticated %}
@@ -54,5 +56,6 @@
         {% if request.user.is_authenticated %}
             <a href="{% url 'user_management:profile' username=user.username %}">Go pack to profile</a>
         {% endif %}
-        
+
 {% endblock %}
+
