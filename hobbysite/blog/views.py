@@ -19,7 +19,7 @@ class ArticleListView(ListView):
         context = super().get_context_data(**kwargs)
         context['categories'] = ArticleCategory.objects.all
         if self.request.user.is_authenticated:
-            context['account'] = Profile.objects.get(user=self.request.user) 
+            context['account'] = user=self.request.user.profile
         return context
 
 
