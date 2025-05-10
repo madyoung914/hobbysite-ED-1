@@ -7,10 +7,9 @@
 
         <h1>🛒 Merch Store</h1>
 
-        <h2>Hi {{ user.get_username }}!</h2>
-        <br>
+        <h2>Hi {{ user.profile.name }}!</h2>
         {% if not request.user.is_authenticated %}
-            <h3> ALL PRODUCTS </h3>
+            <h3>All Products </h3>
             {% for product_type in object_list %}
                 <h4>{{ product_type.name }}: {{ product_type.description }}</h4>
                     {% for product in product_type.type.all %}
@@ -18,11 +17,10 @@
                         <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
                     </li>
                     {% endfor %}
-                    <br>
             {% endfor %}
-
+            <br>
         {% else %}
-            <h3>{{ user.get_username }}'s PRODUCTS</h3>
+            <h3>Your Products</h3>
             {% for product_type in object_list %}
             <h4>{{ product_type.name }}: {{ product_type.description }}</h4>
                     {% for product in product_type.type.all %}
@@ -31,11 +29,11 @@
                             <a href="{{ product.get_absolute_url }}">{{ product.owner.user.get_username }}: {{ product.name }}</a>
                         </li>
                         {% endif %}
-                        <br>
                     {% endfor %}
+                    <br>
             {% endfor %}
 
-            <h3> ALL PRODUCTS</h3>
+            <h3>All Products</h3>
             {% for product_type in object_list %}
             <h4>{{ product_type.name }}: {{ product_type.description }}</h4>
                     {% for product in product_type.type.all %}
