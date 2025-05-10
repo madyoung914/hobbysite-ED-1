@@ -157,7 +157,7 @@ class ImageGalleryUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['form_title'] = 'Update Images'
+        context['form_title'] = 'Update Image'
         image_instance = self.get_object()
         context['article'] = image_instance.article
         return context

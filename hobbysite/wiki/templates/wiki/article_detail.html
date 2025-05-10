@@ -25,7 +25,7 @@
             {% for image in images %}
                 <img src="{{ image.image.url }}" alt="{{ image.description }}" style="width: 300px; height: 300px; object-fit: cover; object-position: middle;">
                 
-                {% if user.is_authenticated and article.wiki_author.user == user %}
+                {% if user.is_authenticated and article.author.user == user %}
                     <a href="{% url 'wiki:image-update' image.pk %}">✏️Edit Image</a>
                 {% endif %}
             {% endfor %}
