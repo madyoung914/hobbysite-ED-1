@@ -1,15 +1,20 @@
 from django.views.generic.list import ListView
+<<<<<<< HEAD
 from django.views.generic.edit import CreateView
 from user_management.models import Profile
 from django.contrib.auth.models import User
 from .forms import CreateUserForm
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
+=======
+from user_management.models import Profile
+>>>>>>> 6e8e5e3f35cd8f49718c7549124f99b6721daeb9
 
 
 class AppsListView(ListView):
     model = Profile
     template_name = 'main_interface/homepage.html'
+<<<<<<< HEAD
 
 
 class UserCreateView(CreateView):
@@ -73,3 +78,5 @@ class UserCreateView(CreateView):
 
 
 '''
+=======
+>>>>>>> 6e8e5e3f35cd8f49718c7549124f99b6721daeb9

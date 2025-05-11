@@ -1,0 +1,302 @@
+[
+  {
+    "model": "forum.threadcategory",
+    "pk": 1,
+    "fields": {
+      "name": "Lifestyle",
+      "description": "Insert description"
+    }
+  },
+  {
+    "model": "forum.threadcategory",
+    "pk": 2,
+    "fields": {
+      "name": "Technology",
+      "description": "Discuss the latest in tech"
+    }
+  },
+  {
+    "model": "forum.threadcategory",
+    "pk": 3,
+    "fields": {
+      "name": "Fashion",
+      "description": "Trends and advice on fashion"
+    }
+  },
+
+  {
+    "model": "forum.thread",
+    "pk": 1,
+    "fields": {
+      "title": "What soap is good for cleaning?",
+      "author": 4,
+      "category": 1,
+      "entry": "Lorem ipsum ipsum",
+      "image": "images/_118283913_29xp-meme-mobilemasterat3x-v3.jpg",
+      "created_on": "2025-05-10T13:49:08.320Z",
+      "updated_on": "2025-05-10T13:49:08.320Z"
+    }
+  },
+  {
+    "model": "forum.thread",
+    "pk": 2,
+    "fields": {
+      "title": "Is AI making us lazy?",
+      "author": 5,
+      "category": 2,
+      "entry": "I've noticed I'm doing less and letting ChatGPT do more...",
+      "image": "images/_118283913_29xp-meme-mobilemasterat3x-v3.jpg",
+      "created_on": "2025-05-10T13:50:08.000Z",
+      "updated_on": "2025-05-10T13:50:08.000Z"
+    }
+  },
+  {
+    "model": "forum.thread",
+    "pk": 3,
+    "fields": {
+      "title": "Favorite thrift store finds?",
+      "author": 6,
+      "category": 3,
+      "entry": "Share your best fashion finds from thrift stores!",
+      "image": "images/_118283913_29xp-meme-mobilemasterat3x-v3.jpg",
+      "created_on": "2025-05-10T13:51:10.000Z",
+      "updated_on": "2025-05-10T13:51:10.000Z"
+    }
+  },
+
+  {
+    "model": "forum.thread",
+    "pk": 4,
+    "fields": {
+      "title": "Best ways to stay productive while working from home",
+      "author": 7,
+      "category": 1,
+      "entry": "Any tips for staying focused while working from home?",
+      "image": "images/_118283913_29xp-meme-mobilemasterat3x-v3.jpg",
+      "created_on": "2025-05-10T13:52:10.000Z",
+      "updated_on": "2025-05-10T13:52:10.000Z"
+    }
+  },
+  {
+    "model": "forum.thread",
+    "pk": 5,
+    "fields": {
+      "title": "How to create a successful morning routine?",
+      "author": 8,
+      "category": 1,
+      "entry": "What are the best habits to start your day?",
+      "image": "images/_118283913_29xp-meme-mobilemasterat3x-v3.jpg",
+      "created_on": "2025-05-10T13:52:40.000Z",
+      "updated_on": "2025-05-10T13:52:40.000Z"
+    }
+  },
+  {
+    "model": "forum.thread",
+    "pk": 6,
+    "fields": {
+      "title": "What’s the most useful tech gadget you own?",
+      "author": 9,
+      "category": 2,
+      "entry": "Share your favorite tech gadgets and why you love them.",
+      "image": "images/_118283913_29xp-meme-mobilemasterat3x-v3.jpg",
+      "created_on": "2025-05-10T13:53:00.000Z",
+      "updated_on": "2025-05-10T13:53:00.000Z"
+    }
+  },
+
+  {
+    "model": "forum.thread",
+    "pk": 7,
+    "fields": {
+      "title": "What are the top programming languages to learn in 2025?",
+      "author": 10,
+      "category": 2,
+      "entry": "If you're starting in tech, which programming languages should you focus on?",
+      "image": "images/_118283913_29xp-meme-mobilemasterat3x-v3.jpg",
+      "created_on": "2025-05-10T13:53:20.000Z",
+      "updated_on": "2025-05-10T13:53:20.000Z"
+    }
+  },
+
+  {
+    "model": "forum.thread",
+    "pk": 8,
+    "fields": {
+      "title": "Will robots replace human jobs?",
+      "author": 11,
+      "category": 2,
+      "entry": "With advancements in robotics and AI, is job security under threat?",
+      "image": "images/_118283913_29xp-meme-mobilemasterat3x-v3.jpg",
+      "created_on": "2025-05-10T13:53:40.000Z",
+      "updated_on": "2025-05-10T13:53:40.000Z"
+    }
+  },
+
+  {
+    "model": "forum.thread",
+    "pk": 9,
+    "fields": {
+      "title": "Latest fashion trends for spring 2025",
+      "author": 1,
+      "category": 3,
+      "entry": "What are the must-have pieces for this season?",
+      "image": "images/_118283913_29xp-meme-mobilemasterat3x-v3.jpg",
+      "created_on": "2025-05-10T13:54:00.000Z",
+      "updated_on": "2025-05-10T13:54:00.000Z"
+    }
+  },
+  {
+    "model": "forum.thread",
+    "pk": 10,
+    "fields": {
+      "title": "How to style vintage clothes?",
+      "author": 2,
+      "category": 3,
+      "entry": "Share tips on how to make vintage pieces modern and wearable.",
+      "image": "images/_118283913_29xp-meme-mobilemasterat3x-v3.jpg",
+      "created_on": "2025-05-10T13:54:20.000Z",
+      "updated_on": "2025-05-10T13:54:20.000Z"
+    }
+  },
+
+  {
+    "model": "forum.thread",
+    "pk": 11,
+    "fields": {
+      "title": "What shoes are a must-have this year?",
+      "author": 3,
+      "category": 3,
+      "entry": "Looking for recommendations on the best shoes for 2025!",
+      "image": "images/_118283913_29xp-meme-mobilemasterat3x-v3.jpg",
+      "created_on": "2025-05-10T13:54:40.000Z",
+      "updated_on": "2025-05-10T13:54:40.000Z"
+    }
+  },
+
+  {
+    "model": "forum.comment",
+    "pk": 4,
+    "fields": {
+      "author": 3,
+      "thread": 1,
+      "entry": "How about this one?",
+      "created_on": "2025-05-10T13:49:23.288Z",
+      "updated_on": "2025-05-10T13:49:23.288Z"
+    }
+  },
+  {
+    "model": "forum.comment",
+    "pk": 5,
+    "fields": {
+      "author": 2,
+      "thread": 2,
+      "entry": "I still prefer thinking for myself lol",
+      "created_on": "2025-05-10T13:50:23.000Z",
+      "updated_on": "2025-05-10T13:50:23.000Z"
+    }
+  },
+  {
+    "model": "forum.comment",
+    "pk": 6,
+    "fields": {
+      "author": 1,
+      "thread": 3,
+      "entry": "I found a vintage Levi’s jacket for $10!",
+      "created_on": "2025-05-10T13:51:30.000Z",
+      "updated_on": "2025-05-10T13:51:30.000Z"
+    }
+  },
+
+  {
+    "model": "forum.comment",
+    "pk": 7,
+    "fields": {
+      "author": 4,
+      "thread": 4,
+      "entry": "Try creating a to-do list every morning. It helps me stay on track!",
+      "created_on": "2025-05-10T13:52:30.000Z",
+      "updated_on": "2025-05-10T13:52:30.000Z"
+    }
+  },
+  {
+    "model": "forum.comment",
+    "pk": 8,
+    "fields": {
+      "author": 5,
+      "thread": 5,
+      "entry": "I’ve been adding 10 minutes of stretching every morning, which helps me feel more energized!",
+      "created_on": "2025-05-10T13:52:50.000Z",
+      "updated_on": "2025-05-10T13:52:50.000Z"
+    }
+  },
+  {
+    "model": "forum.comment",
+    "pk": 9,
+    "fields": {
+      "author": 6,
+      "thread": 6,
+      "entry": "My wireless earbuds are a game changer!",
+      "created_on": "2025-05-10T13:53:10.000Z",
+      "updated_on": "2025-05-10T13:53:10.000Z"
+    }
+  },
+
+  {
+    "model": "forum.comment",
+    "pk": 10,
+    "fields": {
+      "author": 7,
+      "thread": 7,
+      "entry": "I think Python is the most versatile language to learn!",
+      "created_on": "2025-05-10T13:53:30.000Z",
+      "updated_on": "2025-05-10T13:53:30.000Z"
+    }
+  },
+
+  {
+    "model": "forum.comment",
+    "pk": 11,
+    "fields": {
+      "author": 8,
+      "thread": 8,
+      "entry": "I believe automation will take over repetitive jobs, but creative jobs will remain secure.",
+      "created_on": "2025-05-10T13:53:50.000Z",
+      "updated_on": "2025-05-10T13:53:50.000Z"
+    }
+  },
+
+  {
+    "model": "forum.comment",
+    "pk": 12,
+    "fields": {
+      "author": 9,
+      "thread": 9,
+      "entry": "I’m loving oversized jackets for this spring!",
+      "created_on": "2025-05-10T13:54:10.000Z",
+      "updated_on": "2025-05-10T13:54:10.000Z"
+    }
+  },
+
+  {
+    "model": "forum.comment",
+    "pk": 13,
+    "fields": {
+      "author": 10,
+      "thread": 10,
+      "entry": "Vintage t-shirts are timeless, always a great find!",
+      "created_on": "2025-05-10T13:54:30.000Z",
+      "updated_on": "2025-05-10T13:54:30.000Z"
+    }
+  },
+  {
+    "model": "forum.comment",
+    "pk": 14,
+    "fields": {
+      "author": 11,
+      "thread": 11,
+      "entry": "Sneakers are my go-to! They’re comfortable and always in style.",
+      "created_on": "2025-05-10T13:54:50.000Z",
+      "updated_on": "2025-05-10T13:54:50.000Z"
+    }
+  }
+]

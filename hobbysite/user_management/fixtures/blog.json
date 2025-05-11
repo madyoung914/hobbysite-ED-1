@@ -1,0 +1,221 @@
+[
+  {
+    "model": "blog.articlecategory",
+    "pk": 1,
+    "fields": {
+      "name": "Beauty and Fashion",
+      "description": "Read on how to make yourself presentable"
+    }
+  },
+  {
+    "model": "blog.articlecategory",
+    "pk": 2,
+    "fields": {
+      "name": "Technology",
+      "description": "Latest updates and reviews from the tech world"
+    }
+  },
+  {
+    "model": "blog.articlecategory",
+    "pk": 3,
+    "fields": {
+      "name": "Lifestyle",
+      "description": "Tips for healthy, productive, and happy living"
+    }
+  },
+  {
+    "model": "blog.article",
+    "pk": 1,
+    "fields": {
+      "title": "What's good for today",
+      "author": 2,
+      "category": 1,
+      "header_image": "images/1193581-1920x1080-desktop-1080p-gengar-background.jpg",
+      "entry": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "created_on": "2025-05-10T13:32:30.290Z",
+      "updated_on": "2025-05-10T13:32:36.142Z"
+    }
+  },
+  {
+    "model": "blog.article",
+    "pk": 2,
+    "fields": {
+      "title": "Summer Style Essentials",
+      "author": 5,
+      "category": 1,
+      "header_image": "images/1193581-1920x1080-desktop-1080p-gengar-background.jpg",
+      "entry": "Discover how to stay stylish this summer. Discover how to stay stylish this summer.",
+      "created_on": "2025-05-10T13:35:30.000Z",
+      "updated_on": "2025-05-10T13:35:36.000Z"
+    }
+  },
+  {
+    "model": "blog.article",
+    "pk": 3,
+    "fields": {
+      "title": "Sustainable Fashion Trends",
+      "author": 8,
+      "category": 1,
+      "header_image": "images/1193581-1920x1080-desktop-1080p-gengar-background.jpg",
+      "entry": "Eco-friendly materials are taking over runways. Eco-friendly materials are taking over runways.",
+      "created_on": "2025-05-10T13:38:30.000Z",
+      "updated_on": "2025-05-10T13:38:36.000Z"
+    }
+  },
+  {
+    "model": "blog.article",
+    "pk": 4,
+    "fields": {
+      "title": "Top Makeup Trends for 2025",
+      "author": 9,
+      "category": 1,
+      "header_image": "images/1193581-1920x1080-desktop-1080p-gengar-background.jpg",
+      "entry": "From bold lips to shimmering eyes, makeup in 2025 is all about self-expression.",
+      "created_on": "2025-05-10T13:42:30.000Z",
+      "updated_on": "2025-05-10T13:42:36.000Z"
+    }
+  },
+  {
+    "model": "blog.article",
+    "pk": 5,
+    "fields": {
+      "title": "Fashion Hacks You Need to Know",
+      "author": 10,
+      "category": 1,
+      "header_image": "images/1193581-1920x1080-desktop-1080p-gengar-background.jpg",
+      "entry": "Quick and easy tips to elevate your style without breaking the bank.",
+      "created_on": "2025-05-10T13:43:30.000Z",
+      "updated_on": "2025-05-10T13:43:36.000Z"
+    }
+  },
+  {
+    "model": "blog.article",
+    "pk": 6,
+    "fields": {
+      "title": "The Rise of AI",
+      "author": 3,
+      "category": 2,
+      "header_image": "images/1193581-1920x1080-desktop-1080p-gengar-background.jpg",
+      "entry": "Artificial intelligence is changing everything. Artificial intelligence is changing everything.",
+      "created_on": "2025-05-10T13:33:30.000Z",
+      "updated_on": "2025-05-10T13:33:36.000Z"
+    }
+  },
+  {
+    "model": "blog.article",
+    "pk": 7,
+    "fields": {
+      "title": "Top 5 Programming Languages",
+      "author": 6,
+      "category": 2,
+      "header_image": "images/1193581-1920x1080-desktop-1080p-gengar-background.jpg",
+      "entry": "Python still reigns supreme, but competition grows. Python still reigns supreme.",
+      "created_on": "2025-05-10T13:36:30.000Z",
+      "updated_on": "2025-05-10T13:36:36.000Z"
+    }
+  },
+  {
+    "model": "blog.article",
+    "pk": 8,
+    "fields": {
+      "title": "5 Gadgets You Didn't Know You Needed",
+      "author": 9,
+      "category": 2,
+      "header_image": "images/1193581-1920x1080-desktop-1080p-gengar-background.jpg",
+      "entry": "These gadgets will blow your mind in 2025. These gadgets will blow your mind in 2025.",
+      "created_on": "2025-05-10T13:39:30.000Z",
+      "updated_on": "2025-05-10T13:39:36.000Z"
+    }
+  },
+  {
+    "model": "blog.article",
+    "pk": 9,
+    "fields": {
+      "title": "How Blockchain is Revolutionizing Industries",
+      "author": 4,
+      "category": 2,
+      "header_image": "images/1193581-1920x1080-desktop-1080p-gengar-background.jpg",
+      "entry": "Blockchain is more than just crypto. It’s transforming sectors from finance to healthcare.",
+      "created_on": "2025-05-10T13:44:30.000Z",
+      "updated_on": "2025-05-10T13:44:36.000Z"
+    }
+  },
+  {
+    "model": "blog.article",
+    "pk": 10,
+    "fields": {
+      "title": "Future of Virtual Reality",
+      "author": 5,
+      "category": 2,
+      "header_image": "images/1193581-1920x1080-desktop-1080p-gengar-background.jpg",
+      "entry": "Virtual Reality is paving the way for immersive experiences in gaming, education, and more.",
+      "created_on": "2025-05-10T13:45:30.000Z",
+      "updated_on": "2025-05-10T13:45:36.000Z"
+    }
+  },
+  {
+    "model": "blog.article",
+    "pk": 11,
+    "fields": {
+      "title": "Work-Life Balance in 2025",
+      "author": 4,
+      "category": 3,
+      "header_image": "images/1193581-1920x1080-desktop-1080p-gengar-background.jpg",
+      "entry": "Balancing work and life has never been more critical. Balancing work and life.",
+      "created_on": "2025-05-10T13:34:30.000Z",
+      "updated_on": "2025-05-10T13:34:36.000Z"
+    }
+  },
+  {
+    "model": "blog.article",
+    "pk": 12,
+    "fields": {
+      "title": "Mindfulness for Beginners",
+      "author": 7,
+      "category": 3,
+      "header_image": "images/1193581-1920x1080-desktop-1080p-gengar-background.jpg",
+      "entry": "Start your journey into mindfulness and meditation. Start your journey into mindfulness.",
+      "created_on": "2025-05-10T13:37:30.000Z",
+      "updated_on": "2025-05-10T13:37:36.000Z"
+    }
+  },
+  {
+    "model": "blog.article",
+    "pk": 13,
+    "fields": {
+      "title": "Minimalism at Home",
+      "author": 10,
+      "category": 3,
+      "header_image": "images/1193581-1920x1080-desktop-1080p-gengar-background.jpg",
+      "entry": "Simple living leads to a clearer mind. Simple living leads to a clearer mind.",
+      "created_on": "2025-05-10T13:40:30.000Z",
+      "updated_on": "2025-05-10T13:40:36.000Z"
+    }
+  },
+  {
+    "model": "blog.article",
+    "pk": 14,
+    "fields": {
+      "title": "5 Ways to Be More Productive",
+      "author": 6,
+      "category": 3,
+      "header_image": "images/1193581-1920x1080-desktop-1080p-gengar-background.jpg",
+      "entry": "Improve your productivity with these simple yet effective strategies.",
+      "created_on": "2025-05-10T13:46:30.000Z",
+      "updated_on": "2025-05-10T13:46:36.000Z"
+    }
+  },
+  {
+    "model": "blog.article",
+    "pk": 15,
+    "fields": {
+      "title": "Healthy Eating Habits for a Better Life",
+      "author": 8,
+      "category": 3,
+      "header_image": "images/1193581-1920x1080-desktop-1080p-gengar-background.jpg",
+      "entry": "Eating healthy is the first step to a better, happier life. Eating healthy is the first step.",
+      "created_on": "2025-05-10T13:47:30.000Z",
+      "updated_on": "2025-05-10T13:47:36.000Z"
+    }
+  }
+]

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}{{ object.name }}{% endblock %}
+{% block content %}
+    <h3>{{ object.name }}</h3>
+    <h4>Owner: {{ object.owner }}</h4>
+    <p>Description: {{ object.description }}</p>
+    <p>Product Type: {{ object.producttype }}</p>
+    <p>Price (₱): {{ object.price }}</p>
+    <p>Stock: {{object.stock }}</p>
+    <p>Product Status: {{ object.status }}</p>
+
+    <a href="{% url 'merchstore:merchstore-list' %}">Go back to merchstore</a>
+
+    <br>
+
+    {% if request.user.profile != object.owner %}
+        <p>Want to buy this product?</p>
+        <form method = "POST">
+            {% csrf_token %}
+            {{ form.as_p }} 
+            <button type="submit">Submit</button>
+        </form>
+    {% else %}
+        <p>Want to update info on ur product?</p>
+        <a href="{% url 'merchstore:merch-edit' pk=object.pk %}">Click here</a>
+    {% endif %}
+{% endblock %}

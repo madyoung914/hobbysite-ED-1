@@ -5,12 +5,37 @@
 
 {% block content %}
     <h1>🖥️ Blog</h1>
+    <h2>User's Articles</h2>
     <ul>
-        {% for article in object_list %}
-            <li>
-                <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
-                | Category: {{ article.category }} | Published: {{ article.created_on }} | Last Updated: {{ article.updated_on }}
-            </li>
+    {% if user_articles %}
+        {% for article in user_articles %}
+            <li><a href="{{ article.get_absolute_url }}">{{ article }}</a></li>
         {% endfor %}
+    {% else %}
+        <p>You have not written any articles</p>
+        <p>{{ user_articles }}</p>
+    {% endif %}
     </ul>
+    
+    <h2>All Articles</h2>
+    {% for category in categories %}
+    <h3>{{ category }}</h3>
+        <ul>
+        {% for article in other_articles %}
+            {% if article.category == category %}
+                <li><a href="{{ article.get_absolute_url }}">{{ article }}</a></li>
+            {% endif %}
+            <p></p>
+        {% endfor %}
+        </ul>
+    {% endfor %}
+    <a href="{% url 'blog:article-add' %}">Add Article</a>
+    {% if request.user.is_authenticated %}
+        <br>
+        <a href="{% url 'user_management:profile' username=user.username %}">Go back to profile</a>
+    {% endif %}
+    <br>
+    <a href="{% url 'main_interface:homepage'%}">Go back to homepage</a>
 {% endblock %}
+
+

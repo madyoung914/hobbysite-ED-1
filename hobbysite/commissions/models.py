@@ -1,13 +1,46 @@
-from turtle import title
 from django.db import models
+from user_management.models import Profile
 from django.urls import reverse
 
+
 class Commission(models.Model):
+
+    class CommStatus(models.TextChoices):
+        OPEN = 'O', 'Open'
+        FULL = 'F', 'Full'
+        COMPLETE = 'C', 'Complete'
+        DISCONTINUED = 'D', 'Discontinued'
+
+    class CommManager(models.Manager):
+        def get_queryset(self):
+            return super().get_queryset().annotate(
+                status_order=models.Case(
+                    models.When(status=Commission.CommStatus.OPEN,
+                                then=models.Value(1)),
+                    models.When(status=Commission.CommStatus.FULL,
+                                then=models.Value(2)),
+                    models.When(status=Commission.CommStatus.COMPLETE,
+                                then=models.Value(3)),
+                    models.When(
+                        status=Commission.CommStatus.DISCONTINUED, then=models.Value(4)),
+                    default=models.Value(5),
+                    output_field=models.IntegerField(),
+                )
+            ).order_by('status_order')
+
     title = models.CharField(max_length=255)
     description = models.TextField()
-    peopleRequired = models.IntegerField()
-    CreatedOn = models.DateTimeField(auto_now_add=True)
-    UpdatedOn = models.DateTimeField(auto_now=True)
+    status = models.CharField(
+        max_length=255,
+        choices=CommStatus.choices,
+        default=CommStatus.OPEN
+    )
+    author = models.ForeignKey(Profile,
+                               on_delete=models.SET_NULL,
+                               null=True,
+                               related_name='commission')
+    createdOn = models.DateTimeField(auto_now_add=True)
+    updatedOn = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title
@@ -15,19 +48,75 @@ class Commission(models.Model):
     def get_absolute_url(self):
         return reverse('commissions:commissionDetail', args=[self.pk])
 
-    class Meta:
-        ordering = ['-UpdatedOn']
+    objects = CommManager()
 
 
-class Comment(models.Model):
+class Job(models.Model):
+    class JobStatus(models.TextChoices):
+        OPEN = 'O', 'Open'
+        FULL = 'F', 'Full'
+
+    class JobManager(models.Manager):
+        def get_queryset(self):
+            return super().get_queryset().annotate(
+                status_order=models.Case(
+                    models.When(status=Commission.CommStatus.OPEN,
+                                then=models.Value(1)),
+                    models.When(status=Commission.CommStatus.FULL,
+                                then=models.Value(2)),
+                    default=models.Value(3),
+                    output_field=models.IntegerField(),
+                )
+            ).order_by('status_order')
+
     commission = models.ForeignKey(
         Commission,
         on_delete=models.CASCADE,
-        related_name='comments'
+        null=True,
+        related_name='jobs'
     )
-    entry = models.TextField()
-    CreatedOn = models.DateTimeField(auto_now_add=True)
-    UpdatedOn = models.DateTimeField(auto_now=True)
+    role = models.CharField(max_length=255)
+    manpowerRequired = models.IntegerField()
+    status = models.CharField(
+        max_length=255,
+        choices=JobStatus.choices,
+        default=JobStatus.OPEN
+    )
+    createdOn = models.DateTimeField(auto_now_add=True)
+
+    objects = JobManager()
+
+    def __str__(self):
+        return self.role
+
+    def get_absolute_url(self):
+        return reverse('commissions:jobDetail', args=[self.pk])
+
+
+class JobApplication(models.Model):
+
+    class AppStatus(models.TextChoices):
+        PENDING = 'P', 'Pending'
+        ACCEPTED = 'A', 'Accepted'
+        REJECTED = 'R', 'Rejected'
+
+    job = models.ForeignKey(
+        Job,
+        on_delete=models.CASCADE,
+        related_name='jobApplication'
+    )
+    applicant = models.ForeignKey(
+        Profile,
+        on_delete=models.CASCADE,
+        null=True,
+        related_name='applicant'
+    )
+    status = models.CharField(
+        max_length=255,
+        choices=AppStatus.choices,
+        default=AppStatus.PENDING
+    )
+    appliedOn = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ['-UpdatedOn']
+        ordering = ['-appliedOn']

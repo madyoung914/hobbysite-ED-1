@@ -1,5 +1,8 @@
 .env
 csci40env/
+media/
 **/*.pyc
 **/__pycache__
 db.sqlite3
+media/
+

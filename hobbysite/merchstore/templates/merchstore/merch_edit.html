@@ -2,13 +2,20 @@
 
 {% block content %}
 
+<<<<<<< HEAD
 <p> is this working</p>
 
+=======
+>>>>>>> 6e8e5e3f35cd8f49718c7549124f99b6721daeb9
 <form method = "POST">
     {% csrf_token %}
     {{ form.as_p }} 
     <button type="submit" data-show-if="object.stock != 0">Submit</button>
 </form>
 
+<<<<<<< HEAD
 <a href="{% url 'merchstore:merchstore-item' pk=object.pk %}">Go pack to page</a>
+=======
+<a href="{% url 'merchstore:merchstore-item' pk=object.pk %}">Go back to page</a>
+>>>>>>> 6e8e5e3f35cd8f49718c7549124f99b6721daeb9
 {% endblock %}

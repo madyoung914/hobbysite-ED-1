@@ -1,10 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6e8e5e3f35cd8f49718c7549124f99b6721daeb9
         <form method = "POST">
                 {% csrf_token %}
                 {{ form.as_p }} 
                 <button type="submit">Submit</button>
         </form>
+<<<<<<< HEAD
+=======
+        <a href="{% url 'merchstore:merchstore-list' %}">Go back to merchstore page</a>
+>>>>>>> 6e8e5e3f35cd8f49718c7549124f99b6721daeb9
 {% endblock %}

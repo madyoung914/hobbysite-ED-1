@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'commissions',
     'blog',
     'user_management',
+    'main_interface',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -114,7 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Manila'
 
 USE_I18N = True
 
@@ -128,8 +130,13 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+<<<<<<< HEAD
 LOGIN_REDIRECT_URL = '/merchstore/items'  # THIS IS TEMPORARY UNTIL THE HOMEPAGE IS MADE
 LOGOUT_REDIRECT_URL = '/profile'
+=======
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+>>>>>>> 6e8e5e3f35cd8f49718c7549124f99b6721daeb9
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Default primary key field type
