@@ -29,6 +29,16 @@
              .navbar {
                  background-color: #4A0072;
              }
+
+             .plain-text-button {
+                 background: none;
+                 border: none;
+                 padding: 0;
+                 color: inherit; /* Inherit text color from parent element */
+                 font: inherit; /* Inherit font style from parent element */
+                 cursor: pointer;
+             }
+
         </style>
     
     </head>
@@ -39,7 +49,7 @@
             <nav class="navbar navbar-expand-lg px-2 py-1 m-0 text-white">
                 <div class="container-fluid">
                     <!-- Left content (optional) -->
-                    <h1 class="navbar-brand">HobbySite</h1>
+                    <h1 class="navbar-brand"><a class="nav-link link-light" href="{% url 'main_interface:homepage' %}">HobbySite</a></h1>
 
                     <ul class="nav">
                         <li class="nav-item app-links">
@@ -55,21 +65,39 @@
                             <a class="nav-link link-light" href="{% url 'forum:threads-list' %}">Forum</a>
                         </li>
                         <li class="nav-item app-links">
-                            <a class="nav-link link-light" href="{% url 'commissions:commission-list' %}">Commission</a>
+                            <a class="nav-link link-light" href="{% url 'commissions:commissions-list' %}">Commission</a>
                         </li>
                     </ul>
 
                     <!-- Right-aligned text -->
-                    <div class="navbar-text ms-auto">
-                        <ul class="nav">
-                            <li class="nav-item app-links">
-                                <a class="nav-link link-light" href="">Profile</a>
-                            </li>
-                            <li class="nav-item app-links">
-                                <a class="nav-link link-light" href="">Logout</a>
-                            </li>
-                        </ul>
-                    </div>
+                    {% if request.user.is_authenticated %}
+                        <div class="navbar-text ms-auto">
+                            <ul class="nav">
+                                <li class="nav-item app-links">
+                                    <a class="nav-link link-light" href="{% url 'user_management:profile' username=user.username %}">
+                                        Profile
+                                    </a>
+                                </li>
+                                <li class="nav-item app-links">
+                                    <form class="nav-link link-light" method="POST" action="{% url 'logout' %}">
+                                        {% csrf_token %}
+                                        <button class="plain-text-button" type="submit">Logout</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    {% else %}
+                        <div class="navbar-text ms-auto">
+                            <ul class="nav">
+                                <li class="nav-item app-links">
+                                    <a class="nav-link link-light" href="{% url 'login' %}">Login</a>
+                                </li>
+                                <li class="nav-item app-links">
+                                    <a class="nav-link link-light" href="{% url 'accounts:register' %}">Register</a>
+                                </li>
+                            </ul>
+                        </div>
+                    {% endif %}
                 </div>
             </nav>
 
