@@ -46,7 +46,7 @@ class Commission(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('commissions:commissionDetail', args=[self.pk])
+        return reverse('commissions:commission-detail', args=[self.pk])
 
     objects = CommManager()
 
@@ -90,7 +90,7 @@ class Job(models.Model):
         return self.role
 
     def get_absolute_url(self):
-        return reverse('commissions:jobDetail', args=[self.pk])
+        return reverse('commissions:job-detail', args=[self.pk])
 
 
 class JobApplication(models.Model):
