@@ -4,7 +4,10 @@
 {% block title %}Threads List{% endblock %}
 
 {% block content %}
-    <h1>💬 Threads</h1>
+    <div class="header">
+        <h1 class="header-brand">💬 Forum</h1>
+    </div>
+    
 
     {% if user.is_authenticated %}
     <h2>Your Threads</h2>

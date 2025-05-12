@@ -1,3 +1,9 @@
+@font-face {
+	font-family: HB-Primary-Header;
+	src: url('PalanquinDark-SemiBold.woff') format('woff');
+
+}
+
 .app-links {
 	margin: 1px 0 0 0;
 	padding: 0px .2px 0px .2px;
@@ -7,8 +13,8 @@
 
 .navbar-brand {
 	color: white;
-	padding: 1% 5% 1% 2%;
-	font-size: 1.5rem;
+	padding: .5% 2% .5% 2%;
+	font-size: 2.5rem;
 }
 
 .navbar {
@@ -20,6 +26,7 @@
 	color: #FFFFFF;
 	font-weight: bold;
 	box-shadow: #4A0072 5px 5px;
+	padding: 6px 16px 6px 16px;
 }
 
 .btn-primary:hover {
@@ -35,17 +42,34 @@
 	background-color: #4A0072;
 }
 
+.header {
+	position: sticky;
+	background-color: #002E69;
+	margin: 0 0 0 0;
+	padding: 10px;
+	text-align: center;
+}
+
+.header-brand {
+	color: white;
+	padding: 1% 5% 1% 2%;
+	font-family: 'HB-Primary-Header';
+	font-size: 3rem;
+}
+
 html, body {
 	height: 100%;
-	margin: 0;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
 }
 
 body {
 	display: flex;
 	flex-direction: column;
-	background: #F7F1FF;
+	background: #E5EBFC;
 }
 
 main {
 	flex: 1;
 }
+

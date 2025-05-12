@@ -2,7 +2,10 @@
 {% load static %}
 {% block title %}Commission App{% endblock %}
 {% block content %}
-<h1>🗣️ Commissions</h1>
+
+<div class="header">
+    <h1 class="header-brand">🗣️ Commissions</h1>
+</div>
 
 {% if request.user.is_authenticated %}
 <h3>Created:</h3>
