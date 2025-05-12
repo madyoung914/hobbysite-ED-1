@@ -4,6 +4,7 @@
 {% block content %}
 <h1>🗣️ Commissions</h1>
 
+{% if request.user.is_authenticated %}
 <h3>Created:</h3>
 <ul>
 
@@ -21,6 +22,8 @@
     </li>
     {% endfor %}
 </ul>
+{% endif %}
+
 
 <h3>All:</h3>
 <ul>
@@ -32,12 +35,12 @@
 </ul>
 
     {% if request.user.is_authenticated %}
-        <a href="{% url 'commissions:commissionAdd' %}"> Add Commission </a>
+<a href="{% url 'commissions:commission-add' %}"> Add Commission </a>
     {% endif %}
-    
+
 {% if request.user.is_authenticated %}
-    <br>
-    <a href="{% url 'user_management:profile' username=user.username %}">Go back to profile</a>
+<br>
+<a href="{% url 'user_management:profile' username=user.username %}">Go back to profile</a>
 {% endif %}
 <br>
 <a href="{% url 'main_interface:homepage'%}">Go back to homepage</a>

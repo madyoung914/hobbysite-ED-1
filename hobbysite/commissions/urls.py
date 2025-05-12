@@ -2,15 +2,15 @@ from django.urls import path
 from .views import CommissionListView, CommissionDetailView, CreateCommissionView, CommissionUpdateView, JobView
 
 urlpatterns = [
-	path('list', CommissionListView.as_view(), name='commissionList'),
+	path('list', CommissionListView.as_view(), name='commissions-list'),
 	path('detail/<int:pk>', CommissionDetailView.as_view(), 
-    	name='commissionDetail'),
+    	name='commission-detail'),
 	path('add', CreateCommissionView.as_view(), 
-    	name='commissionAdd'),
+    	name='commission-add'),
 	path('detail/<int:pk>/edit', CommissionUpdateView.as_view(), 
-    	name='commissionEdit'),
-	path('jobDetail/<int:pk>', JobView.as_view(), 
-    	name='jobDetail'),
+    	name='commission-edit'),
+	path('job/<int:pk>', JobView.as_view(), 
+    	name='job-detail'),
 ]
 
 app_name = "commissions"

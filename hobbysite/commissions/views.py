@@ -16,17 +16,20 @@ class CommissionListView(ListView):
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        user_profile = self.request.user.profile
-        createdCommissions = Commission.objects.filter(author=user_profile)
-        jobApps = JobApplication.objects.filter(applicant = user_profile)
+        
+        if(self.request.user.is_authenticated):
 
-        appliedCommissions = []
-        for apps in jobApps:
-            if(not (apps.job.commission in appliedCommissions)):
-                appliedCommissions.append(apps.job.commission)
+            user_profile = self.request.user.profile
+            createdCommissions = Commission.objects.filter(author=user_profile)
+            jobApps = JobApplication.objects.filter(applicant = user_profile)
 
-        ctx['createdCommissions'] = createdCommissions
-        ctx['appliedCommissions'] = appliedCommissions
+            appliedCommissions = []
+            for apps in jobApps:
+                if(not (apps.job.commission in appliedCommissions)):
+                    appliedCommissions.append(apps.job.commission)
+
+            ctx['createdCommissions'] = createdCommissions
+            ctx['appliedCommissions'] = appliedCommissions
 
         return ctx
 
@@ -38,11 +41,13 @@ class CommissionDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        user_profile = self.request.user.profile
-        applied_job_ids = JobApplication.objects.filter(applicant=user_profile).values_list('job_id', flat=True)
+        
+        if(self.request.user.is_authenticated):
+            user_profile = self.request.user.profile
+            applied_job_ids = JobApplication.objects.filter(applicant=user_profile).values_list('job_id', flat=True)
 
-        ctx['applied_job_ids'] = set(applied_job_ids)
-        ctx['form'] = JobApplicationForm()
+            ctx['applied_job_ids'] = set(applied_job_ids)
+            ctx['form'] = JobApplicationForm()
         return ctx
 
     def post(self, request, *args, **kwargs):
@@ -51,7 +56,6 @@ class CommissionDetailView(DetailView):
 
         if form.is_valid():
             # but also submit button should not be clickable if stock is 0
-
 
             user = request.user
             login(request, user)
