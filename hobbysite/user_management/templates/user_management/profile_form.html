@@ -3,9 +3,9 @@
 
 {% block title %}Profile{% endblock %}
 
-<h2>Edit Profile Page</h2>
-
 {% block content %}
+    <h1>Edit Profile Page</h1>
+
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form }}

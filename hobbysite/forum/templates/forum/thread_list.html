@@ -10,7 +10,7 @@
     <h2>Your Threads</h2>
     <ul>
       {% for thread in object_list %}
-        {% if user.username == thread.author.name %}
+        {% if request.user.profile == thread.author %}
         <li>
             <a href="{{ thread.get_absolute_url }}">{{ thread.title }}</a>
         </li>
@@ -22,9 +22,10 @@
 
     {% for category in grouped_threads %}
         <h2>{{ category.name }}</h2>
+        <p>{{ category.description }}</p>
         <ul>
             {% for thread in category.thread_set.all %}
-                {% if user.username != thread.author.name %}
+                {% if request.user.profile != thread.author %}
                     <li>
                         <a href="{{ thread.get_absolute_url }}">{{ thread.title }}</a>
                     </li>

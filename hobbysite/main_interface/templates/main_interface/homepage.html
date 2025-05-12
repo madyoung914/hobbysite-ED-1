@@ -9,6 +9,7 @@
         <h1>Hello {{ request.user.profile.name }}!</h1>
         <h1>Welcome to HobbySite.</h1>
 
+<<<<<<< HEAD
         {% else %}
         <h1>Welcome to HobbySite.</h1>
         <h4><a class="btn btn-primary rounded-pill" href="{% url 'login' %}">Already have an account? Sign up here.</a></h4>
@@ -31,3 +32,22 @@
         </div>
     </div>
     {% endblock %}
+=======
+<h3>All our Apps</h3>
+    <a href="{% url 'merchstore:merchstore-list' %}">Go to merchstore</a>
+    <br>
+    <a href="{% url 'blog:articles-list' %}">Go to blog</a>
+    <br>
+    <a href="{% url 'commissions:commissions-list' %}">Go to commissions</a>
+    <br>
+    <a href="{% url 'forum:threads-list' %}">Go to forum</a>
+    <br>
+    <a href="{% url 'wiki:articles-list' %}">Go to wiki</a>
+    <br>
+    {% if user.is_authenticated %}
+        <a href="{% url 'user_management:profile' username=user.username %}">Go to profile</a>
+        <br>
+        <a href="{% url 'user_management:profile-dashboard' username=user.username %}">Go to dashboard</a>
+    {% endif %}
+{% endblock %}
+>>>>>>> 710e684cfd09ed6d9cc992d3791d122302c1fd7a
