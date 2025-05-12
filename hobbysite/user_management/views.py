@@ -1,4 +1,5 @@
 from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy
 
@@ -27,3 +28,14 @@ class ProfileUpdateView(UpdateView):
             'user_management:profile',
             kwargs={'username': self.object.user.username}
         )
+
+
+class ProfileListView(ListView):
+    model = Profile
+    template_name = 'user_management/dashboard.html'
+
+    slug_field = 'user__username'
+    slug_url_kwarg = 'username'
+
+
+
