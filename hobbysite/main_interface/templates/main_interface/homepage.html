@@ -3,18 +3,31 @@
 
 {% block title %}Homepage{% endblock %}
 {% block content %}
-    {% if request.user.is_authenticated %}
+<div class="container d-flex ml-3 my-5">
+    <div class="row">
+        {% if request.user.is_authenticated %}
         <h1>Hello {{ request.user.profile.name }}</h1>
         <h1>Welcome to HobbySite.</h1>
 
-    {% else %}
+        {% else %}
         <h1>Welcome to HobbySite.</h1>
-        <h4><a href="{% url 'login' %}">Already have an account? Sign up here.</a></h4>
-        <h4><a href="{% url 'accounts:register' %}">Want to create a new account? Register here.</a></h4>
-    {% endif %}
-
+        <h4><a class="btn btn-primary rounded-pill" href="{% url 'login' %}">Already have an account? Sign up here.</a></h4>
+        <h4><a class="btn btn-primary rounded-pill" href="{% url 'accounts:register' %}">Want to create a new account? Register here.</a></h4>
+        {% endif %}
+    </div>
+</div>
     <hr>
-
-    <h2>About HobbySite</h2>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex, recusandae mollitia delectus unde exercitationem repudiandae eos ab hic quod rerum accusamus optio commodi atque veritatis debitis fugit soluta inventore eaque?</p>
-{% endblock %}
+    <div class="container d-flex">
+        <div class="row">
+            <div class="col-sm-9 offset-3 justify-content-end">
+                <h2 class="text-end">About HobbySite</h2>
+                <p class="text-end">
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex, recusandae mollitia delectus unde exercitationem repudiandae eos ab hic quod rerum accusamus optio commodi atque veritatis debitis fugit soluta inventore eaque?
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex, recusandae mollitia delectus unde exercitationem repudiandae eos ab hic quod rerum accusamus optio commodi atque veritatis debitis fugit soluta inventore eaque?
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex, recusandae mollitia delectus unde exercitationem repudiandae eos ab hic quod rerum accusamus optio commodi atque veritatis debitis fugit soluta inventore eaque?
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex, recusandae mollitia delectus unde exercitationem repudiandae eos ab hic quod rerum accusamus optio commodi atque veritatis debitis fugit soluta inventore eaque?
+                </p>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

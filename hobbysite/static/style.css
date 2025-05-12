@@ -28,3 +28,23 @@
 	box-shadow: #002E69 5px 5px;
 	outline: none !important;
 }
+
+.footer {
+	margin: 0 0 0 0;
+	padding: .5% .5% .5% .5% ;
+	background-color: #4A0072;
+}
+
+html, body {
+	height: 100%;
+	margin: 0;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+}
+
+main {
+	flex: 1;
+}
