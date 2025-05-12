@@ -13,7 +13,7 @@
         <img src="{{ object.image.url }}" alt="Thread image" style="max-width: 100%;">
     {% endif %}
     <br>
-    {% if user.is_authenticated and object.author.name == user.username %}
+    {% if user.is_authenticated and object.author == request.user.profile %}
         <a href="{% url 'forum:thread-edit' thread.pk %}">Edit Thread</a>
     {% endif %}
     <hr>
