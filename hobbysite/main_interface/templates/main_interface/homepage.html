@@ -1,33 +1,20 @@
 {% extends 'base.html' %}
 
 
+{% block title %}Homepage{% endblock %}
 {% block content %}
     {% if request.user.is_authenticated %}
         <h1>Hello {{ request.user.profile.name }}</h1>
-        <form method="POST" action="{% url 'logout' %}">
-            {% csrf_token %}
-            <button type="submit">Logout</button>
-        </form>
+        <h1>Welcome to HobbySite.</h1>
+
     {% else %}
-        <h1>Want to login?</h1>
-        <a href="{% url 'login' %}">Login</a>
-        <br>
-        <h1>Need to create a new account?</h1>
-        <a href="{% url 'accounts:register' %}">Register</a>
+        <h1>Welcome to HobbySite.</h1>
+        <h4><a href="{% url 'login' %}">Already have an account? Sign up here.</a></h4>
+        <h4><a href="{% url 'accounts:register' %}">Want to create a new account? Register here.</a></h4>
     {% endif %}
 
-<h3>All our Apps</h3>
-    <a href="{% url 'merchstore:merchstore-list' %}">Go to merchstore</a>
-    <br>
-    <a href="{% url 'blog:articles-list' %}">Go to blog</a>
-    <br>
-    <a href="{% url 'commissions:commissions-list' %}">Go to commissions</a>
-    <br>
-    <a href="{% url 'forum:threads-list' %}">Go to forum</a>
-    <br>
-    <a href="{% url 'wiki:articles-list' %}">Go to wiki</a>
-    <br>
-    {% if user.is_authenticated %}
-        <a href="{% url 'user_management:profile' username=user.username %}">Go to profile</a>
-    {% endif %}
+    <hr>
+
+    <h2>About HobbySite</h2>
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex, recusandae mollitia delectus unde exercitationem repudiandae eos ab hic quod rerum accusamus optio commodi atque veritatis debitis fugit soluta inventore eaque?</p>
 {% endblock %}
