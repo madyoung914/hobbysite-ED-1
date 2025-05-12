@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from user_management.models import Profile
+from django.core.validators import MinValueValidator
 
 PRODUCT_STATUS = (
     ('AVL', 'Available'),
@@ -39,7 +40,7 @@ class Product(models.Model):
     owner = models.ForeignKey(Profile,
                               on_delete=models.CASCADE, null=True,
                               related_name='owner')
-    stock = models.PositiveIntegerField()
+    stock = models.PositiveIntegerField(validators= [MinValueValidator(1)])
     status = models.CharField(max_length=15,
                               choices=PRODUCT_STATUS,
                               default="AVL")

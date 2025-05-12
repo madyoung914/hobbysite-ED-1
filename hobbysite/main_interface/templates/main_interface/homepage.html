@@ -6,7 +6,7 @@
 <div class="container d-flex ml-3 my-5">
     <div class="row">
         {% if request.user.is_authenticated %}
-        <h1>Hello {{ request.user.profile.name }}</h1>
+        <h1>Hello {{ request.user.profile.name }}!</h1>
         <h1>Welcome to HobbySite.</h1>
 
         {% else %}

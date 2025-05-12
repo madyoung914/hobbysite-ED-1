@@ -2,11 +2,13 @@
 
 {% block content %}
 
+<h3>Edit my product</h3>
+<hr>
 <form method = "POST">
     {% csrf_token %}
     {{ form.as_p }} 
     <button type="submit" data-show-if="object.stock != 0">Submit</button>
 </form>
 
-<a href="{% url 'merchstore:merchstore-item' pk=object.pk %}">Go back to page</a>
+<a href="{% url 'merchstore:merchstore-item' pk=object.pk %}">Go back to my product</a>
 {% endblock %}

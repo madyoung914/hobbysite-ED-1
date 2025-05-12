@@ -2,61 +2,80 @@
 
 {% load static %}
 
-{% block title %}All Items{% endblock %}
+{% block title %}Merchstore List{% endblock %}
+
+{% block styles %}
+    <style>
+        .header-brand {
+            color: white;
+            padding: 1% 5% 1% 2%;
+            font-size: 3rem;
+        }
+
+        .header {
+            position: sticky;
+            background-color: #002E69;
+            margin: 0px; 
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+{% endblock %}
+
 {% block content %}
+        <header class="header">
+            <h1 class="header-brand">🛒 Welcome to the Merchandise Store!</h1>
+        </header>
 
-        <h1>🛒 Merch Store</h1>
+        <br>
 
-        <h2>Hi {{ user.profile.name }}!</h2>
         {% if not request.user.is_authenticated %}
             <h3>All Products </h3>
+            <hr>
             {% for product_type in object_list %}
-                <h4>{{ product_type.name }}: {{ product_type.description }}</h4>
-                    {% for product in product_type.type.all %}
-                    <li>
-                        <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
-                    </li>
-                    {% endfor %}
+                {% for product in product_type.type.all %}
+                <li>
+                    <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+                </li>
+                {% endfor %}
             {% endfor %}
             <br>
+
         {% else %}
+            <h4><a href="{% url 'merchstore:merch-cart' %}">My Cart</a></h4>
+            <br>
             <h3>Your Products</h3>
+            <hr>
             {% for product_type in object_list %}
-            <h4>{{ product_type.name }}: {{ product_type.description }}</h4>
                     {% for product in product_type.type.all %}
                         {% if product.owner.user == user %}
                         <li>
-                            <a href="{{ product.get_absolute_url }}">{{ product.owner.user.get_username }}: {{ product.name }}</a>
+                            <a href="{{ product.get_absolute_url }}">{{ product.producttype }}: {{ product.name }}</a>
                         </li>
                         {% endif %}
                     {% endfor %}
                     <br>
             {% endfor %}
 
+            <br>
+            <h4><a href="{% url 'merchstore:merch-add' %}">Want to create a new product?</a></h4>
+            <h4><a href="{% url 'merchstore:merch-transactions' %}">My Transactions</a></h4>
+            
+            <br>
             <h3>All Products</h3>
+            <hr>
             {% for product_type in object_list %}
-            <h4>{{ product_type.name }}: {{ product_type.description }}</h4>
-                    {% for product in product_type.type.all %}
-                        {% if product.owner.user != user %}
-                        <li>
-                            <a href="{{ product.get_absolute_url }}">{{ product.owner.user.get_username }}: {{ product.name }}</a>
-                        </li>
-                        {% endif %}
-                        <br>
-                    {% endfor %}
+                {% for product in product_type.type.all %}
+                    {% if product.owner.user != user %}
+                    <li>
+                        <a href="{{ product.get_absolute_url }}">{{ product.owner.user.get_username }}: {{ product.name }}</a>
+                    </li>
+                    {% endif %}
+                    <br>
+                {% endfor %}
             {% endfor %}
         {% endif %}
-
-        <br>
-        <hr>
-        <h4>Want to create a new product? Click <a href="{% url 'merchstore:merch-add' %}">Here</a>
         
-        {% if request.user.is_authenticated %}
-            <br>
-            <a href="{% url 'user_management:profile' username=user.username %}">Go back to profile</a>
-        {% endif %}
-        <br>
-        <a href="{% url 'main_interface:homepage'%}">Go back to homepage</a>
 {% endblock %}
 
 

@@ -5,6 +5,7 @@
 {% block title %}{{ object.name }}{% endblock %}
 {% block content %}
     <h3>{{ object.name }}</h3>
+    <a href="{% url 'merchstore:merch-edit' pk=object.pk %}">Edit</a>
     <h4>Owner: {{ object.owner }}</h4>
     <p>Description: {{ object.description }}</p>
     <p>Product Type: {{ object.producttype }}</p>
@@ -12,21 +13,19 @@
     <p>Stock: {{object.stock }}</p>
     <p>Product Status: {{ object.status }}</p>
 
-    <a href="{% url 'merchstore:merchstore-list' %}">Go back to merchstore</a>
-
     <br>
 
     {% if request.user.profile != object.owner %}
-        <p>Want to buy this product?</p>
+        <h3>Add to Cart</h3>
+        <hr>
         <form method = "POST">
             {% csrf_token %}
             {{ form.as_p }} 
-            <button type="submit">Submit</button>
+            <button type="submit" {% if object.stock == 0 %}disabled{% endif %}>Submit</button>
         </form>
-    {% else %}
-        <p>Want to update info on ur product?</p>
-        <a href="{% url 'merchstore:merch-edit' pk=object.pk %}">Click here</a>
     {% endif %}
     <br>
+
+    <a href="{% url 'merchstore:merchstore-list' %}">Go back to products list</a>
 
 {% endblock %}

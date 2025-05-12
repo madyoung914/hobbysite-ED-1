@@ -104,3 +104,6 @@ class CartView (LoginRequiredMixin, ListView):
 class TransactionListView (LoginRequiredMixin, ListView):
     model = Transaction
     template_name = "merchstore/transaction.html"
+
+    def get_queryset(self):
+        return Transaction.objects.filter(product__owner__user=self.request.user).order_by('-created_on')
