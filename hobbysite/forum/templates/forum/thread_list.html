@@ -8,44 +8,45 @@
         <h1 class="header-brand">💬 Forum</h1>
     </div>
     
-
-    {% if user.is_authenticated %}
-    <h2>Your Threads</h2>
-    <ul>
-      {% for thread in object_list %}
-        {% if request.user.profile == thread.author %}
-        <li>
-            <a href="{{ thread.get_absolute_url }}">{{ thread.title }}</a>
-        </li>
+    <div class="container app-content">
+        {% if user.is_authenticated %}
+        <h2>Your Threads</h2>
+        <ul>
+            {% for thread in object_list %}
+            {% if request.user.profile == thread.author %}
+            <li>
+                <a href="{{ thread.get_absolute_url }}">{{ thread.title }}</a>
+            </li>
+            {% endif %}
+            {% endfor %}
+        </ul>
         {% endif %}
-      {% endfor %}
-    </ul>
-    {% endif %}    
-    
 
-    {% for category in grouped_threads %}
+
+        {% for category in grouped_threads %}
         <h2>{{ category.name }}</h2>
         <p>{{ category.description }}</p>
         <ul>
             {% for thread in category.thread_set.all %}
-                {% if request.user.profile != thread.author %}
-                    <li>
-                        <a href="{{ thread.get_absolute_url }}">{{ thread.title }}</a>
-                    </li>
-                {% endif %}
+            {% if request.user.profile != thread.author %}
+            <li>
+                <a href="{{ thread.get_absolute_url }}">{{ thread.title }}</a>
+            </li>
+            {% endif %}
             {% empty %}
             <li>No threads in this category.</li>
             {% endfor %}
         </ul>
-    {% endfor %}
+        {% endfor %}
 
-    <h4></h4>
-    <a href="{% url 'forum:thread-add' %}">Create New Thread</a>
-    
-    {% if request.user.is_authenticated %}
+        <h4></h4>
+        <a href="{% url 'forum:thread-add' %}">Create New Thread</a>
+
+        {% if request.user.is_authenticated %}
         <br>
         <a href="{% url 'user_management:profile' username=user.username %}">Go back to profile</a>
-    {% endif %}
-    <br>
-    <a href="{% url 'main_interface:homepage'%}">Go back to homepage</a>
-{% endblock %}
+        {% endif %}
+        <br>
+        <a href="{% url 'main_interface:homepage'%}">Go back to homepage</a>
+        </div>
+        {% endblock %}

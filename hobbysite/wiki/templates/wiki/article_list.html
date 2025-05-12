@@ -8,39 +8,40 @@
     <h1 class="header-brand">📚 Online Wiki</h1>
 </div>
     
-    
+<div class="container app-content">
     <h2>👤Your Articles</h2>
     {% if user_articles %}
-        <ul>
-            {% for article in user_articles %}
-                <li>
-                    <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
-                </li>
-            {% endfor %}
-        </ul>
+    <ul>
+        {% for article in user_articles %}
+        <li>
+            <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+        </li>
+        {% endfor %}
+    </ul>
     {% else %}
-        <p>You have not written any articles</p>
+    <p>You have not written any articles</p>
     {% endif %}
 
-    <a href="{% url 'wiki:article-add' %}">➕Create an Article</a>    
+    <a href="{% url 'wiki:article-add' %}">➕Create an Article</a>
     <hr>
 
     <h2>🗒️All Articles by Category</h2>
     {% for category, articles in articles_by_category.items %}
-        <h3>{{ category }}</h3>
-        <ul>
-            {% for article in articles %}
-                <li>
-                    <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
-                </li>
-            {% endfor %}
-        </ul>
+    <h3>{{ category }}</h3>
+    <ul>
+        {% for article in articles %}
+        <li>
+            <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+        </li>
+        {% endfor %}
+    </ul>
     {% endfor %}
-    
+
     {% if request.user.is_authenticated %}
-        <br>
-        <a href="{% url 'user_management:profile' username=user.username %}">Go back to profile</a>
+    <br>
+    <a class="btn btn-primary rounded-pill" href="{% url 'user_management:profile' username=user.username %}">Go back to profile</a>
     {% endif %}
     <br>
-    <a href="{% url 'main_interface:homepage'%}">Go back to homepage</a>
-{% endblock %}
+    <a class="btn btn-primary rounded-pill" href="{% url 'main_interface:homepage'%}">Go back to homepage</a>
+</div>
+    {% endblock %}

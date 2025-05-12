@@ -12,7 +12,8 @@
         </div>
 
         <br>
-
+        
+        <div class="container app-content">
         {% if not request.user.is_authenticated %}
             <h3>All Products </h3>
             <hr>
@@ -42,7 +43,7 @@
             {% endfor %}
 
             <br>
-            <h4><a href="{% url 'merchstore:merch-add' %}">Want to create a new product?</a></h4>
+            <h4><a  href="{% url 'merchstore:merch-add' %}">Want to create a new product?</a></h4>
             <h4><a href="{% url 'merchstore:merch-transactions' %}">My Transactions</a></h4>
             
             <br>
@@ -60,6 +61,7 @@
             {% endfor %}
         {% endif %}
         
+        </div>
 {% endblock %}
 
 

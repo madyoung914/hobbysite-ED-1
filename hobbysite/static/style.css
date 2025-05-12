@@ -70,6 +70,10 @@ body {
 }
 
 main {
+	margin: 0 0 0 0;
 	flex: 1;
 }
 
+.app-content {
+	margin: 3rem 2rem 3rem 2rem;
+}
