@@ -2,7 +2,6 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy
-
 from .forms import UserEditForm
 from .models import Profile
 
@@ -36,6 +35,11 @@ class ProfileListView(ListView):
 
     slug_field = 'user__username'
     slug_url_kwarg = 'username'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        #?
+        return context
 
 
 

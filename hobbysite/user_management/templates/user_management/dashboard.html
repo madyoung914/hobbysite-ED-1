@@ -3,9 +3,30 @@
 
 {% block title %}Dashboard{% endblock %}
 
-
-
 {% block content %}
-<h2>Your Dashboard</h2>
+<h1>{{ request.user.profile.name }}'s Dashboard</h1>
+
+    {% if request.user.is_authenticated %}
+    <h3>Products Bought</h3>
+
+    <h3>Products Sold</h3>
+
+    <h3>Wiki Articles Created</h3>
+
+    <h3>Blog Articles Created</h3>
+
+    <h3>Threads Created</h3>
+    
+
+    <h3>Commissions Created</h3>
+
+    <h3>Commissions Joined</h3>
+
+
+    {% else %}
+        <h1>Not logged yet</h1>
+    {% endif %}
+
+    <a href="{% url 'main_interface:homepage' %}">Go to homepage</a>
 
 {% endblock %}
