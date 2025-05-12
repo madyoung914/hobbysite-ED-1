@@ -43,6 +43,7 @@ html, body {
 body {
 	display: flex;
 	flex-direction: column;
+	background: #F7F1FF;
 }
 
 main {
