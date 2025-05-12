@@ -1,11 +1,113 @@
 [
     {
+        "model": "merchstore.producttype",
+        "pk": 1,
+        "fields": {
+            "name": "Gadget",
+            "description": "Wow Technology"
+        }
+    },
+    {
+        "model": "merchstore.producttype",
+        "pk": 2,
+        "fields": {
+            "name": "Clothing",
+            "description": "Fashionable wear"
+        }
+    },
+    {
+        "model": "merchstore.producttype",
+        "pk": 3,
+        "fields": {
+            "name": "Accessories",
+            "description": "Stylish accessories"
+        }
+    },
+    {
+        "model": "merchstore.product",
+        "pk": 1,
+        "fields": {
+            "name": "Earphones",
+            "description": "For sale wow",
+            "price": "300.00",
+            "producttype": 1,
+            "owner": 11,
+            "stock": 50,
+            "status": "SALE"
+        }
+    },
+    {
+        "model": "merchstore.product",
+        "pk": 2,
+        "fields": {
+            "name": "Mouse",
+            "description": "It is a mouse",
+            "price": "400.00",
+            "producttype": 1,
+            "owner": 7,
+            "stock": 50,
+            "status": "AVL"
+        }
+    },
+    {
+        "model": "merchstore.product",
+        "pk": 3,
+        "fields": {
+            "name": "T-shirt",
+            "description": "Comfortable cotton shirt",
+            "price": "150.00",
+            "producttype": 2,
+            "owner": 11,
+            "stock": 100,
+            "status": "SALE"
+        }
+    },
+    {
+        "model": "merchstore.product",
+        "pk": 4,
+        "fields": {
+            "name": "Jeans",
+            "description": "Blue denim jeans",
+            "price": "250.00",
+            "producttype": 2,
+            "owner": 2,
+            "stock": 30,
+            "status": "AVL"
+        }
+    },
+    {
+        "model": "merchstore.product",
+        "pk": 5,
+        "fields": {
+            "name": "Watch",
+            "description": "Luxury wristwatch",
+            "price": "1200.00",
+            "producttype": 3,
+            "owner": 11,
+            "stock": 10,
+            "status": "SALE"
+        }
+    },
+    {
+        "model": "merchstore.product",
+        "pk": 6,
+        "fields": {
+            "name": "Sunglasses",
+            "description": "Trendy sunglasses",
+            "price": "350.00",
+            "producttype": 3,
+            "owner": 7,
+            "stock": 60,
+            "status": "AVL"
+        }
+    },
+    {
         "model": "merchstore.product",
         "pk": 7,
         "fields": {
             "name": "Bluetooth Speaker",
             "description": "Loud and portable",
-            "price": 900,
+            "price": "900.00",
             "producttype": 1,
             "owner": 1,
             "stock": 40,
@@ -18,7 +120,7 @@
         "fields": {
             "name": "Power Bank",
             "description": "Charges on the go",
-            "price": 600,
+            "price": "600.00",
             "producttype": 1,
             "owner": 2,
             "stock": 25,
@@ -31,7 +133,7 @@
         "fields": {
             "name": "Smart Watch",
             "description": "Track your fitness",
-            "price": 1500,
+            "price": "1500.00",
             "producttype": 1,
             "owner": 3,
             "stock": 20,
@@ -44,7 +146,7 @@
         "fields": {
             "name": "USB Hub",
             "description": "Expand your ports",
-            "price": 350,
+            "price": "350.00",
             "producttype": 1,
             "owner": 4,
             "stock": 60,
@@ -57,21 +159,20 @@
         "fields": {
             "name": "Wireless Charger",
             "description": "Fast wireless charging",
-            "price": 800,
+            "price": "800.00",
             "producttype": 1,
             "owner": 5,
             "stock": 30,
             "status": "AVL"
         }
     },
-
     {
         "model": "merchstore.product",
         "pk": 12,
         "fields": {
             "name": "Hoodie",
             "description": "Warm and cozy",
-            "price": 500,
+            "price": "500.00",
             "producttype": 2,
             "owner": 6,
             "stock": 45,
@@ -84,7 +185,7 @@
         "fields": {
             "name": "Jacket",
             "description": "Stylish outerwear",
-            "price": 800,
+            "price": "800.00",
             "producttype": 2,
             "owner": 7,
             "stock": 35,
@@ -97,7 +198,7 @@
         "fields": {
             "name": "Cap",
             "description": "Cool baseball cap",
-            "price": 200,
+            "price": "200.00",
             "producttype": 2,
             "owner": 8,
             "stock": 75,
@@ -110,7 +211,7 @@
         "fields": {
             "name": "Shorts",
             "description": "Casual summer wear",
-            "price": 300,
+            "price": "300.00",
             "producttype": 2,
             "owner": 9,
             "stock": 50,
@@ -123,21 +224,20 @@
         "fields": {
             "name": "Sweater",
             "description": "Perfect for winter",
-            "price": 600,
+            "price": "600.00",
             "producttype": 2,
             "owner": 10,
             "stock": 20,
             "status": "SALE"
         }
     },
-
     {
         "model": "merchstore.product",
         "pk": 17,
         "fields": {
             "name": "Bracelet",
             "description": "Leather wrist bracelet",
-            "price": 250,
+            "price": "250.00",
             "producttype": 3,
             "owner": 11,
             "stock": 40,
@@ -150,7 +250,7 @@
         "fields": {
             "name": "Necklace",
             "description": "Silver chain",
-            "price": 700,
+            "price": "700.00",
             "producttype": 3,
             "owner": 1,
             "stock": 15,
@@ -163,7 +263,7 @@
         "fields": {
             "name": "Belt",
             "description": "Classic leather belt",
-            "price": 400,
+            "price": "400.00",
             "producttype": 3,
             "owner": 2,
             "stock": 25,
@@ -176,7 +276,7 @@
         "fields": {
             "name": "Earrings",
             "description": "Gold-plated earrings",
-            "price": 950,
+            "price": "950.00",
             "producttype": 3,
             "owner": 3,
             "stock": 18,
@@ -189,11 +289,55 @@
         "fields": {
             "name": "Ring",
             "description": "Stainless steel ring",
-            "price": 500,
+            "price": "500.00",
             "producttype": 3,
             "owner": 4,
             "stock": 22,
             "status": "AVL"
+        }
+    },
+    {
+        "model": "merchstore.transaction",
+        "pk": 1,
+        "fields": {
+            "buyer": 10,
+            "product": 1,
+            "amount": 300,
+            "status": "CART",
+            "created_on": "2025-05-10T14:10:00Z"
+        }
+    },
+    {
+        "model": "merchstore.transaction",
+        "pk": 2,
+        "fields": {
+            "buyer": 9,
+            "product": 2,
+            "amount": 400,
+            "status": "PAY",
+            "created_on": "2025-05-10T14:12:30Z"
+        }
+    },
+    {
+        "model": "merchstore.transaction",
+        "pk": 3,
+        "fields": {
+            "buyer": 8,
+            "product": 3,
+            "amount": 150,
+            "status": "SHIP",
+            "created_on": "2025-05-10T14:15:00Z"
+        }
+    },
+    {
+        "model": "merchstore.transaction",
+        "pk": 4,
+        "fields": {
+            "buyer": 7,
+            "product": 4,
+            "amount": 250,
+            "status": "RECEIVE",
+            "created_on": "2025-05-10T14:17:00Z"
         }
     }
 ]
