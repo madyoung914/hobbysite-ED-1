@@ -27,7 +27,11 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+<<<<<<< HEAD
 ALLOWED_HOSTS = []
+=======
+ALLOWED_HOSTS = ['hobbysite-app-mquq4.ondigitalocean.app']
+>>>>>>> 66b13ee (Changed allowed hosts)
 
 
 # Application definition
