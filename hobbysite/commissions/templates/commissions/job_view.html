@@ -2,26 +2,31 @@
 {% load static %}
 {% block title %}Commission App{% endblock %}
 {% block content %}
-<div class="header">
-<h1 class="header-brand">🗣️ Commissions</h1>
-</div>
-
 <div class="container app-content">
+    <div class="container">
+        <h1><b>{{object.role}}</b></h1>
+        <div class="fs-5">for {{object.commission.title}} </div>
+        <hr>
+        <h5>Status: <b>{{object.get_status_display}}</b></h5>
+        <div class="fs-6">
+            Created On: {{object.createdOn}}<br>
+            Updated On: {{object.updatedOn}}<br>
+            Author: {{object.commission.author}}<br>
+        </div>
 
-    <h3 class="category-header">{{object.title}}</h3>
 
-    <ul>
-        <li>Created On: {{object.createdOn}}</li>
-        <li>Updated On: {{object.updatedOn}}</li>
-        <li>Status: {{object.get_status_display}}</li>
-    </ul>
-
-    <h2>Applicants:</h2>
-    <ul>
-        {% for application in object.jobApplication.all %}
-        <li>
-            <h4> {{application.applicant.name}}</h4>
-            <p> {{application.get_status_display}} </p>
+    </div>
+        
+    <hr>
+    <div class="container">
+        <h2>Applicants:</h2>
+        <hr>
+        
+            {% for application in object.jobApplication.all %}
+        <div class="container p-4 border rounded bg-light shadow my-2">
+            <p>
+                <h4> {{application.applicant.name}}</h4>
+             {{application.get_status_display}} <br>
 
             {% if application.status == "P" %}
             <form method="POST">
@@ -32,11 +37,13 @@
                 <button type="submit" name="action" value="reject">Reject</button>
             </form>
             {% endif %}
-        </li>
-        {% endfor %}
-    </ul>
-
-    <a href="{% url 'commissions:commissions-list' %}"> Go back to Commission List </a>
+            </p>
+        </div>
+            {% endfor %}
+            
+        
+    <a class="btn btn-primary rounded-pill m-2" href="{% url 'commissions:commission-detail' pk=object.commission.pk %}"> Go back to Commission Detail </a> <br>
+    <a class="btn btn-primary rounded-pill m-2" href="{% url 'commissions:commissions-list' %}"> Go back to Commission List </a>
 
 </div>
 {% endblock %}

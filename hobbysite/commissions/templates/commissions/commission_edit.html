@@ -1,23 +1,32 @@
-{% extends 'base.html' %}
+﻿{% extends 'base.html' %}
 
 {% block content %}
 
-<form method="POST">
+
+<form class="container p-4 border rounded bg-light shadow my-4 border-dark" method="POST">
+    <h4>Edit Commission</h4>
+
     {% csrf_token %}
     {{ form.as_p }}
 
     <br>
-    <p>Jobs: </p>
+    
+    <p>
+        Jobs:
 
-    {{ job_formset.management_form }}
-    {% for form in job_formset %}
-    <p>{{ form.as_p }}</p>
-    <br>
+        {{ job_formset.management_form }}
+        {% for form in job_formset %}
+        <div class="container p-4 border rounded bg-light shadow my-2 border-dark">
+            {{ form.as_p }}
+            <br>
+
+        </div>
+    </p>
     {% endfor %}
 
-    <button type="submit">Submit</button>
+    <button class="btn btn-primary rounded-pill" type="submit">Submit</button>
 </form>
 
-<a href="{% url 'commissions:commissions-list' %}"> Go back to Commission List </a>
+<a class="btn btn-primary rounded-pill m-4" href="{% url 'commissions:commissions-list' %}"> Go back to Commission List </a>
 
 {% endblock %}

@@ -124,6 +124,12 @@ main {
 }
 
 .app-content {
+	display: flow;
 	margin: 3rem 1rem 3rem 1rem;
 	padding: 0 0 0 0;
+}
+
+.min-detail {
+	font-size: 10px;
+	margin: 0.4px 2px 0 0;
 }

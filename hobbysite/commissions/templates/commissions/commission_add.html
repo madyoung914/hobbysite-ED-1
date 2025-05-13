@@ -1,13 +1,14 @@
-{% extends 'base.html' %}
+﻿{% extends 'base.html' %}
 
 {% block content %}
 
-<form method="POST">
+<form class="container p-4 border rounded bg-light shadow my-4" method="POST">
+    <h4>Create new Commission</h4>
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Submit</button>
+    <button class="btn btn-primary rounded-pill" type="submit">Submit</button>
 </form>
 
-<a href="{% url 'commissions:commissions-list' %}"> Go back to Commission List </a>
+<a class="btn btn-primary rounded-pill m-4" href="{% url 'commissions:commissions-list' %}"> Go back to Commission List </a>
 
 {% endblock %}

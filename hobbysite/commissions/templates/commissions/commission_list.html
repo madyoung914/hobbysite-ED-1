@@ -58,34 +58,36 @@
 
         {% endif %}
 
-           <div class="container">
-               <hr>
-               <div class="row">
-               <h3 class="category-header">All:</h3>
-                </div>
-               <hr>
-               <ul class="mt-4 mb-5">
-                   {% for commission in object_list %}
-                   <li class="row  mb-2">
-                       <a class="col-sm-10 btn btn-item" href={{commission.get_absolute_url}}>
-                           {{commission.title}} <br>
-
-                           <b>{{commission.get_status_display}}</b> <br>
-                           <p>{{commission.description}}</p>
-                       </a>
-                   </li>
-                   {% endfor %}
-               </ul>
-           </div>
+    <div class="container">
         <hr>
-        
+        <div class="row">
+            <h3 class="category-header">All:</h3>
+        </div>
+        <hr>
+        <ul class="mt-4 mb-5">
+            {% for commission in object_list %}
+            <li class="row  mb-2">
+                <a class="col-sm-10 btn btn-item" href={{commission.get_absolute_url}}>
+                    {{commission.title}} <br>
 
+                    <b>{{commission.get_status_display}}</b> <br>
+                    <p>{{commission.description}}</p>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+        <hr>
+    </div>
+        
+        
+    <div class="container">
         {% if request.user.is_authenticated %}
         <br>
         <a class="btn btn-primary rounded-pill my-1" href="{% url 'user_management:profile' username=user.username %}">Go back to profile</a>
         {% endif %}
         <br>
         <a class="btn btn-primary rounded-pill my-1" href="{% url 'main_interface:homepage'%}">Go back to homepage</a>
-         
+
+    </div>
     </div>
     {% endblock %}
