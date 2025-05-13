@@ -2,14 +2,28 @@
 {% load static %}
 {% block title %}Commission App{% endblock %}
 {% block content %}
-<h1>🗣️ Commissions</h1>
-<ul>
-    {% for application in object.jobApplication.all %}
-    <li>
-        <h4> {{application.applicant.name}}</h4>
-        <p> {{application.get_status_display}} </p>
+<div class="header">
+<h1 class="header-brand">🗣️ Commissions</h1>
+</div>
 
-        {% if application.status == "P" %}
+<div class="container app-content">
+
+    <h3>{{object.title}}</h3>
+
+    <ul>
+        <li>Created On: {{object.createdOn}}</li>
+        <li>Updated On: {{object.updatedOn}}</li>
+        <li>Status: {{object.get_status_display}}</li>
+    </ul>
+
+    <h2>Applicants:</h2>
+    <ul>
+        {% for application in object.jobApplication.all %}
+        <li>
+            <h4> {{application.applicant.name}}</h4>
+            <p> {{application.get_status_display}} </p>
+
+            {% if application.status == "P" %}
             <form method="POST">
                 {% csrf_token %}
                 <input type="hidden" name="app_id" value="{{ application.id }}">
@@ -17,11 +31,12 @@
                 <button type="submit" name="action" value="accept">Accept</button>
                 <button type="submit" name="action" value="reject">Reject</button>
             </form>
-        {% endif %}
-    </li>
-    {% endfor %}
-</ul>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
 
-<a href="{% url 'commissions:commissions-list' %}"> Go back to Commission List </a>
+    <a href="{% url 'commissions:commissions-list' %}"> Go back to Commission List </a>
 
+</div>
 {% endblock %}
