@@ -38,7 +38,7 @@ class Commission(models.Model):
     author = models.ForeignKey(Profile,
                                on_delete=models.SET_NULL,
                                null=True,
-                               related_name='commission')
+                               related_name='commissions')
     createdOn = models.DateTimeField(auto_now_add=True)
     updatedOn = models.DateTimeField(auto_now=True)
 
@@ -109,7 +109,7 @@ class JobApplication(models.Model):
         Profile,
         on_delete=models.CASCADE,
         null=True,
-        related_name='applicant'
+        related_name='JobApplications'
     )
     status = models.CharField(
         max_length=255,

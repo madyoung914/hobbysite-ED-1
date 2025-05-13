@@ -42,7 +42,8 @@ class ProfileTemplateView(TemplateView):
         context['sellerTransactions'] = Transaction.objects.filter(product__owner=profile)
         context['blogs'] = profile.blogs.all()
         context['wikis'] = profile.wikis.all()
-
+        context['commissionsCreated'] = profile.commissions.all()
+        context['jobsJoined'] = profile.JobApplications.all()
         return context
 
 

@@ -38,14 +38,25 @@
         {% endfor %}
     
     <h3>Commissions Created</h3>
+        {% for commission in commissionsCreated %}
+            <a href={{ commission.get_absolute_url }}> {{ commission.title }} </a>
+            <br>
+        {% endfor %}
 
     <h3>Commissions Joined</h3>
-
+        {% for jobJoined in jobsJoined %}
+            <p>
+                <a href={{ jobJoined.job.commission.get_absolute_url }}> {{ jobJoined.job.commission.title }} </a>
+                as <a href={{ jobJoined.job.get_absolute_url }}> {{ jobJoined.job.role}} - {{ jobJoined.get_status_display }} </a>
+            </p>
+            <br>
+        {% endfor %}
 
     {% else %}
         <h1>Not logged yet</h1>
     {% endif %}
-
+    
+    <br>
     <a href="{% url 'main_interface:homepage' %}">Go to homepage</a>
 
 {% endblock %}
