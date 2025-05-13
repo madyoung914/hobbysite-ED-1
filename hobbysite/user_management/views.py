@@ -4,6 +4,8 @@ from django.urls import reverse_lazy
 from .forms import UserEditForm
 from .models import Profile
 from merchstore.models import Transaction
+from django.shortcuts import get_object_or_404
+from django.contrib.auth.models import User
 
 
 class ProfileDetailView(DetailView):
@@ -12,6 +14,12 @@ class ProfileDetailView(DetailView):
 
     slug_field = 'user__username'
     slug_url_kwarg = 'username'
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        username = self.kwargs.get('username')
+        ctx['profile_user'] = get_object_or_404(User, username=username)
+        return ctx
 
 
 class ProfileUpdateView(UpdateView):

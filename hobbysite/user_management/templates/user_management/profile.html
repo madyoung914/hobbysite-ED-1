@@ -2,21 +2,35 @@
 
 
 {% block content %}
-    {% if request.user.is_authenticated %}
-        <h1>Hello {{ request.user.profile.name }}</h1>
-        <form method="POST" action="{% url 'logout' %}">
-            {% csrf_token %}
-            <button type="submit">Logout</button>
-        </form>
+
+<div class="container-fluid mx-0 app-content">
+    <div class=" container border border-dark rounded d-flex">
+        <div class="col-md-2">
+            {%if profile_user.profile.profile_image %}
+                <img src="{{ profile_user.profile.profile_image.url }}" alt="{{ profile_user.profile.profile_image.url }}" class="rounded-circle m-3" style="width: 100%; aspect-ratio: 1 / 1; ">
+            {% else %}
+                <div class="d-flex align-items-center justify-content-center bg-secondary text-white rounded-circle m-3" style="width: 100%; aspect-ratio: 1 / 1;">
+                    <p class="fs-5 text-center m-0">No Available Image</p>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="col-md-10 p-5">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2 class="m-0">{{ profile_user.profile.name }}</h2>
+                <a href="{% url 'user_management:profile-edit' username=user.username %}" class="btn btn-primary rounded-pill">Edit Profile</a>
+            </div>
+
+            <hr>
+            <p class="ms-3">
+                Username: {{ profile_user }}<br>
+                Email: {{ profile_user.profile.email }}
+            </p> 
+                
+        </div>
+    </div>
+</div>
     
-        <p>Name: {{ request.user.profile.name }}</p>
-        <p>Email: {{ request.user.profile.email }}</p>
-        <a href="{% url 'user_management:profile-edit' username=user.username %}">Edit Profile</a>
-        <br>
-        <a href="{% url 'user_management:profile-dashboard' username=user.username %}">My Dashboard</a>
-        <p></p>
-    {% else %}
-        <h1>Not logged yet</h1>        
-    {% endif %}
-    <a href="{% url 'main_interface:homepage' %}">Go to homepage</a>
+
+        
 {% endblock %}
