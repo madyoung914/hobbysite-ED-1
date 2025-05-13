@@ -4,9 +4,14 @@
 
 }
 
+nav {
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+}
+
 .nav-item {
-	margin: 1px 0 0 0;
-	padding: 0px .2px 0px .2px;
+	margin: 0 0 0 0;
+	padding: 2.6% .2px 2.6% .2px;
 	color: #ffffff;
 	font-size: .8rem;
 	font-weight: bold;
@@ -17,14 +22,32 @@
 	color: #4A0072;
 }
 
+.nav-link {
+	color: inherit;
+}
+
+.nav-link:hover {
+	color: inherit;
+}
+
 .navbar-brand {
+	margin: 0 0 0 0;
 	color: white;
+	padding: .5% 2% .5% 2%;
+	font-size: 2.5rem;
+}
+
+.navbar-brand:hover {
+	margin: 0 0 0 0;
+	color: black;
 	padding: .5% 2% .5% 2%;
 	font-size: 2.5rem;
 }
 
 .navbar {
 	background-color: #4A0072;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
 }
 
 .btn-primary {
@@ -75,6 +98,11 @@
 	padding: 1% 5% 1% 2%;
 	font-family: 'HB-Primary-Header';
 	font-size: 3rem;
+}
+
+.category-header {
+	font-family: 'HB-Primary-Header';
+	font-size: 2rem;
 }
 
 html, body {

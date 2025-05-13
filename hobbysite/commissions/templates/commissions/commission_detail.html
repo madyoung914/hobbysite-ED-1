@@ -4,60 +4,61 @@
 {% block content %}
 
 
+<div class="container app-content">
+    <h3>{{object.title}}</h3>
 
-<h3>{{object.title}}</h3>
+    <ul>
+        <li>Created On: {{object.createdOn}}</li>
+        <li>Updated On: {{object.updatedOn}}</li>
+        <li>Status: {{object.get_status_display}}</li>
+    </ul>
 
-<ul>
-    <li>Created On: {{object.createdOn}}</li>
-    <li>Updated On: {{object.updatedOn}}</li>
-    <li>Status: {{object.get_status_display}}</li>
-</ul>
-
-<p>
-    <b>Description</b>
-    <br>
-    {{object.description}}
-</p>
+    <p>
+        <b>Description</b>
+        <br>
+        {{object.description}}
+    </p>
 
 
 
-<ul>
-    {% for job in object.jobs.all %}
-    <li>
-        <p>
-            {% if request.user.profile != object.author %}
-            <b>{{job.role}}</b>
-            {% else %}
-            <a href={{job.get_absolute_url}}><b>{{job.role}}</b></a>
-            {% endif%}
+    <ul>
+        {% for job in object.jobs.all %}
+        <li>
+            <p>
+                {% if request.user.profile != object.author %}
+                <b>{{job.role}}</b>
+                {% else %}
+                <a href={{job.get_absolute_url}}><b>{{job.role}}</b></a>
+                {% endif%}
 
-            <br>
-            Number of People: {{job.manpowerRequired}} <br>
-            Status: {{job.get_status_display}}
-            {% if request.user.is_authenticated%}
-            {% if request.user.profile != object.author %}
-            {% if job.id in applied_job_ids %}
-            <br>
-            <b>Applied</b>
-            {% else %}
-            <form method="POST">
-                {% csrf_token %}
-                <input type="hidden" name="job_id" value="{{ job.id }}">
-                {{ form.as_p }}
-                <button type="submit">Apply Job</button>
-            </form>
-            {% endif %}
-            {% endif %}
-            {% endif %}
-        </p>
-    </li>
-    {% endfor %}
-</ul>
+                <br>
+                Number of People: {{job.manpowerRequired}} <br>
+                Status: {{job.get_status_display}}
+                {% if request.user.is_authenticated%}
+                {% if request.user.profile != object.author %}
+                {% if job.id in applied_job_ids %}
+                <br>
+                <b>Applied</b>
+                {% else %}
+                <form method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="job_id" value="{{ job.id }}">
+                    {{ form.as_p }}
+                    <button type="submit">Apply Job</button>
+                </form>
+                {% endif %}
+                {% endif %}
+                {% endif %}
+            </p>
+        </li>
+        {% endfor %}
+    </ul>
 
-{% if request.user.profile == object.author %}
-<a href="{% url 'commissions:commission-edit' pk=object.pk %}"> Edit Commission </a> <br>
-{% endif %}
-<a href="{% url 'commissions:commissions-list' %}"> Go back to Commission List </a>
+    {% if request.user.profile == object.author %}
+    <a href="{% url 'commissions:commission-edit' pk=object.pk %}"> Edit Commission </a> <br>
+    {% endif %}
+    <a href="{% url 'commissions:commissions-list' %}"> Go back to Commission List </a>
 
+</div>
 
 {% endblock %}

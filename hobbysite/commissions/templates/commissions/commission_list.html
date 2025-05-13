@@ -11,13 +11,13 @@
     <div class="container">
         {% if request.user.is_authenticated %}
         <hr>
-        <h3 class="row">Created:</h3>
+        <h3 class="row category-header">Created:</h3>
         <hr>
         <ul class="mt-4 mb-5">
 
             {% for commission in createdCommissions %}
             <li class="row mb-2">
-                <a class="col-sm-8 btn btn-item" href={{commission.get_absolute_url}}>
+                <a class="col-sm-10 btn btn-item" href={{commission.get_absolute_url}}>
                     {{commission.title}} <br>
 
                     <b>{{commission.get_status_display}}</b> <br>
@@ -36,12 +36,12 @@
     
     <div class="container">
         <hr>
-        <h3 class="row">Applied:</h3>
+        <h3 class="row category-header">Applied:</h3>
         <hr>
         <ul class="mt-4 mb-5">
             {% for commission in appliedCommissions %}
             <li class="row mb-2">
-                <a class="col-sm-8 btn btn-item" href={{commission.get_absolute_url}}>
+                <a class="col-sm-10 btn btn-item" href={{commission.get_absolute_url}}>
                     {{commission.title}} <br>
 
                     <b>{{commission.get_status_display}}</b> <br>
@@ -61,13 +61,13 @@
            <div class="container">
                <hr>
                <div class="row">
-               <h3>All:</h3>
+               <h3 class="category-header">All:</h3>
                 </div>
                <hr>
                <ul class="mt-4 mb-5">
                    {% for commission in object_list %}
                    <li class="row  mb-2">
-                       <a class="col-sm-8 btn btn-item" href={{commission.get_absolute_url}}>
+                       <a class="col-sm-10 btn btn-item" href={{commission.get_absolute_url}}>
                            {{commission.title}} <br>
 
                            <b>{{commission.get_status_display}}</b> <br>

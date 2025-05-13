@@ -24,47 +24,45 @@
 
                     <ul class="nav">
                         <li class="nav-item app-links">
-                            <a class="nav-link link-light" href="{% url 'merchstore:merchstore-list' %}">Merchandise Store</a>
+                            <a class="nav-link" href="{% url 'merchstore:merchstore-list' %}">Merchandise Store</a>
                         </li>
                         <li class="nav-item app-links">
-                            <a class="nav-link link-light" href="{% url 'wiki:articles-list' %}">Wiki</a>
+                            <a class="nav-link" href="{% url 'wiki:articles-list' %}">Wiki</a>
                         </li>
                         <li class="nav-item app-links">
-                            <a class="nav-link link-light" href="{% url 'blog:articles-list' %}">Blog</a>
+                            <a class="nav-link" href="{% url 'blog:articles-list' %}">Blog</a>
                         </li>
                         <li class="nav-item app-links">
-                            <a class="nav-link link-light" href="{% url 'forum:threads-list' %}">Forum</a>
+                            <a class="nav-link" href="{% url 'forum:threads-list' %}">Forum</a>
                         </li>
                         <li class="nav-item app-links">
-                            <a class="nav-link link-light" href="{% url 'commissions:commissions-list' %}">Commission</a>
+                            <a class="nav-link" href="{% url 'commissions:commissions-list' %}">Commission</a>
                         </li>
                     </ul>
 
                     <!-- Right-aligned text -->
                     {% if request.user.is_authenticated %}
-                        <div class="navbar-text ms-auto">
+                        <div class="ms-auto">
                             <ul class="nav">
                                 <li class="nav-item app-links">
-                                    <a class="nav-link link-light" href="{% url 'user_management:profile' username=user.username %}">
-                                        Profile
-                                    </a>
+                                    <a class="nav-link" href="{% url 'user_management:profile' username=user.username %}">Profile</a>
                                 </li>
                                 <li class="nav-item app-links">
-                                    <form class="nav-link link-light" method="POST" action="{% url 'logout' %}">
+                                    <form class="nav-link" method="POST" action="{% url 'logout' %}">
                                         {% csrf_token %}
-                                        <button class="plain-text-button" type="submit">Logout</button>
+                                        <button class="nav-link " type="submit">Logout</button>
                                     </form>
                                 </li>
                             </ul>
                         </div>
                     {% else %}
-                        <div class="navbar-text ms-auto">
+                        <div class="ms-auto">
                             <ul class="nav">
                                 <li class="nav-item app-links">
-                                    <a class="nav-link link-light" href="{% url 'login' %}">Login</a>
+                                    <a class="nav-link" href="{% url 'login' %}">Login</a>
                                 </li>
                                 <li class="nav-item app-links">
-                                    <a class="nav-link link-light" href="{% url 'accounts:register' %}">Register</a>
+                                    <a class="nav-link" href="{% url 'accounts:register' %}">Register</a>
                                 </li>
                             </ul>
                         </div>
