@@ -6,7 +6,7 @@ class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = '__all__'
-        exclude = ['owner', ]
+        exclude = ['owner', 'sale_price']
 
 
 class TransactionForm(forms.ModelForm):

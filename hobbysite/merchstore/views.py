@@ -35,6 +35,7 @@ class ProductDetailView(DetailView):
                 self.object.status = 'OOS'
 
             transaction.status = 'CART'
+
             transaction.save()
             self.object.save()
 
@@ -83,11 +84,15 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
     template_name = "merchstore/merch_edit.html"
 
     def form_valid(self, form):
-        if form.instance.stock == 0:
-            form.instance.status = 'OOS'
-        elif form.instance.stock != 0 and form.instance.status == 'OOS':
+        if form.instance.sale_percent:
+                form.instance.sale_price = self.object.price - (self.object.price * (form.instance.sale_percent)/100)
+                form.instance.status = 'SALE'
+        else:
             form.instance.status = 'AVL'
 
+        if form.instance.stock == 0:
+            form.instance.status = 'OOS'
+            
         form.save()
         return super().form_valid(form)
 

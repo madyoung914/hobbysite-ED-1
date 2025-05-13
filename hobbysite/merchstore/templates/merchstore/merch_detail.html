@@ -4,12 +4,26 @@
 
 {% block title %}{{ object.name }}{% endblock %}
 {% block content %}
+
+    <br>
+    {% if object.merch_image %}
+        <img src="{{ object.merch_image.url }}" alt="{{ object.merch_image.url }}" style="width: 50%; object-position: left">
+    {% endif %}
+    
+    
     <h3>{{ object.name }}</h3>
     <a href="{% url 'merchstore:merch-edit' pk=object.pk %}">Edit</a>
     <h4>Owner: {{ object.owner }}</h4>
     <p>Description: {{ object.description }}</p>
     <p>Product Type: {{ object.producttype }}</p>
     <p>Price (₱): {{ object.price }}</p>
+
+    {% if object.sale_percent %}
+        <p>{{ object.sale_percent }}% off!</p>
+        <p>Sale Price (₱): {{ object.sale_price }}</p>
+    {% endif %}
+
+
     <p>Stock: {{object.stock }}</p>
     <p>Product Status: {{ object.status }}</p>
 

@@ -5,7 +5,7 @@
 
 <h3>Edit my product</h3>
 <hr>
-<form method = "POST">
+<form method = "POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }} 
     <button type="submit" data-show-if="object.stock != 0">Submit</button>
