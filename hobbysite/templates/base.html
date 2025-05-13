@@ -20,22 +20,22 @@
             <nav class="navbar navbar-expand-lg px-2 py-1 m-0">
                 <div class="container-fluid">
                     <!-- Left content (optional) -->
-                    <h1 class="navbar-brand"><a class="nav-link link-light" href="{% url 'main_interface:homepage' %}">HobbySite</a></h1>
+                    <h1 class="navbar-brand"><a class="nav-link" href="{% url 'main_interface:homepage' %}">HobbySite</a></h1>
 
                     <ul class="nav">
-                        <li class="nav-item app-links">
+                        <li class="nav-item">
                             <a class="nav-link" href="{% url 'merchstore:merchstore-list' %}">Merchandise Store</a>
                         </li>
-                        <li class="nav-item app-links">
+                        <li class="nav-item">
                             <a class="nav-link" href="{% url 'wiki:articles-list' %}">Wiki</a>
                         </li>
-                        <li class="nav-item app-links">
+                        <li class="nav-item">
                             <a class="nav-link" href="{% url 'blog:articles-list' %}">Blog</a>
                         </li>
-                        <li class="nav-item app-links">
+                        <li class="nav-item">
                             <a class="nav-link" href="{% url 'forum:threads-list' %}">Forum</a>
                         </li>
-                        <li class="nav-item app-links">
+                        <li class="nav-item">
                             <a class="nav-link" href="{% url 'commissions:commissions-list' %}">Commission</a>
                         </li>
                     </ul>
@@ -44,10 +44,10 @@
                     {% if request.user.is_authenticated %}
                         <div class="ms-auto">
                             <ul class="nav">
-                                <li class="nav-item app-links">
+                                <li class="nav-item">
                                     <a class="nav-link" href="{% url 'user_management:profile' username=user.username %}">Profile</a>
                                 </li>
-                                <li class="nav-item app-links">
+                                <li class="nav-item">
                                     <form class="nav-link" method="POST" action="{% url 'logout' %}">
                                         {% csrf_token %}
                                         <button class="nav-link " type="submit">Logout</button>
@@ -58,10 +58,10 @@
                     {% else %}
                         <div class="ms-auto">
                             <ul class="nav">
-                                <li class="nav-item app-links">
+                                <li class="nav-item">
                                     <a class="nav-link" href="{% url 'login' %}">Login</a>
                                 </li>
-                                <li class="nav-item app-links">
+                                <li class="nav-item">
                                     <a class="nav-link" href="{% url 'accounts:register' %}">Register</a>
                                 </li>
                             </ul>
