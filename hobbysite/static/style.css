@@ -4,7 +4,7 @@
 
 }
 
-nav {
+.nav {
 	margin: 0 0 0 0;
 	padding: 0 0 0 0;
 }
@@ -101,6 +101,7 @@ nav {
 }
 
 .category-header {
+	margin: 0 0 0 2rem;
 	font-family: 'HB-Primary-Header';
 	font-size: 2rem;
 }
@@ -123,5 +124,6 @@ main {
 }
 
 .app-content {
-	margin: 3rem 2rem 3rem 2rem;
+	margin: 3rem 1rem 3rem 1rem;
+	padding: 0 0 0 0;
 }
