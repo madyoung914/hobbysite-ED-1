@@ -16,7 +16,7 @@
         <ul class="mt-4 mb-5">
 
             {% for commission in createdCommissions %}
-            <li class="row mb-2">
+            <li class="row mb-3">
                 <a class="col-sm-10 btn btn-item" href={{commission.get_absolute_url}}>
                     {{commission.title}} <br>
 
@@ -28,7 +28,7 @@
             {% endfor %}
         </ul>
         {% if request.user.is_authenticated %}
-        <div class="row">
+        <div class="row mb-3">
             <a class="col-sm-4 offset-4 btn btn-primary mt-5" href="{% url 'commissions:commission-add' %}"> Add Commission </a>
         </div>
         {% endif %}
@@ -40,7 +40,7 @@
         <hr>
         <ul class="mt-4 mb-5">
             {% for commission in appliedCommissions %}
-            <li class="row mb-2">
+            <li class="row mb-3">
                 <a class="col-sm-10 btn btn-item" href={{commission.get_absolute_url}}>
                     {{commission.title}} <br>
 

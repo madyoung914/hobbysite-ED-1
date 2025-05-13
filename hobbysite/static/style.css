@@ -45,7 +45,7 @@
 }
 
 .navbar {
-	background-color: #4A0072;
+	background-color: #3A0059;
 	margin: 0 0 0 0;
 	padding: 0 0 0 0;
 }
@@ -68,15 +68,16 @@
 .btn-item {
 	background-color: #ffffff;
 	color: #000000;
-	outline:5px black;
+	outline: 0.1px solid black;
 	padding: 1rem 16px 1rem 16px;
 	text-align: left;
+	box-shadow: #3A0059 0 5px;
 }
 
 .btn-item:hover {
-	background-color: #E0EAFF;
+	background-color: #ECECEC;
 	color: #000000;
-	box-shadow: #002E69 5px 5px;
+	box-shadow: #3A0059 5px 5px;
 }
 
 .footer {
@@ -87,14 +88,13 @@
 
 .header {
 	position: sticky;
-	background-color: #002E69;
 	margin: 0 0 0 0;
 	padding: 10px;
 	text-align: center;
 }
 
 .header-brand {
-	color: white;
+	color: #3A0059;
 	padding: 1% 5% 1% 2%;
 	font-family: 'HB-Primary-Header';
 	font-size: 3rem;
