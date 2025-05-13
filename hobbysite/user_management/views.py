@@ -1,9 +1,9 @@
-from django.views.generic.detail import DetailView
-from django.views.generic.list import ListView
+from django.views.generic import TemplateView, DetailView
 from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy
 from .forms import UserEditForm
 from .models import Profile
+from merchstore.models import Transaction
 
 
 class ProfileDetailView(DetailView):
@@ -29,17 +29,20 @@ class ProfileUpdateView(UpdateView):
         )
 
 
-class ProfileListView(ListView):
-    model = Profile
+class ProfileTemplateView(TemplateView):
     template_name = 'user_management/dashboard.html'
-
     slug_field = 'user__username'
     slug_url_kwarg = 'username'
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        #?
-        return context
+        profile = self.request.user.profile
+        context['threads'] = profile.threads.all()
+        context['buyerTransactions'] = profile.transactions.all()
+        context['sellerTransactions'] = Transaction.objects.filter(product__owner=profile)
+        context['blogs'] = profile.blogs.all()
+        context['wikis'] = profile.wikis.all()
 
+        return context
 
 

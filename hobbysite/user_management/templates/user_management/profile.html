@@ -12,11 +12,11 @@
         <p>Name: {{ request.user.profile.name }}</p>
         <p>Email: {{ request.user.profile.email }}</p>
         <a href="{% url 'user_management:profile-edit' username=user.username %}">Edit Profile</a>
+        <br>
+        <a href="{% url 'user_management:profile-dashboard' username=user.username %}">My Dashboard</a>
         <p></p>
     {% else %}
-        <h1>Not logged yet</h1>
-
-        
+        <h1>Not logged yet</h1>        
     {% endif %}
     <a href="{% url 'main_interface:homepage' %}">Go to homepage</a>
 {% endblock %}

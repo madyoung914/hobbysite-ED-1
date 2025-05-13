@@ -38,7 +38,7 @@ class Product(models.Model):
                                     related_name="type")
     owner = models.ForeignKey(Profile,
                               on_delete=models.CASCADE, null=True,
-                              related_name='owner')
+                              related_name='products')
     stock = models.PositiveIntegerField()
     status = models.CharField(max_length=15,
                               choices=PRODUCT_STATUS,
@@ -58,11 +58,11 @@ class Transaction(models.Model):
     buyer = models.ForeignKey(Profile,
                               on_delete=models.SET_NULL,
                               null=True,
-                              related_name='buyer')
+                              related_name='transactions')
     product = models.ForeignKey(Product,
                                 on_delete=models.SET_NULL,
                                 null=True,
-                                related_name="product")
+                                related_name='transacted')
     amount = models.PositiveIntegerField()
     status = models.CharField(max_length=15, choices=TRANSACTION_STATUS)
     created_on = models.DateTimeField(auto_now_add=True)
