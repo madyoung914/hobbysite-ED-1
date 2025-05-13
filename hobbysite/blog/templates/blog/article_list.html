@@ -23,7 +23,7 @@
                     {% endfor %}
                 </u1>
             {% else %}
-                <p>You have not written any articles</p>
+                <p>You have not written any articles.</p>
             {% endif %}
        
             <div class="row">
@@ -47,13 +47,5 @@
                 </ul>
             {% endfor %}
         </div>
-       
-        {% if request.user.is_authenticated %}
-            <br>
-            <a class="btn btn-primary rounded-pill my-1" href="{% url 'user_management:profile' username=user.username %}">Go back to profile</a>
-        {% endif %}
-
-        <br>
-        <a class="btn btn-primary rounded-pill my-1" href="{% url 'main_interface:homepage'%}">Go back to homepage</a>
     </div>
 {% endblock %}

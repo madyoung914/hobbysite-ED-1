@@ -40,15 +40,19 @@
             <hr>
             <h3 class="row category-header">Your Products</h3>
             <hr>
-            {% for product_type in object_list %}
-                    {% for product in product_type.type.all %}
-                        {% if product.owner.user == user %}
-                        <li>
-                            <a href="{{ product.get_absolute_url }}">{{ product.producttype }}: {{ product.name }}</a>
-                        </li>
-                        {% endif %}
-                    {% endfor %}
-            {% endfor %}
+            {% if product %}
+                {% for product_type in object_list %}
+                        {% for product in product_type.type.all %}
+                            {% if product.owner.user == user %}
+                            <li>
+                                <a href="{{ product.get_absolute_url }}">{{ product.producttype }}: {{ product.name }}</a>
+                            </li>
+                            {% endif %}
+                        {% endfor %}
+                {% endfor %}
+            {% else %}
+                <p>You have not made any product.</p>
+            {% endif %}
 
             
             <div style="display: flex; justify-content: center; gap: 20px; margin: 20px;">
