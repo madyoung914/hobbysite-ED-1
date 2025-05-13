@@ -23,7 +23,7 @@
             </div>
 
             <p style="margin-top: 10px;">
-                By: {{ article.author.name }} - @{{ article.author.user }} <br>
+                By: {{ article.author.name }} - <a href="{% url 'user_management:profile' username=article.author.user.username %}">@{{ article.author.user }}</a> <br>
                 Created on: {{ article.created_on }} <br>
                 Last Updated on: {{ article.updated_on }}
             </p>
@@ -70,7 +70,7 @@
         </div>
 
         <div class="container">
-            <h3 style="margin-top: 2em;">Other Articles from {{ article.category.name }}</h3>
+            <h3 style="margin-top: 2em;">Other Articles about {{ article.category.name }}</h3>
             <hr>
                 <ul>
                     {% for related in related_articles %}

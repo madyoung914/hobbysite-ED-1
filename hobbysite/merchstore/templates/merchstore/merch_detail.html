@@ -27,7 +27,7 @@
 
             <hr>
             <p class="ms-3">{{ object.description }}</p>
-            <p>Owner: {{ object.owner }} - @{{ object.owner.user.username }}</p>
+            <p>Owner: {{ object.owner }} - <a href="{% url 'user_management:profile' username=object.owner.user.username %}">@{{ object.owner.user.username }}</a></p>
             <p>Product Type: {{ object.producttype }}</p>
 
             <div class="d-flex gap-3">
