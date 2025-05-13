@@ -5,60 +5,61 @@
 {% block title %}{{ object.name }}{% endblock %}
 {% block content %}
 
-    <div class="container app-content">
-        <div style="display: flex; gap: 20px; ">
-            
+<div class="container app-content">
+    <div class="row g-4">
+        
+        <div class="col-md-6">
             {% if object.merch_image %}
-                <img src="{{ object.merch_image.url }}" alt="{{ object.merch_image.url }}" style="width: 45vw; height: 45vw;">
+                <img src="{{ object.merch_image.url }}" alt="{{ object.merch_image.url }}" style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover;" 
+                 class="img-fluid rounded border">
             {% else %}
-                <div style="width: 100vw; height: 45vw; background-color: gray; display: flex; align-items: center; justify-content: center;">
-                    <p style="color: white; font-size: 1.5rem;">No Available Image</p>
+                <div class="d-flex align-items-center justify-content-center bg-secondary text-white rounded border" style="width: 100%; aspect-ratio: 1 / 1;">
+                    <p class="fs-4 text-center m-0">No Available Image</p>
                 </div>
             {% endif %}
-    
-
-            <div style="width: 100%; font-size: 1.5rem">
-                <div style="display: flex; justify-content: space-between;">
-                    <div style="display: flex; gap:10px;">
-                        <h2 style="margin: 0;">{{ object.name }}</h2>
-                    </div>
-                    <a class="btn btn-primary rounded-pill" href="{% url 'merchstore:merch-edit' pk=object.pk %}">Edit</a>
-                </div>
-                <hr>
-                <p style="margin-left: 20px;">{{ object.description }}</p>
-                <p>Owner: {{ object.owner }} - @{{ object.owner.user.username }}</p>
-                <p>Product Type: {{ object.producttype }}</p>
-
-                <div style="display: flex; gap: 10px; background-color: gray;">
-                    {% if object.sale_percent %}
-                        <p>Price (₱): <s style="color: gray; font-size: 0.95rem;">{{ object.price }}</s>       {{ object.sale_price }}</p>
-                        <div style="display:flex; color: white; font-size: 0.8rem; padding: 0; align-items: center;">
-                            <p style="background-color: red; margin: 0;"> -{{ object.sale_percent }}% off! </p>
-                        </div>
-                    {% else %}
-                        <p>Price (₱): {{ object.price }}</p>
-                    {% endif %}
-                </div>
-
-                <p>Product Status: {{ object.status }}</p>
-                <p>Stock: {{ object.stock }}</p>
-            </div>
         </div>
-        
 
-        <br>
+        <div class="col-md-6">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2 class="m-0">{{ object.name }}</h2>
+                <a href="{% url 'merchstore:merch-edit' pk=object.pk %}" class="btn btn-primary rounded-pill">Edit</a>
+            </div>
 
-        {% if request.user.profile != object.owner %}
-            <h3>Add to Cart</h3>
             <hr>
-            <form method = "POST">
-                {% csrf_token %}
-                {{ form.as_p }} 
-                <button type="submit" {% if object.stock == 0 %}disabled{% endif %}>Submit</button>
-            </form>
-        {% endif %}
-        <br>
+            <p class="ms-3">{{ object.description }}</p>
+            <p>Owner: {{ object.owner }} - @{{ object.owner.user.username }}</p>
+            <p>Product Type: {{ object.producttype }}</p>
 
-        <a class="btn btn-primary rounded-pill" href="{% url 'merchstore:merchstore-list' %}">Go back to products list</a>
+            <div class="d-flex gap-3">
+                {% if object.sale_percent %}
+                    <p>Price (₱): <s class="text-muted fs-6">{{ object.price }}</s> {{ object.sale_price }}</p>
+                    <div class="d-flex align-items-center justify-content-center bg-danger text-white rounded mb-3 px-2">
+                        <p class="m-0 small">-{{ object.sale_percent }}% off!</p>
+                    </div>
+                {% else %}
+                    <p>Price (₱): {{ object.price }}</p>
+                {% endif %}
+            </div>
+
+            <p>Product Status: {{ object.status }}</p>
+            <p>Stock: {{ object.stock }}</p>
+        </div>
     </div>
+
+    <br>
+
+    {% if request.user.profile != object.owner %}
+        <h3>Add to Cart</h3>
+        <hr>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" {% if object.stock == 0 %}disabled{% endif %}>Submit</button>
+        </form>
+    {% endif %}
+
+    <br>
+    <a href="{% url 'merchstore:merchstore-list' %}" class="btn btn-primary rounded-pill">Go back to products list</a>
+</div>
+
 {% endblock %}

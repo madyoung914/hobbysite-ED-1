@@ -11,9 +11,12 @@
         <h1 class="header-brand">🛒 Welcome to the Merchandise Store!</h1>
     </div>
     
-    <div class="container app-content">
+    <div class="container-fluid mx-0 app-content">
+
+        <div class="container">
         {% if not request.user.is_authenticated %}
-            <h3>All Products </h3>
+            <hr>
+            <h3 class="row category-header">All Products </h3>
             <hr>
             {% for product_type in object_list %}
                 {% for product in product_type.type.all %}
@@ -24,13 +27,18 @@
             {% endfor %}
             <br>
 
+        </div>
+
         {% else %}
-            
-            <div class="col-sm-9 offset-3 justify-content-end">
+        
+        <div class="container">
+            <div class="d-flex justify-content-end mb-3">
                 <h4 class="text-end"><a class="btn btn-primary rounded-pill" href="{% url 'merchstore:merch-cart' %}">My Cart</a></h4>
             </div>
-        
-            <h3>Your Products</h3>
+            <br>
+
+            <hr>
+            <h3 class="row category-header">Your Products</h3>
             <hr>
             {% for product_type in object_list %}
                     {% for product in product_type.type.all %}
@@ -47,8 +55,9 @@
                 <h4><a class="btn btn-primary rounded-pill" href="{% url 'merchstore:merch-add' %}">Want to create a new product?</a></h4>
                 <h4><a class="btn btn-primary rounded-pill" href="{% url 'merchstore:merch-transactions' %}">My Transactions</a></h4>
             </div>
-          
-            <h3>All Products</h3>
+            
+            <hr>
+            <h3 class="row category-header">All Products</h3>
             <hr>
             {% for product_type in object_list %}
                 <h4>All {{ product_type }}</h4>
