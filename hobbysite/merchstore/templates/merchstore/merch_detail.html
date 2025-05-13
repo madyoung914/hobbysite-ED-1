@@ -5,41 +5,50 @@
 {% block title %}{{ object.name }}{% endblock %}
 {% block content %}
 
-    <br>
-    {% if object.merch_image %}
-        <img src="{{ object.merch_image.url }}" alt="{{ object.merch_image.url }}" style="width: 50%; object-position: left">
-    {% endif %}
-    
-    
-    <h3>{{ object.name }}</h3>
-    <a href="{% url 'merchstore:merch-edit' pk=object.pk %}">Edit</a>
-    <h4>Owner: {{ object.owner }}</h4>
-    <p>Description: {{ object.description }}</p>
-    <p>Product Type: {{ object.producttype }}</p>
-    <p>Price (₱): {{ object.price }}</p>
+    <div class="container app-content">
+        <div style="display: flex; align-items: flex-start; gap: 20px;">
+        {% if object.merch_image %}
+            <img src="{{ object.merch_image.url }}" alt="{{ object.merch_image.url }}" style="width: 45vw; height: 45vw; object-fit: cover; object-position: left;">
+        {% endif %}
 
-    {% if object.sale_percent %}
-        <p>{{ object.sale_percent }}% off!</p>
-        <p>Sale Price (₱): {{ object.sale_price }}</p>
-    {% endif %}
+            <div style="width: 100%;">
+                <div style="display: flex; justify-content: space-between;">
+                    <h3 style="margin: 0;">{{ object.name }}</h3>
+                    <a href="{% url 'merchstore:merch-edit' pk=object.pk %}">Edit</a>
+                </div>
+                <hr>
+                <p>Description: {{ object.description }}</p>
+                <p>Owner: {{ object.owner }} - @{{ object.owner.user.username }}</p>
+                <p>Product Type: {{ object.producttype }}</p>
 
+                <div style="display: flex; justify-content: space-between;">
+                    <p>Price (₱): {{ object.price }}</p>
 
-    <p>Stock: {{object.stock }}</p>
-    <p>Product Status: {{ object.status }}</p>
+                    {% if object.sale_percent %}
+                        <p>{{ object.sale_percent }}% off!</p>
+                        <p>Sale Price (₱): {{ object.sale_price }}</p>
+                {% endif %}
 
-    <br>
+                </div>
+                <p>Product Status: {{ object.status }}</p>
+                <p>Stock: {{ object.stock }}</p>
+            </div>
+        </div>
+        
 
-    {% if request.user.profile != object.owner %}
-        <h3>Add to Cart</h3>
-        <hr>
-        <form method = "POST">
-            {% csrf_token %}
-            {{ form.as_p }} 
-            <button type="submit" {% if object.stock == 0 %}disabled{% endif %}>Submit</button>
-        </form>
-    {% endif %}
-    <br>
+        <br>
 
-    <a href="{% url 'merchstore:merchstore-list' %}">Go back to products list</a>
+        {% if request.user.profile != object.owner %}
+            <h3>Add to Cart</h3>
+            <hr>
+            <form method = "POST">
+                {% csrf_token %}
+                {{ form.as_p }} 
+                <button type="submit" {% if object.stock == 0 %}disabled{% endif %}>Submit</button>
+            </form>
+        {% endif %}
+        <br>
 
+        <a href="{% url 'merchstore:merchstore-list' %}">Go back to products list</a>
+    </div>
 {% endblock %}

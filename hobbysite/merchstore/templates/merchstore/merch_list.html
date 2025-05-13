@@ -7,13 +7,13 @@
 
 {% block content %}
         
-        <div class="header">
-            <h1 class="header-brand">🛒 Welcome to the Merchandise Store!</h1>
-        </div>
+    <div class="header">
+        <h1 class="header-brand">🛒 Welcome to the Merchandise Store!</h1>
+    </div>
 
-        <br>
-        
-        <div class="container app-content">
+    <br>
+    
+    <div class="container app-content">
         {% if not request.user.is_authenticated %}
             <h3>All Products </h3>
             <hr>
@@ -27,7 +27,10 @@
             <br>
 
         {% else %}
-            <h4><a href="{% url 'merchstore:merch-cart' %}">My Cart</a></h4>
+            
+            <div class="col-sm-9 offset-3 justify-content-end">
+                <h4 class="text-end"><a href="{% url 'merchstore:merch-cart' %}">My Cart</a></h4>
+            </div>
             <br>
             <h3>Your Products</h3>
             <hr>
@@ -39,29 +42,30 @@
                         </li>
                         {% endif %}
                     {% endfor %}
-                    <br>
             {% endfor %}
 
-            <br>
-            <h4><a  href="{% url 'merchstore:merch-add' %}">Want to create a new product?</a></h4>
-            <h4><a href="{% url 'merchstore:merch-transactions' %}">My Transactions</a></h4>
             
-            <br>
+            <div style="display: flex; justify-content: center; gap: 20px; margin: 20px;">
+                <h4><a  href="{% url 'merchstore:merch-add' %}">Want to create a new product?</a></h4>
+                <h4><a href="{% url 'merchstore:merch-transactions' %}">My Transactions</a></h4>
+            </div>
+          
             <h3>All Products</h3>
             <hr>
             {% for product_type in object_list %}
+                <h4>All {{ product_type }}</h4>
                 {% for product in product_type.type.all %}
                     {% if product.owner.user != user %}
                     <li>
-                        <a href="{{ product.get_absolute_url }}">{{ product.owner.user.get_username }}: {{ product.name }}</a>
+                        <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
                     </li>
                     {% endif %}
-                    <br>
                 {% endfor %}
+                <br>
             {% endfor %}
         {% endif %}
-        
-        </div>
+    
+    </div>
 {% endblock %}
 
 

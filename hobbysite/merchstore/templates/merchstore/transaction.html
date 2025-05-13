@@ -3,21 +3,23 @@
 {% block title %}Transactions{% endblock %}
 {% block content %}
 
-<h2>My Transactions</h2>
-<br>
+<div class="container app-content">
+    <h2>My Transactions</h2>
+    <br>
 
-{% for transaction in object_list %}
-    {% if transaction.product.owner.user == user %}
-        <h4>{{ transaction.product }} bought by {{ transaction.buyer }}</h4>
-        <hr>
-        <li>Amount: {{ transaction.amount }}</li>
-        <li>Status: {{ transaction.status }}</li>
-        <li>Bought on: {{ transaction.created_on }}</li>
-        <br>
-    {% endif %} 
+    {% for transaction in object_list %}
+        {% if transaction.product.owner.user == user %}
+            <h4>{{ transaction.product }} bought by {{ transaction.buyer }}</h4>
+            <hr>
+            <li>Amount: {{ transaction.amount }}</li>
+            <li>Status: {{ transaction.status }}</li>
+            <li>Bought on: {{ transaction.created_on }}</li>
+            <br>
+        {% endif %} 
 
-{% endfor %}
+    {% endfor %}
 
-<a href="{% url 'merchstore:merchstore-list' %}">Go back to products list</a>
+    <a href="{% url 'merchstore:merchstore-list' %}">Go back to products list</a>
+</div>
 
 {% endblock %}

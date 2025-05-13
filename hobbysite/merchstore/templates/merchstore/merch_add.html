@@ -3,12 +3,17 @@
 {% block title %}Creating{% endblock %}
 {% block content %}
 
-<h3>Create a new product</h3>
-<hr>
+<div class="container app-content">
+        <h3>Create a new product</h3>
+        <hr>
         <form method = "POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form.as_p }} 
                 <button type="submit">Submit</button>
         </form>
+
+        <br>
         <a href="{% url 'merchstore:merchstore-list' %}">Go back to products list</a>
+</div>
+
 {% endblock %}
