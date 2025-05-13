@@ -17,8 +17,8 @@
             {% if user_articles %}
                 <u1>
                     {% for article in user_articles %}
-                    <li>
-                        <a href="{{ article.get_absolute_url }}">{{ article }}</a>
+                    <li class="row mb-2">
+                        <a class="col-sm-10 btn btn-item" href="{{ article.get_absolute_url }}">{{ article }}</a>
                     </li>
                     {% endfor %}
                 </u1>
@@ -41,7 +41,7 @@
                 <ul>
                     {% for article in other_articles %}
                         {% if article.category == category %}
-                            <li><a href="{{ article.get_absolute_url }}">{{ article }}</a></li>
+                            <li class="row mb-2"><a class="col-sm-10 btn btn-item" href="{{ article.get_absolute_url }}">{{ article }}</a></li>
                         {% endif %}
                     {% endfor %}
                 </ul>

@@ -2,10 +2,12 @@
 
 
 {% block content %}
-    <form method = "POST">
+<div class="container p-4 border rounded bg-light shadow my-5 border-dark w-40 h-40">
+    <form method="POST">
+        <h4>Register</h4>
         {% csrf_token %}
-        {{ form.as_p }} 
+        {{ form.as_p }}
         <button type="submit">Submit</button>
     </form>
-   
-{% endblock %}
+</div>
+    {% endblock %}

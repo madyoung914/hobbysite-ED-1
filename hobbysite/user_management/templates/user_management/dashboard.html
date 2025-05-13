@@ -47,7 +47,7 @@
         {% for jobJoined in jobsJoined %}
             <p>
                 <a href={{ jobJoined.job.commission.get_absolute_url }}> {{ jobJoined.job.commission.title }} </a>
-                as <a href={{ jobJoined.job.get_absolute_url }}> {{ jobJoined.job.role}} - {{ jobJoined.get_status_display }} </a>
+                as {{ jobJoined.job.role}} - {{ jobJoined.get_status_display }}
             </p>
             <br>
         {% endfor %}

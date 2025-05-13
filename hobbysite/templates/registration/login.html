@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
  {% block content %}
+
     {% if form.errors %}
         {% for field in form %}
             {% for error in field.errors %}
@@ -8,10 +9,13 @@
             {% endfor %}
         {% endfor %}
     {% endif %}
+<div class="container p-4 border rounded bg-light shadow my-4 border-dark w-25 h-30">
     <form method="POST">
+        <h4>Login</h4>
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Login</button>
     </form>
     <a href="{% url 'password_reset' %}">Forgot Password?</a>
+</div>
  {% endblock %}

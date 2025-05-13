@@ -17,7 +17,7 @@
 
     </div>
         
-    <hr>
+    <br>
     <div class="container">
         <h2>Applicants:</h2>
         <hr>
@@ -33,8 +33,8 @@
                 {% csrf_token %}
                 <input type="hidden" name="app_id" value="{{ application.id }}">
                 {{ form.as_p }}
-                <button type="submit" name="action" value="accept">Accept</button>
-                <button type="submit" name="action" value="reject">Reject</button>
+                <button class="btn btn-primary rounded-pill m-2" type="submit" name="action" value="accept">Accept</button>
+                <button class="btn btn-primary rounded-pill m-2" type="submit" name="action" value="reject">Reject</button>
             </form>
             {% endif %}
             </p>
