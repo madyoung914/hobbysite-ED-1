@@ -3,7 +3,7 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, FormMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 
 from .models import Article, ArticleCategory, Comment, ImageGallery
 from user_management.models import Profile
@@ -20,7 +20,6 @@ class ArticleListView(ListView):
         context['categories'] = ArticleCategory.objects.all
         if self.request.user.is_authenticated:
             context['user'] = self.request.user
-
             context['user_articles'] = Article.objects.filter(
                 author=self.request.user.profile)
             context['other_articles'] = Article.objects.exclude(
@@ -36,31 +35,44 @@ class ArticleDetailView(FormMixin, DetailView):
     form_class = CommentForm
 
     def post(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        form = self.get_form()
-        if form.is_valid():
-            return self.form_valid(form)
+        article = self.get_object()
+        profile = get_object_or_404(Profile, user=request.user)
+        comment_id = request.POST.get('comment_id')
+        if comment_id:
+            comment = get_object_or_404(
+                Comment,
+                id=comment_id,
+                article=article
+            )
+            if comment.author == profile:
+                comment.entry = request.POST.get('entry', comment.entry)
+                comment.save()
+            return redirect('blog:article-detail', pk=article.pk)
         else:
-            return self.form_invalid(form)
-
-    def form_valid(self, form):
-        comment = form.save(commit=False)
-        comment.article = self.object
-        comment.author = Profile.objects.get(user=self.request.user)
-        comment.save()
-        return super().form_valid(form)
-
+            form = CommentForm(request.POST)
+            if form.is_valid():
+                comment = form.save(commit=False)
+                comment.article = article
+                comment.author = profile
+                comment.save()
+                return redirect('blog:article-detail', pk=article.pk)
+            context = self.get_context_data()
+            context['form'] = form
+            return self.render_to_response(context)
+    
     def get_success_url(self):
         return reverse_lazy("blog:article-detail", kwargs={"pk": self.object.pk})
-
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['articles'] = Article.objects.filter(author=self.object.author)
+        context['related_articles'] = Article.objects.filter(
+            author=self.object.author
+        ).exclude(pk=self.object.pk)[:2]
         context['comments'] = Comment.objects.filter(
-            article=self.object).reverse
+            article=self.object
+        ).order_by('-created_on')
         if self.request.user.is_authenticated:
-            context['user'] = Profile.objects.get(user=self.request.user)
-
+            context['profile'] = Profile.objects.get(user=self.request.user)
         context['images'] = ImageGallery.objects.filter(article=self.object)
         return context
 
@@ -97,7 +109,7 @@ class ArticleUpdateView(LoginRequiredMixin, UpdateView):
 class ImageGalleryView(LoginRequiredMixin, CreateView):
     model = ImageGallery
     fields = ['image', 'description']
-    template_name = 'wiki/image_gallery.html'
+    template_name = 'blog/image_gallery.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -120,8 +132,7 @@ class ImageGalleryView(LoginRequiredMixin, CreateView):
 class ImageGalleryUpdateView(LoginRequiredMixin, UpdateView):
     model = ImageGallery
     form_class = ImageGalleryForm
-    template_name = 'wiki/image_gallery.html'
-
+    template_name = 'blog/image_gallery.html'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form_title'] = 'Update Image'

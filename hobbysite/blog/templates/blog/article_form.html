@@ -1,16 +1,18 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Article{% endblock %}
-
-<h2>Add Article Page</h2>
+{% block title %}{{ form_title }}{% endblock %}
 
 {% block content %}
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form }}
-        <button type="submit">Submit</button>
+  <div class="container app-content">
+    <h3>{{ form_title }}</h3>
+    <hr>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Post</button>
     </form>
     <br>
-    <a href="{% url 'blog:articles-list' %}">Go back to article list</a>
+    <a class="btn btn-primary rounded-pill" href="{% url 'wiki:articles-list' %}">Go back to article list</a>
+  </div>
 {% endblock %}

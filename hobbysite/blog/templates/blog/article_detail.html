@@ -5,63 +5,131 @@
 
 {% block content %}
     <img src="{{ article.header_image.url }}" alt="{{ article.header_image.url }}" style="width: 100%; height: 300px; object-fit: cover; object-position: middle;">
-    <h1>{{ article.title }}</h1>
-    <p>Author: {{ article.author.name }} | Category: {{ article.category }} | Published: {{ article.created_on }} | Last Updated: {{ article.updated_on }}</p>
-    
-    <p>{{ article.entry }}</p>
-    <a href="{% url 'blog:articles-list' %}">Go to Articles List</a>
 
-    {% if user == article.author %}
-        <a href="{% url 'blog:article-edit' pk=article.pk %}">Edit Article</a>
-    {% endif %}
-    
-    {% if images %}
-        <h3>Image Gallery 🖼️</h3>
-            {% for image in images %}
-                <img src="{{ image.image.url }}" alt="{{ image.description }}" style="width: 300px; height: 300px; object-fit: cover; object-position: middle;">
-                
-                {% if user.is_authenticated and article.author.user == user %}
-                    <a href="{% url 'blog:image-update' image.pk %}">✏️Edit Image</a>
+    <div class="container app-content">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap;">
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <h1>{{ article.title }}</h1>
+                    <span style="background-color: #4f98a1; color: #ffffff; padding: 2px 10px; border-radius: 10px; font-size: 0.9em;">{{ article.category }}</span>
+                </div>
+           
+                {% if user.is_authenticated and object.author.user == user %}
+                    <a class="btn btn-item" href="{% url 'blog:article-edit' pk=object.pk %}" style = "background-color: #87C9CF; padding: 5px 8px;">
+                        Edit article
+                    </a>
                 {% endif %}
-            {% endfor %}
-    {% endif %}
-    <br>
+            </div>
 
-    {% if article.author == user %}
-        <a href="{% url 'blog:image-upload' article.pk %}">➕Upload an Image</a>
-    {% endif %} 
-    
-    <h2>Comments</h2>
-    {% if user.is_authenticated %}
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Post Comment</button>
-        </form>
-    {% else %}
-        <p>You must be logged in.</p>
-    {% endif %}
-    <ul>
-    {% for comment in comments %}
-        <li>
-            <h3>{{ comment.author }}</h3>
-            <p>{{ comment.created_on }}</p>
-            <p>{{ comment.entry }}</p>
-        </li>
-    {% endfor %}
-    </ul>
-    <h2>Other Articles by {{ article.author.name }}</h2>
-    <ul>
-    {% for a in articles %}
-        {% if a != article %}
-        <li>
-            <a href="{% url 'blog:article-detail' pk=a.pk %}">{{ a.title }}</a>
-        </li>
-        {% endif %}
-    {% endfor %}
-    </ul>
+            <p style="margin-top: 10px;">
+                By: {{ article.author.name }} - @{{ article.author.user }} <br>
+                Created on: {{ article.created_on }} <br>
+                Last Updated on: {{ article.updated_on }}
+            </p>
+            <hr>
+        </div>
+
+        <div style="margin-top: 2em;" class="container">
+            <p>{{ article.entry }}</p>
+        </div>
+
+        <div style="margin-top: 2em;" class="container">
+            {% if images %}
+                <div style="background-color: #ffffff; border: 1px solid #d6d6d6; padding: 10px; margin-bottom: 15px; border-radius: 5px;">
+                    <h4>Image Gallery</h4>
+                    <hr>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                        {% for image in images %}
+                            <div style="text-align: center;">
+                                <img src="{{ image.image.url }}" alt="{{ image.description }}" style="width: 300px; height: 300px; object-fit: cover">
+                           
+                                {% if user.is_authenticated and article.author.user == user %}
+                                    <div style="margin-top: 5px;">
+                                        <a class="btn btn-item rounded-pill" href="{% url 'blog:image-update' image.pk %}"
+                                        style="background-color: #b1e4e9; padding: 5px 8px; font-size: 0.8rem;">Edit Image</a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <br>
+                    {% if user.is_authenticated and article.author.user == user %}
+                        <a class="btn btn-item" href="{% url 'blog:image-upload' article.pk %}"
+                        style="background-color: #87C9CF; padding: 5px 8px;">Upload an Image</a>    
+                    {% endif %}
+                </div>
+
+            {% else %}
+                {% if user.is_authenticated and article.author.user == user %}
+                    <a class="btn btn-item" href="{% url 'blog:image-upload' article.pk %}"
+                    style="background-color: #87C9CF; padding: 5px 8px;">Upload an Image</a>
+                {% endif %}
+            {% endif %}
+        </div>
+
+        <div class="container">
+            <h3 style="margin-top: 2em;">Other Articles by {{ article.author.name }}</h3>
+            <hr>
+                <ul>
+                    {% for related in related_articles %}
+                        <li><a href="{{ related.get_absolute_url }}">{{ related.title }}</a></li>
+                    {% empty %}
+                        <li>No other articles from this author.</li>
+                    {% endfor %}
+                </ul>
+            <a class="btn btn-primary rounded-pill" href="{% url 'blog:articles-list' %}">Go back to Article List</a>
+        </div>
+
+        <div class="container">
+            <h3 style="margin-top: 2em;">Leave a Comment:</h3>
+            <hr>
+            {% if user.is_authenticated %}
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Post Comment</button>
+                </form>
+            {% else %}
+                <p>You must be logged in.</p>
+            {% endif %}
+        </div>
+   
+        <div class="container">
+            <h3 style="margin-top: 2em;" >Comments</h3>
+            <hr>
+            {% for comment in comments %}
+                <div style="background-color: #ffffff; padding: 10px; margin-bottom: 15px; border-radius: 5px;">
+                    {% if user.is_authenticated and comment.author.user == user and request.GET.comment_id == comment.id|stringformat:"s" %}
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                            <textarea name="entry" style="width: 100%;">{{ comment.entry }}</textarea>
+                            <br>
+                            <button type="submit">Update</button>
+                            <a href="{% url 'wiki:article-detail' article.pk %}">Cancel</a>
+                        </form>
+
+                    {% else %}
+                        <b>@{{ comment.author.user }}</b> | <small>{{ comment.created_on }}</small>
+                        {% if comment.updated_on != comment.created_on %}
+                            <em><small>(Edited: {{ comment.updated_on }})</small></em>
+                        {% endif %}
+
+                        {% if user.is_authenticated and comment.author.user == user %}
+                            <a class="btn btn-item rounded-pill" href="?comment_id={{ comment.id }}" style="background-color: #a6b1ff; padding: 5px 8px;">
+                                <small>Edit</small>
+                            </a>
+                        {% endif %}
+                       
+                        <p>{{ comment.entry }}</p>
+                    {% endif %}
+                </div>
+            {% empty %}
+                <p>No comments yet.</p>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
 
 
-    
-    

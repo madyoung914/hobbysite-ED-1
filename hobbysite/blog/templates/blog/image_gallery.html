@@ -4,12 +4,16 @@
 {% block title %}{{ form_title }}{% endblock %}
 
 {% block content %}
-    <h1>{{ form_title }}</h1>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Upload</button>
-    </form>
+    <div class="container app-content">
+        <h3>{{ form_title }}</h3>
+        <hr>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Post Image</button>
+        </form>
 
-    <a href="{% url 'blog:article-detail' article.pk %}">⬅️ Back to article</a>
+        <br>
+        <a class="btn btn-primary rounded-pill" href="{% url 'blog:article-detail' article.pk %}">Back to Blog Article</a>
+    </div>
 {% endblock %}

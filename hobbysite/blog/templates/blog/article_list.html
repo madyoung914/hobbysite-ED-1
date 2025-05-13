@@ -1,47 +1,59 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Articles List{% endblock %}
+{% block title %}Blog{% endblock %}
 
 {% block content %}
-<div class="header">
-    <h1 class="header-brand">🖥️ Blog</h1>
-</div>
+    <div class="header">
+        <h1 class="header-brand">Welcome to Blog!</h1>
+    </div>
 
-<div class="container app-content">
-    <h2>User's Articles</h2>
-    <ul>
-        {% if user_articles %}
-        {% for article in user_articles %}
-        <li><a href="{{ article.get_absolute_url }}">{{ article }}</a></li>
-        {% endfor %}
-        {% else %}
-        <p>You have not written any articles</p>
-        <p>{{ user_articles }}</p>
+    <div class="container-fluid mx-0 app-content">
+        <div class="container">
+            <hr>
+            <h3 class="row category-header">Your Articles</h3>
+            <hr>
+
+            {% if user_articles %}
+                <u1>
+                    {% for article in user_articles %}
+                    <li>
+                        <a href="{{ article.get_absolute_url }}">{{ article }}</a>
+                    </li>
+                    {% endfor %}
+                </u1>
+            {% else %}
+                <p>You have not written any articles</p>
+            {% endif %}
+       
+            <div class="row">
+                <a class="col-sm-4 offset-4 btn btn-primary mt-5" href="{% url 'blog:article-add' %}"> Create a new Article </a>
+            </div>
+        </div>
+
+        <div class="container">
+            <hr>
+            <h3 class="row category-header">All Articles</h3>
+            <hr>
+            {% for category in categories %}
+                <br>
+                <h4>{{ category }}</h4>
+                <ul>
+                    {% for article in other_articles %}
+                        {% if article.category == category %}
+                            <li><a href="{{ article.get_absolute_url }}">{{ article }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+        </div>
+       
+        {% if request.user.is_authenticated %}
+            <br>
+            <a class="btn btn-primary rounded-pill my-1" href="{% url 'user_management:profile' username=user.username %}">Go back to profile</a>
         {% endif %}
-    </ul>
 
-    <h2>All Articles</h2>
-    {% for category in categories %}
-    <h3>{{ category }}</h3>
-    <ul>
-        {% for article in other_articles %}
-        {% if article.category == category %}
-        <li><a href="{{ article.get_absolute_url }}">{{ article }}</a></li>
-        {% endif %}
-        <p></p>
-        {% endfor %}
-    </ul>
-    {% endfor %}
-    <a href="{% url 'blog:article-add' %}">Add Article</a>
-    {% if request.user.is_authenticated %}
-    <br>
-    <a href="{% url 'user_management:profile' username=user.username %}">Go back to profile</a>
-    {% endif %}
-    <br>
-    <a href="{% url 'main_interface:homepage'%}">Go back to homepage</a>
-
-</div>
-    {% endblock %}
-
-
+        <br>
+        <a class="btn btn-primary rounded-pill my-1" href="{% url 'main_interface:homepage'%}">Go back to homepage</a>
+    </div>
+{% endblock %}
