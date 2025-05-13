@@ -8,25 +8,55 @@
 
     {% if request.user.is_authenticated %}
     <h3>Products Bought</h3>
+        {% for transaction in buyerTransactions %}
+        <a href={{ transaction.product.get_absolute_url }}>{{ transaction.amount }} - {{ transaction.product }}</a>
+            <br>
+        {% endfor %}    
 
     <h3>Products Sold</h3>
+        {% for transaction in sellerTransactions %}
+        <a href={{ transaction.product.get_absolute_url }}>{{ transaction.amount }} - {{ transaction.product }}</a>
+            <br>
+        {% endfor %}  
 
     <h3>Wiki Articles Created</h3>
+        {% for wiki in wikis %}
+            <a href={{ wiki.get_absolute_url }}> {{ wiki.title }} </a>
+            <br>
+        {% endfor %}
 
     <h3>Blog Articles Created</h3>
+        {% for blog in blogs %}
+            <a href={{ blog.get_absolute_url }}> {{ blog.title }} </a>
+            <br>
+        {% endfor %}
 
     <h3>Threads Created</h3>
+        {% for thread in threads %}
+            <a href={{ thread.get_absolute_url }}> {{ thread.title }} </a>
+            <br>
+        {% endfor %}
     
-
     <h3>Commissions Created</h3>
+        {% for commission in commissionsCreated %}
+            <a href={{ commission.get_absolute_url }}> {{ commission.title }} </a>
+            <br>
+        {% endfor %}
 
     <h3>Commissions Joined</h3>
-
+        {% for jobJoined in jobsJoined %}
+            <p>
+                <a href={{ jobJoined.job.commission.get_absolute_url }}> {{ jobJoined.job.commission.title }} </a>
+                as <a href={{ jobJoined.job.get_absolute_url }}> {{ jobJoined.job.role}} - {{ jobJoined.get_status_display }} </a>
+            </p>
+            <br>
+        {% endfor %}
 
     {% else %}
         <h1>Not logged yet</h1>
     {% endif %}
-
+    
+    <br>
     <a href="{% url 'main_interface:homepage' %}">Go to homepage</a>
 
 {% endblock %}

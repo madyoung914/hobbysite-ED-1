@@ -20,7 +20,7 @@ class Article(models.Model):
         Profile,
         on_delete=models.SET_NULL,
         null=True, 
-        related_name="wiki_author"
+        related_name="wikis"
     )
     category = models.ForeignKey(
         ArticleCategory,

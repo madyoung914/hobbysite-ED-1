@@ -132,7 +132,7 @@ class CreateCommissionView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy("commissions:commissionDetail",
+        return reverse_lazy("commissions:commission-detail",
                             kwargs={"pk": self.object.pk})
 
 class CommissionUpdateView(UpdateView):
