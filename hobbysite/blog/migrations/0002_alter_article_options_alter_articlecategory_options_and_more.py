@@ -19,12 +19,12 @@ class Migration(migrations.Migration):
             name='articlecategory',
             options={'ordering': ['name']},
         ),
-        #migrations.AddField(
-            #model_name='article',
-            #name='created_on',
-            #field=models.DateTimeField(auto_now_add=True, default=django.utils.timezone.now),
-            #preserve_default=False,
-        #),
+        migrations.AddField(
+            model_name='article',
+            name='created_on',
+            field=models.DateTimeField(auto_now_add=True, default=django.utils.timezone.now),
+            preserve_default=False,
+        ),
         migrations.AddField(
             model_name='article',
             name='updated_on',
