@@ -48,7 +48,7 @@
                                     <a class="nav-link" href="{% url 'user_management:profile' username=user.username %}">Profile</a>
                                 </li>
                                 <li class="nav-item">
-                                    <form class="nav-link" method="POST" action="{% url 'logout' %}">
+                                    <form method="POST" action="{% url 'logout' %}">
                                         {% csrf_token %}
                                         <button class="nav-link " type="submit">Logout</button>
                                     </form>
