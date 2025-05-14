@@ -83,6 +83,11 @@ class ArticleCreateView(LoginRequiredMixin, CreateView):
     redirect_field_name = 'accounts/login'
     form_class = ArticleForm
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form_title'] = 'Create a new article'
+        return context
+
     def form_valid(self, form):
         form.instance.author = Profile.objects.get(user=self.request.user)
         return super().form_valid(form)
@@ -97,6 +102,7 @@ class ArticleUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['pk'] = self.kwargs['pk']
+        context['form_title'] = 'Update article'
         return context
 
     def get_success_url(self):
