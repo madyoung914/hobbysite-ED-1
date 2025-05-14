@@ -4,7 +4,9 @@ from django.views.generic.edit import CreateView, UpdateView, FormMixin
 from .models import Thread, ThreadCategory, Comment
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse, reverse_lazy
+from django.shortcuts import get_object_or_404, redirect
 from .forms import CommentForm
+from .models import Profile
 
 
 class ThreadListView(ListView):
@@ -38,17 +40,37 @@ class ThreadDetailView(FormMixin, DetailView):
         context['form'] = self.get_form()
         return context
 
+    
     def post(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        form = self.get_form()
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.thread = self.object
-            comment.author = request.user.profile
-            comment.save()
-            return super().form_valid(form)
+        thread = self.get_object()
+        profile = get_object_or_404(Profile, user=request.user)
+        comment_id = request.POST.get('comment_id')
+
+        if comment_id:
+            comment = get_object_or_404(
+                Comment,
+                id=comment_id,
+                thread=thread
+            )
+
+            if comment.author == profile:
+                comment.entry = request.POST.get('entry', comment.entry)
+                comment.save()
+
+            return redirect('forum:thread-detail', pk=thread.pk)
+
         else:
-            return self.form_invalid(form)
+            form = CommentForm(request.POST)
+            if form.is_valid():
+                comment = form.save(commit=False)
+                comment.thread = thread
+                comment.author = profile
+                comment.save()
+                return redirect('forum:thread-detail', pk=thread.pk)
+
+            context = self.get_context_data()
+            context['form'] = form
+            return self.render_to_response(context)
 
 
 class ThreadCreateView(LoginRequiredMixin, CreateView):
