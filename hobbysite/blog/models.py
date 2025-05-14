@@ -71,5 +71,5 @@ class ImageGallery(models.Model):
         related_name='images',
         on_delete=models.CASCADE,
     )
-    image = models.ImageField(upload_to='blog/', null=False,)
+    image = models.ImageField(upload_to='images/', null=False,)
     description = models.CharField(max_length=255, blank=True, null=True)
