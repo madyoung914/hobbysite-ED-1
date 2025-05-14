@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="fs-6">
-            Author: {{object.author}} <br>
+            Author: {{object.author}} - <a href="{% url 'user_management:profile' username=object.author.user.username %}">@{{ object.author.user }}</a><br>
             Created On: {{object.createdOn}}<br>
             Updated On: {{object.updatedOn}}<br>
         </div>
