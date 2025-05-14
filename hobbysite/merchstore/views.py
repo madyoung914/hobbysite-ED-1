@@ -12,6 +12,23 @@ from user_management.models import Profile
 class ProductTypeListView(ListView):
     model = ProductType
     template_name = "merchstore/merch_list.html"
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+
+        MadeProduct = self.request.user.profile.products.all().count() 
+        OnSaleProduct = self.request.user.profile.products.filter(status='SALE').count()
+
+        hasProduct = False
+        hasSale = False
+
+        if MadeProduct-OnSaleProduct >0:
+            hasProduct = True
+        if OnSaleProduct>0:
+            hasSale = True
+        ctx['hasProduct'] = hasProduct
+        ctx['hasSale'] = hasSale
+
+        return ctx
 
 
 class ProductDetailView(DetailView):

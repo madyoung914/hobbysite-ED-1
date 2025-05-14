@@ -18,13 +18,15 @@
             <hr>
             <h3 class="row category-header">All Products </h3>
             <hr>
-            {% for product_type in object_list %}
+            <ul>
+                {% for product_type in object_list %}
                 {% for product in product_type.type.all %}
                 <li>
                     <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
                 </li>
                 {% endfor %}
-            {% endfor %}
+                {% endfor %}
+            </ul>
             <br>
 
         </div>
@@ -40,17 +42,19 @@
             <hr>
             <h3 class="row category-header">Your Products for Sale</h3>
             <hr>
-            {% if object_list %}
+            {% if hasSale %}
+            <ul>
                 {% for product_type in object_list %}
-                        {% for product in product_type.type.all %}
-                            {% if product.owner.user == user and product.status == 'SALE' %}
-                            <li>
-                                <a href="{{ product.get_absolute_url }}">{{ product.producttype }}: {{ product.name }}</a>
-                            </li>
-                            {% endif %}
-                        {% endfor %}
+                {% for product in product_type.type.all %}
+                {% if product.owner.user == user and product.status == 'SALE' %}
+                <li>
+                    <a href="{{ product.get_absolute_url }}">{{ product.producttype }}: {{ product.name }}</a>
+                </li>
+                {% endif %}
                 {% endfor %}
-            {% else %}
+                {% endfor %}
+            </ul>
+                {% else %}
                 <p>You have not made any product.</p>
             {% endif %}
 
@@ -58,16 +62,18 @@
             <hr>
             <h3 class="row category-header">Your Products</h3>
             <hr>
-            {% if object_list %}
+            {% if hasProduct%}
+            <ul>
                 {% for product_type in object_list %}
-                        {% for product in product_type.type.all %}
-                            {% if product.owner.user == user and product.status != 'SALE' %}
-                            <li>
-                                <a href="{{ product.get_absolute_url }}">{{ product.producttype }}: {{ product.name }}</a>
-                            </li>
-                            {% endif %}
-                        {% endfor %}
+                {% for product in product_type.type.all %}
+                {% if product.owner.user == user and product.status != 'SALE' %}
+                <li>
+                    <a href="{{ product.get_absolute_url }}">{{ product.producttype }}: {{ product.name }}</a>
+                </li>
+                {% endif %}
                 {% endfor %}
+                {% endfor %}
+            </ul>
             {% else %}
                 <p>You have not made any product.</p>
             {% endif %}
