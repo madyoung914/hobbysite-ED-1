@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Create Blog Article{% endblock %}
+{% block title %}Update Blog Article{% endblock %}
 
 {% block content %}
   <div class="container app-content">
-    <h3>Create Blog</h3>
+    <h3>Update Blog</h3>
     <hr>
     <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
@@ -13,6 +13,6 @@
       <button type="submit">Post</button>
     </form>
     <br>
-    <a class="btn btn-primary rounded-pill" href="{% url 'blog:articles-list' %}">Back to Article List</a>
+    <a class="btn btn-primary rounded-pill" href="{% url 'blog:article-detail' article.pk %}">Back to article</a>
   </div>
 {% endblock %}

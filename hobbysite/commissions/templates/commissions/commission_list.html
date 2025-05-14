@@ -4,7 +4,7 @@
 {% block content %}
 
 <div class="header">
-    <h1 class="header-brand">🗣️ Commissions</h1>
+    <h1 class="header-brand">🗣️ Welcome to Commissions!</h1>
 </div>
 
 <div class="container-fluid mx-0 app-content">
@@ -15,7 +15,8 @@
         <hr>
         <ul class="mt-4 mb-5">
 
-            {% for commission in createdCommissions %}
+        {% if created_commissions %}
+            {% for commission in created_commissions %}
             <li class="row mb-3">
                 <a class="col-sm-10 btn btn-item" href={{commission.get_absolute_url}}>
                     {{commission.title}} <br>
@@ -24,8 +25,11 @@
                     <p>{{commission.description}}</p>
                 </a> 
             </li>
-            
             {% endfor %}
+        {% else %}
+            <p>You have no created any commissions.</p>
+        {% endif %}
+
         </ul>
         {% if request.user.is_authenticated %}
         <div class="row mb-3">
@@ -39,7 +43,8 @@
         <h3 class="row category-header">Applied:</h3>
         <hr>
         <ul class="mt-4 mb-5">
-            {% for commission in appliedCommissions %}
+        {% if applied_commissions %}
+            {% for commission in applied_commissions %}
             <li class="row mb-3">
                 <a class="col-sm-10 btn btn-item" href={{commission.get_absolute_url}}>
                     {{commission.title}} <br>
@@ -48,8 +53,10 @@
                     <p>{{commission.description}}</p>
                 </a>
             </li>
-            
             {% endfor %}
+        {% else %}
+            <p>You have not applied to any commissions.</p>
+        {% endif %}
         </ul>
 
 
@@ -78,16 +85,6 @@
         </ul>
         <hr>
     </div>
-        
-        
-    <div class="container">
-        {% if request.user.is_authenticated %}
-        <br>
-        <a class="btn btn-primary rounded-pill my-1" href="{% url 'user_management:profile' username=user.username %}">Go back to profile</a>
-        {% endif %}
-        <br>
-        <a class="btn btn-primary rounded-pill my-1" href="{% url 'main_interface:homepage'%}">Go back to homepage</a>
 
     </div>
-    </div>
-    {% endblock %}
+{% endblock %}

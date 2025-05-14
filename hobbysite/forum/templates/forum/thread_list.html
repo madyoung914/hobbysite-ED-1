@@ -15,14 +15,16 @@
                 <h3 class="row category-header">Your Threads</h3>
                 <hr>
 
-                {% if object_list %}
-                    {% for thread in object_list %}
-                        {% if request.user.profile == thread.author %}
-                            <li class="row mb-2">
-                                <a class="col-sm-10 btn btn-item" href="{{ thread.get_absolute_url }}">{{ thread.title }}</a>
-                            </li>
-                        {% endif %}
+                {% if made_threads %}
+                <ul>
+                    {% for thread in made_threads %}
+                    {% if request.user.profile == thread.author %}
+                    <li class="row mb-2">
+                        <a class="col-sm-10 btn btn-item" href="{{ thread.get_absolute_url }}">{{ thread.title }}</a>
+                    </li>
+                    {% endif %}
                     {% endfor %}
+                </ul>
                 {% else %}
                     <p>You have not written any threads.</p>
                 {% endif %}

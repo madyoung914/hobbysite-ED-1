@@ -19,7 +19,7 @@ class Article(models.Model):
     author = models.ForeignKey(
         Profile,
         on_delete=models.SET_NULL,
-        null=True, 
+        null=True,
         related_name="wikis"
     )
     category = models.ForeignKey(
@@ -29,7 +29,7 @@ class Article(models.Model):
     )
     entry = models.TextField()
     header_image = models.ImageField(
-        upload_to='wiki/',
+        upload_to='images/wiki/',
         null=True
     )
     created_on = models.DateTimeField(auto_now_add=True)
@@ -49,7 +49,7 @@ class Comment(models.Model):
     author = models.ForeignKey(
         Profile,
         on_delete=models.SET_NULL,
-        null=True, 
+        null=True,
         related_name="wiki_comment_author"
     )
     article = models.ForeignKey(
@@ -70,5 +70,5 @@ class ImageGallery(models.Model):
         related_name='images',
         on_delete=models.CASCADE,
     )
-    image = models.ImageField(upload_to='wiki/', null=False,)
+    image = models.ImageField(upload_to='images/wiki/', null=False,)
     description = models.CharField(max_length=255, blank=True, null=True)

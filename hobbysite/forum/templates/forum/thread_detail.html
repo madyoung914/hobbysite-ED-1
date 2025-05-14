@@ -54,20 +54,6 @@
         </div>
        
         <div class="container">
-            <h3 style="margin-top: 2em;">Leave a Comment:</h3>
-            <hr>
-            {% if user.is_authenticated %}
-                <form method="post">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <button type="submit">Post Comment</button>
-                </form>
-            {% else %}
-                <p>You must be logged in.</p>
-            {% endif %}
-        </div>
-
-        <div class="container">
             <h3 style="margin-top: 2em;" >Comments</h3>
             <hr>
             {% for comment in comments %}
@@ -79,7 +65,7 @@
                             <textarea name="entry" style="width: 100%;">{{ comment.entry }}</textarea>
                             <br>
                             <button type="submit">Update</button>
-                            <a href="{% url 'wiki:article-detail' article.pk %}">Cancel</a>
+                            <a href="{% url 'forum:thread-edit' object.pk %}">Cancel</a>
                         </form>
 
                     {% else %}
@@ -101,6 +87,21 @@
                 <p>No comments yet.</p>
             {% endfor %}
         </div>
+        
+        <div class="container">
+            <h3 style="margin-top: 2em;">Leave a Comment:</h3>
+            <hr>
+            {% if user.is_authenticated %}
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Post Comment</button>
+                </form>
+            {% else %}
+                <p>You must be logged in.</p>
+            {% endif %}
+        </div>
+        
     </div>
 
 {% endblock %}

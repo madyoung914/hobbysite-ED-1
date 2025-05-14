@@ -6,11 +6,30 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import ProductForm, TransactionForm
+from user_management.models import Profile
 
 
 class ProductTypeListView(ListView):
     model = ProductType
     template_name = "merchstore/merch_list.html"
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        
+        if self.request.user.is_authenticated:
+            MadeProduct = self.request.user.profile.products.all().count() 
+            OnSaleProduct = self.request.user.profile.products.filter(status='SALE').count()
+
+            hasProduct = False
+            hasSale = False
+
+            if MadeProduct-OnSaleProduct >0:
+                hasProduct = True
+            if OnSaleProduct>0:
+                hasSale = True
+            ctx['hasProduct'] = hasProduct
+            ctx['hasSale'] = hasSale
+
+        return ctx
 
 
 class ProductDetailView(DetailView):
@@ -71,6 +90,16 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.owner = self.request.user.profile
+        if form.instance.sale_percent:
+                form.instance.sale_price = form.instance.price - (form.instance.price * (form.instance.sale_percent)/100)
+                form.instance.status = 'SALE'
+        else:
+            form.instance.status = 'AVL'
+
+        if form.instance.stock == 0:
+            form.instance.status = 'OOS'
+            
+        form.save()
         return super().form_valid(form)
 
     def get_success_url(self):
@@ -105,10 +134,21 @@ class CartView (LoginRequiredMixin, ListView):
     model = Transaction
     template_name = "merchstore/cart.html"
 
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        transaction_buyer = Profile.objects.get(user=self.request.user)
+        ctx['user_transactions'] = Transaction.objects.filter(buyer = transaction_buyer)
+        return ctx
+
 
 class TransactionListView (LoginRequiredMixin, ListView):
     model = Transaction
     template_name = "merchstore/transaction.html"
 
-    def get_queryset(self):
-        return Transaction.objects.filter(product__owner__user=self.request.user).order_by('-created_on')
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        transaction_owner = Profile.objects.get(user=self.request.user)
+        
+        ctx['user_transactions'] = Transaction.objects.filter(product__owner = transaction_owner).order_by('-created_on')
+
+        return ctx
