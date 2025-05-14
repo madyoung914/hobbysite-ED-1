@@ -85,7 +85,6 @@ class ArticleCreateView(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['form_title'] = 'Create a new article'
         return context
 
     def form_valid(self, form):
@@ -95,7 +94,7 @@ class ArticleCreateView(LoginRequiredMixin, CreateView):
 
 class ArticleUpdateView(LoginRequiredMixin, UpdateView):
     model = Article
-    template_name = 'blog/article_form.html'
+    template_name = 'blog/article_update.html'
     redirect_field_name = 'accounts/login'
     form_class = ArticleForm
 
@@ -139,9 +138,9 @@ class ImageGalleryUpdateView(LoginRequiredMixin, UpdateView):
     model = ImageGallery
     form_class = ImageGalleryForm
     template_name = 'blog/image_gallery.html'
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['form_title'] = 'Update Image'
         image_instance = self.get_object()
         context['article'] = image_instance.article
         return context

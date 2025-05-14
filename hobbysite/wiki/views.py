@@ -96,7 +96,6 @@ class ArticleCreateView(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['form_title'] = 'Create a new article'
         return context
 
     def form_valid(self, form):
@@ -114,11 +113,10 @@ class ArticleCreateView(LoginRequiredMixin, CreateView):
 class ArticleUpdateView(LoginRequiredMixin, UpdateView):
     model = Article
     form_class = ArticleForm
-    template_name = 'wiki/article_form.html'
+    template_name = 'wiki/article_update.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['form_title'] = 'Update article'
         return context
 
     def get_success_url(self):
