@@ -22,7 +22,9 @@
         <div class="col-md-6">
             <div class="d-flex justify-content-between align-items-center">
                 <h2 class="m-0">{{ object.name }}</h2>
-                <a href="{% url 'merchstore:merch-edit' pk=object.pk %}" class="btn btn-primary rounded-pill">Edit</a>
+                {% if request.user.profile == object.owner %}
+                    <a href="{% url 'merchstore:merch-edit' pk=object.pk %}" class="btn btn-primary rounded-pill">Edit</a>
+                {% endif %}
             </div>
 
             <hr>

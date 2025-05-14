@@ -6,6 +6,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import ProductForm, TransactionForm
+from user_management.models import Profile
 
 
 class ProductTypeListView(ListView):
@@ -115,10 +116,21 @@ class CartView (LoginRequiredMixin, ListView):
     model = Transaction
     template_name = "merchstore/cart.html"
 
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        transaction_buyer = Profile.objects.get(user=self.request.user)
+        ctx['user_transactions'] = Transaction.objects.filter(buyer = transaction_buyer)
+        return ctx
+
 
 class TransactionListView (LoginRequiredMixin, ListView):
     model = Transaction
     template_name = "merchstore/transaction.html"
 
-    def get_queryset(self):
-        return Transaction.objects.filter(product__owner__user=self.request.user).order_by('-created_on')
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        transaction_owner = Profile.objects.get(user=self.request.user)
+        
+        ctx['user_transactions'] = Transaction.objects.filter(product__owner = transaction_owner).order_by('-created_on')
+
+        return ctx
