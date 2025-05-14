@@ -19,8 +19,9 @@ class ThreadListView(ListView):
         related_categories = categories.prefetch_related('thread_set')
         context['grouped_threads'] = related_categories
 
-        made_threads = self.request.user.profile.threads.all().count()
-        context['made_threads'] = made_threads
+        if self.request.user.is_authenticated:
+            made_threads = self.request.user.profile.threads.all()
+            context['made_threads'] = made_threads
         return context
 
 

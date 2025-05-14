@@ -51,7 +51,7 @@ class CommissionDetailView(DetailView):
 
             for job in self.object.jobs.all():
                 manpower_required += job.manpower_required
-                for job_app in job.jobApplication.all():
+                for job_app in job.job_application.all():
                     if job_app.status == 'A':
                         taken_slots += 1
 
@@ -116,8 +116,8 @@ class JobView(DetailView):
             application.save()
 
             if (self.object.manpower_required
-                    == self.object.jobApplication.filter(status='A').count()):
-                for job_app in self.object.jobApplication.filter(status='P'):
+                    == self.object.job_application.filter(status='A').count()):
+                for job_app in self.object.job_application.filter(status='P'):
                     job_app.status = 'R'
                     job_app.save()
                 self.object.status = 'F'
