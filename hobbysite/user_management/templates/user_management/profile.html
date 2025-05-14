@@ -5,7 +5,7 @@
 {% block content %}
 
 <div class="container-fluid mx-0 app-content">
-    <div class=" container border border-dark rounded d-flex">
+    <div class=" container border border-dark rounded d-flex bg-light shadow">
         <div class="col-md-2">
             {%if profile_user.profile.profile_image %}
                 <img src="{{ profile_user.profile.profile_image.url }}" alt="{{ profile_user.profile.profile_image.url }}" class="rounded-circle m-3" style="width: 100%; aspect-ratio: 1 / 1; ">
@@ -40,56 +40,64 @@
     <div class="container mt-5">
         <h2>{{ request.user.profile.name }}'s Dashboard</h2>
         <hr>
-
+        <div class="container p-4 border rounded bg-light shadow my-4 border-dark">
             <h3>Products Bought</h3>
             {% for transaction in buyerTransactions %}
-                <li><a href={{ transaction.product.get_absolute_url }}>{{ transaction.amount }} - {{ transaction.product }}</a></li>
-            {% endfor %} 
-            <br>   
-
-            <h3>Products Sold</h3>
-            {% for transaction in sellerTransactions %}
-                <li><a href={{ transaction.product.get_absolute_url }}>{{ transaction.amount }} - {{ transaction.product }}</a></li>
-            {% endfor %}  
-            <br> 
-
-            <h3>Wiki Articles Created</h3>
-            {% for wiki in wikis %}
-                <li><a href={{ wiki.get_absolute_url }}> {{ wiki.title }} </a></li>
-            {% endfor %}
-            <a class="col-sm-4 offset-4 btn btn-primary mt-5" href="{% url 'wiki:article-add' %}"> Create a new Article </a>
-            <br> 
-
-            <h3>Blog Articles Created</h3>
-            {% for blog in blogs %}
-                <li><a href={{ blog.get_absolute_url }}> {{ blog.title }} </a></li>
-            {% endfor %}
-            <br> 
-
-            <h3>Threads Created</h3>
-            {% for thread in threads %}
-                <li><a href={{ thread.get_absolute_url }}> {{ thread.title }} </a></li>
-            {% endfor %}
-            <br> 
-        
-            <h3>Commissions Created</h3>
-            {% for commission in commissionsCreated %}
-                <li><a href={{ commission.get_absolute_url }}> {{ commission.title }} </a></li>
-            {% endfor %}
-            <br> 
-
-            <h3>Commissions Joined</h3>
-            {% for jobJoined in jobsJoined %}
-                <li><a href={{ jobJoined.job.commission.get_absolute_url }}> {{ jobJoined.job.commission.title }} </a>
-                as {{ jobJoined.job.role}} - {{ jobJoined.get_status_display }}</li>
+            <li><a href={{ transaction.product.get_absolute_url }}>{{ transaction.amount }} - {{ transaction.product }}</a></li>
             {% endfor %}
             <br>
+        </div>
+        <div class="container p-4 border rounded bg-light shadow my-4 border-dark">
+            <h3>Products Sold</h3>
+            {% for transaction in sellerTransactions %}
+            <li><a href={{ transaction.product.get_absolute_url }}>{{ transaction.amount }} - {{ transaction.product }}</a></li>
+            {% endfor %}
+            <br>
+        </div>
+        <div class="container p-4 border rounded bg-light shadow my-4 border-dark">
+            <h3>Wiki Articles Created</h3>
+            {% for wiki in wikis %}
+            <li><a href={{ wiki.get_absolute_url }}> {{ wiki.title }} </a></li>
+            {% endfor %}
+            <a class="col-sm-4 offset-4 btn btn-primary mt-5" href="{% url 'wiki:article-add' %}"> Create a new Article </a>
+            <br>
+        </div>
+        <div class="container p-4 border rounded bg-light shadow my-4 border-dark">
+            <h3>Blog Articles Created</h3>
+            {% for blog in blogs %}
+            <li><a href={{ blog.get_absolute_url }}> {{ blog.title }} </a></li>
+            {% endfor %}
+            <br>
+        </div>
+        <div class="container p-4 border rounded bg-light shadow my-4 border-dark">
+            <h3>Threads Created</h3>
+            {% for thread in threads %}
+            <li><a href={{ thread.get_absolute_url }}> {{ thread.title }} </a></li>
+            {% endfor %}
+            <br>
+        </div>
+        <div class="container p-4 border rounded bg-light shadow my-4 border-dark">
+            <h3>Commissions Created</h3>
+            {% for commission in commissionsCreated %}
+            <li><a href={{ commission.get_absolute_url }}> {{ commission.title }} </a></li>
+            {% endfor %}
+            <br>
+        </div>
+        <div class="container p-4 border rounded bg-light shadow my-4 border-dark">
+            <h3>Commissions Joined</h3>
+            {% for jobJoined in jobsJoined %}
+            <li>
+                <a href={{ jobJoined.job.commission.get_absolute_url }}> {{ jobJoined.job.commission.title }} </a>
+                as {{ jobJoined.job.role}} - {{ jobJoined.get_status_display }}
+            </li>
+            {% endfor %}
+            <br>
+        </div>
 
+            {% endif %}
+        </div>
 
-        {% endif %}
     </div>
-
-</div>
     
 
         
