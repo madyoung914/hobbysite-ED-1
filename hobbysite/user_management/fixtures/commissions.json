@@ -1,164 +1,4 @@
 [
-<<<<<<< HEAD
-  {
-    "model": "commissions.commission",
-    "pk": 101,
-    "fields": {
-      "title": "Neighborhood Recycling Drive",
-      "description": "Encourage recycling in the community",
-      "status": "O",
-      "author": 11,
-      "createdOn": "2025-05-10T16:00:00Z",
-      "updatedOn": "2025-05-10T16:00:00Z"
-    }
-  },
-  {
-    "model": "commissions.commission",
-    "pk": 102,
-    "fields": {
-      "title": "Local Garden Revamp",
-      "description": "Help revitalize the public garden",
-      "status": "O",
-      "author": 4,
-      "createdOn": "2025-05-10T16:10:00Z",
-      "updatedOn": "2025-05-10T16:10:00Z"
-    }
-  },
-  {
-    "model": "commissions.commission",
-    "pk": 103,
-    "fields": {
-      "title": "Food Drive Volunteers",
-      "description": "Assist in collecting and sorting donations",
-      "status": "O",
-      "author": 2,
-      "createdOn": "2025-05-10T16:20:00Z",
-      "updatedOn": "2025-05-10T16:20:00Z"
-    }
-  },
-  {
-    "model": "commissions.commission",
-    "pk": 104,
-    "fields": {
-      "title": "Coding Workshop",
-      "description": "Teach basic programming to teens",
-      "status": "O",
-      "author": 5,
-      "createdOn": "2025-05-10T16:30:00Z",
-      "updatedOn": "2025-05-10T16:30:00Z"
-    }
-  },
-  {
-    "model": "commissions.commission",
-    "pk": 105,
-    "fields": {
-      "title": "Charity Fun Run",
-      "description": "Help manage logistics for a community run",
-      "status": "O",
-      "author": 6,
-      "createdOn": "2025-05-10T16:40:00Z",
-      "updatedOn": "2025-05-10T16:40:00Z"
-    }
-  },
-
-  {
-    "model": "commissions.job",
-    "pk": 201,
-    "fields": {
-      "commission": 101,
-      "role": "Event Coordinator",
-      "manpowerRequired": 2,
-      "status": "O",
-      "createdOn": "2025-05-10T16:01:00Z"
-    }
-  },
-  {
-    "model": "commissions.job",
-    "pk": 202,
-    "fields": {
-      "commission": 102,
-      "role": "Gardener",
-      "manpowerRequired": 3,
-      "status": "O",
-      "createdOn": "2025-05-10T16:11:00Z"
-    }
-  },
-  {
-    "model": "commissions.job",
-    "pk": 203,
-    "fields": {
-      "commission": 103,
-      "role": "Donation Sorter",
-      "manpowerRequired": 4,
-      "status": "O",
-      "createdOn": "2025-05-10T16:21:00Z"
-    }
-  },
-  {
-    "model": "commissions.job",
-    "pk": 204,
-    "fields": {
-      "commission": 104,
-      "role": "Tech Mentor",
-      "manpowerRequired": 2,
-      "status": "O",
-      "createdOn": "2025-05-10T16:31:00Z"
-    }
-  },
-  {
-    "model": "commissions.job",
-    "pk": 205,
-    "fields": {
-      "commission": 105,
-      "role": "Logistics Assistant",
-      "manpowerRequired": 3,
-      "status": "O",
-      "createdOn": "2025-05-10T16:41:00Z"
-    }
-  },
-
-  {
-    "model": "commissions.jobapplication",
-    "pk": 301,
-    "fields": {
-      "job": 202,
-      "applicant": 11,
-      "status": "P",
-      "appliedOn": "2025-05-10T16:15:00Z"
-    }
-  },
-  {
-    "model": "commissions.jobapplication",
-    "pk": 302,
-    "fields": {
-      "job": 203,
-      "applicant": 11,
-      "status": "P",
-      "appliedOn": "2025-05-10T16:22:00Z"
-    }
-  },
-  {
-    "model": "commissions.jobapplication",
-    "pk": 303,
-    "fields": {
-      "job": 204,
-      "applicant": 11,
-      "status": "P",
-      "appliedOn": "2025-05-10T16:32:00Z"
-    }
-  },
-  {
-    "model": "commissions.jobapplication",
-    "pk": 304,
-    "fields": {
-      "job": 205,
-      "applicant": 11,
-      "status": "P",
-      "appliedOn": "2025-05-10T16:42:00Z"
-    }
-  }
-]
-=======
     {
         "model": "commissions.commission",
         "pk": 101,
@@ -167,8 +7,8 @@
             "description": "Encourage recycling in the community",
             "status": "O",
             "author": 11,
-            "createdOn": "2025-05-10T16:00:00Z",
-            "updatedOn": "2025-05-10T16:00:00Z"
+            "created_on": "2025-05-10T16:00:00Z",
+            "updated_on": "2025-05-10T16:00:00Z"
         }
     },
     {
@@ -179,8 +19,8 @@
             "description": "Help revitalize the public garden",
             "status": "O",
             "author": 4,
-            "createdOn": "2025-05-10T16:10:00Z",
-            "updatedOn": "2025-05-10T16:10:00Z"
+            "created_on": "2025-05-10T16:10:00Z",
+            "updated_on": "2025-05-10T16:10:00Z"
         }
     },
     {
@@ -191,8 +31,8 @@
             "description": "Assist in collecting and sorting donations",
             "status": "O",
             "author": 2,
-            "createdOn": "2025-05-10T16:20:00Z",
-            "updatedOn": "2025-05-10T16:20:00Z"
+            "created_on": "2025-05-10T16:20:00Z",
+            "updated_on": "2025-05-10T16:20:00Z"
         }
     },
     {
@@ -203,8 +43,8 @@
             "description": "Teach basic programming to teens",
             "status": "O",
             "author": 5,
-            "createdOn": "2025-05-10T16:30:00Z",
-            "updatedOn": "2025-05-10T16:30:00Z"
+            "created_on": "2025-05-10T16:30:00Z",
+            "updated_on": "2025-05-10T16:30:00Z"
         }
     },
     {
@@ -215,8 +55,8 @@
             "description": "Help manage logistics for a community run",
             "status": "O",
             "author": 11,
-            "createdOn": "2025-05-10T16:40:00Z",
-            "updatedOn": "2025-05-11T17:03:35.056Z"
+            "created_on": "2025-05-10T16:40:00Z",
+            "updated_on": "2025-05-11T17:03:35.056Z"
         }
     },
     {
@@ -225,9 +65,9 @@
         "fields": {
             "commission": 101,
             "role": "Event Coordinator",
-            "manpowerRequired": 2,
+            "manpower_required": 2,
             "status": "O",
-            "createdOn": "2025-05-10T16:01:00Z"
+            "created_on": "2025-05-10T16:01:00Z"
         }
     },
     {
@@ -236,9 +76,9 @@
         "fields": {
             "commission": 102,
             "role": "Gardener",
-            "manpowerRequired": 3,
+            "manpower_required": 3,
             "status": "O",
-            "createdOn": "2025-05-10T16:11:00Z"
+            "created_on": "2025-05-10T16:11:00Z"
         }
     },
     {
@@ -247,9 +87,9 @@
         "fields": {
             "commission": 103,
             "role": "Donation Sorter",
-            "manpowerRequired": 4,
+            "manpower_required": 4,
             "status": "O",
-            "createdOn": "2025-05-10T16:21:00Z"
+            "created_on": "2025-05-10T16:21:00Z"
         }
     },
     {
@@ -258,9 +98,9 @@
         "fields": {
             "commission": 104,
             "role": "Tech Mentor",
-            "manpowerRequired": 2,
+            "manpower_required": 2,
             "status": "O",
-            "createdOn": "2025-05-10T16:31:00Z"
+            "created_on": "2025-05-10T16:31:00Z"
         }
     },
     {
@@ -269,9 +109,9 @@
         "fields": {
             "commission": 105,
             "role": "Logistics Assistant",
-            "manpowerRequired": 3,
+            "manpower_required": 3,
             "status": "O",
-            "createdOn": "2025-05-10T16:41:00Z"
+            "created_on": "2025-05-10T16:41:00Z"
         }
     },
     {
@@ -281,7 +121,7 @@
             "job": 202,
             "applicant": 7,
             "status": "P",
-            "appliedOn": "2025-05-10T16:15:00Z"
+            "applied_on": "2025-05-10T16:15:00Z"
         }
     },
     {
@@ -291,7 +131,7 @@
             "job": 203,
             "applicant": 11,
             "status": "P",
-            "appliedOn": "2025-05-10T16:22:00Z"
+            "applied_on": "2025-05-10T16:22:00Z"
         }
     },
     {
@@ -301,7 +141,7 @@
             "job": 204,
             "applicant": 11,
             "status": "P",
-            "appliedOn": "2025-05-10T16:32:00Z"
+            "applied_on": "2025-05-10T16:32:00Z"
         }
     },
     {
@@ -311,7 +151,7 @@
             "job": 205,
             "applicant": 5,
             "status": "P",
-            "appliedOn": "2025-05-10T16:42:00Z"
+            "applied_on": "2025-05-10T16:42:00Z"
         }
     },
     {
@@ -321,7 +161,7 @@
             "job": 201,
             "applicant": 6,
             "status": "R",
-            "appliedOn": "2025-05-11T17:02:32.719Z"
+            "applied_on": "2025-05-11T17:02:32.719Z"
         }
     },
     {
@@ -331,7 +171,7 @@
             "job": 201,
             "applicant": 3,
             "status": "A",
-            "appliedOn": "2025-05-11T17:02:32.722Z"
+            "applied_on": "2025-05-11T17:02:32.722Z"
         }
     },
     {
@@ -341,7 +181,7 @@
             "job": 202,
             "applicant": 3,
             "status": "P",
-            "appliedOn": "2025-05-11T17:02:41.297Z"
+            "applied_on": "2025-05-11T17:02:41.297Z"
         }
     },
     {
@@ -351,7 +191,7 @@
             "job": 205,
             "applicant": 7,
             "status": "P",
-            "appliedOn": "2025-05-11T17:03:16.586Z"
+            "applied_on": "2025-05-11T17:03:16.586Z"
         }
     },
     {
@@ -361,7 +201,7 @@
             "job": 205,
             "applicant": 2,
             "status": "P",
-            "appliedOn": "2025-05-11T17:03:16.586Z"
+            "applied_on": "2025-05-11T17:03:16.586Z"
         }
     },
     {
@@ -371,8 +211,7 @@
             "job": 205,
             "applicant": 4,
             "status": "P",
-            "appliedOn": "2025-05-11T17:03:16.590Z"
+            "applied_on": "2025-05-11T17:03:16.590Z"
         }
     }
 ]
->>>>>>> 710e684cfd09ed6d9cc992d3791d122302c1fd7a

@@ -22,11 +22,12 @@ class Commission(models.Model):
                     models.When(status=Commission.CommStatus.COMPLETE,
                                 then=models.Value(3)),
                     models.When(
-                        status=Commission.CommStatus.DISCONTINUED, then=models.Value(4)),
+                        status=Commission.CommStatus.DISCONTINUED,
+                        then=models.Value(4)),
                     default=models.Value(5),
                     output_field=models.IntegerField(),
                 )
-            ).order_by('status_order', '-createdOn')
+            ).order_by('status_order', '-created_on')
 
     title = models.CharField(max_length=255)
     description = models.TextField()
@@ -35,12 +36,13 @@ class Commission(models.Model):
         choices=CommStatus.choices,
         default=CommStatus.OPEN
     )
-    author = models.ForeignKey(Profile,
-                               on_delete=models.SET_NULL,
-                               null=True,
-                               related_name='commissions')
-    createdOn = models.DateTimeField(auto_now_add=True)
-    updatedOn = models.DateTimeField(auto_now=True)
+    author = models.ForeignKey(
+        Profile,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='commissions')
+    created_on = models.DateTimeField(auto_now_add=True)#
+    updated_on = models.DateTimeField(auto_now=True)#
 
     def __str__(self):
         return self.title
@@ -76,13 +78,13 @@ class Job(models.Model):
         related_name='jobs'
     )
     role = models.CharField(max_length=255)
-    manpowerRequired = models.IntegerField()
+    manpower_required = models.IntegerField()#
     status = models.CharField(
         max_length=255,
         choices=JobStatus.choices,
         default=JobStatus.OPEN
     )
-    createdOn = models.DateTimeField(auto_now_add=True)
+    created_on = models.DateTimeField(auto_now_add=True)#
 
     objects = JobManager()
 
@@ -99,7 +101,7 @@ class JobApplication(models.Model):
         PENDING = 'P', 'Pending'
         ACCEPTED = 'A', 'Accepted'
         REJECTED = 'R', 'Rejected'
-    
+
     class JobAppManager(models.Manager):
         def get_queryset(self):
             return super().get_queryset().annotate(
@@ -113,25 +115,24 @@ class JobApplication(models.Model):
                     default=models.Value(4),
                     output_field=models.IntegerField(),
                 )
-            ).order_by('status_order','appliedOn')
+            ).order_by('status_order', 'applied_on')
 
     job = models.ForeignKey(
         Job,
         on_delete=models.CASCADE,
-        related_name='jobApplication'
+        related_name='job_application'
     )
     applicant = models.ForeignKey(
         Profile,
         on_delete=models.CASCADE,
         null=True,
-        related_name='JobApplications'
+        related_name='job_applications'
     )
     status = models.CharField(
         max_length=255,
         choices=AppStatus.choices,
         default=AppStatus.PENDING
     )
-    appliedOn = models.DateTimeField(auto_now_add=True)
+    applied_on = models.DateTimeField(auto_now_add=True)#
 
     objects = JobAppManager()
-    

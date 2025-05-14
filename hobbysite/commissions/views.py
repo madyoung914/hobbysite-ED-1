@@ -1,5 +1,3 @@
-from pickle import TRUE
-from django.shortcuts import render
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from .models import Commission, Job, JobApplication
@@ -8,57 +6,59 @@ from .forms import CommissionForm, JobFormSet, JobApplicationForm
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse_lazy
+
 
 class CommissionListView(ListView):
     model = Commission
-    template_name = 'commissions/commission_list.html' 
+    template_name = 'commissions/commission_list.html'
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        
-        if(self.request.user.is_authenticated):
+
+        if (self.request.user.is_authenticated):
 
             user_profile = self.request.user.profile
-            createdCommissions = Commission.objects.filter(author=user_profile)
-            jobApps = JobApplication.objects.filter(applicant = user_profile)
+            created_commissions = Commission.objects.filter(
+                author=user_profile)
+            job_apps = JobApplication.objects.filter(applicant=user_profile)
 
-            appliedCommissions = []
-            for apps in jobApps:
-                if(not (apps.job.commission in appliedCommissions)):
-                    appliedCommissions.append(apps.job.commission)
+            applied_commissions = []
+            for apps in job_apps:
+                if (not (apps.job.commission in applied_commissions)):
+                    applied_commissions.append(apps.job.commission)
 
-            ctx['createdCommissions'] = createdCommissions
-            ctx['appliedCommissions'] = appliedCommissions
+            ctx['createdCommissions'] = created_commissions
+            ctx['appliedCommissions'] = applied_commissions
 
         return ctx
 
 
-
 class CommissionDetailView(DetailView):
     model = Commission
-    template_name = 'commissions/commission_detail.html' 
+    template_name = 'commissions/commission_detail.html'
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        
-        if(self.request.user.is_authenticated):
-            user_profile = self.request.user.profile
-            applied_job_ids = JobApplication.objects.filter(applicant=user_profile).values_list('job_id', flat=True)
 
-            ManpowerRequired = 0
-            TakenSlots = 0
+        if (self.request.user.is_authenticated):
+            user_profile = self.request.user.profile
+            applied_job_ids = JobApplication.objects.filter(
+                applicant=user_profile).values_list('job_id', flat=True)
+
+            manpower_required = 0
+            taken_slots = 0
 
             for job in self.object.jobs.all():
-                ManpowerRequired += job.manpowerRequired
-                for jobApp in job.jobApplication.all():
-                    if jobApp.status == 'A':
-                        TakenSlots+=1
+                manpower_required += job.manpower_required
+                for job_app in job.jobApplication.all():
+                    if job_app.status == 'A':
+                        taken_slots += 1
 
-            AvlSlots = ManpowerRequired-TakenSlots
+            avl_slots = manpower_required-taken_slots
 
-            ctx['ManpowerRequired'] = ManpowerRequired
-            ctx['AvlSlots'] = AvlSlots
+            ctx['ManpowerRequired'] = manpower_required
+            ctx['AvlSlots'] = avl_slots
             ctx['applied_job_ids'] = set(applied_job_ids)
             ctx['form'] = JobApplicationForm()
         return ctx
@@ -68,7 +68,6 @@ class CommissionDetailView(DetailView):
         form = JobApplicationForm(request.POST)
 
         if form.is_valid():
-            # but also submit button should not be clickable if stock is 0
 
             user = request.user
             login(request, user)
@@ -82,19 +81,20 @@ class CommissionDetailView(DetailView):
 
             application.save()
             self.object.save()
-            
+
             return redirect(self.object.get_absolute_url())
         else:
             context = self.get_context_data(**kwargs)
             context['form'] = form
             return self.render_to_response(context)
 
+
 class JobView(DetailView):
     model = Job
     template_name = 'commissions/job_view.html'
 
     def get_context_data(self, **kwargs):
-        ctx = super().get_context_data(**kwargs)      
+        ctx = super().get_context_data(**kwargs)
         ctx['form'] = JobApplicationForm()
         return ctx
 
@@ -105,35 +105,38 @@ class JobView(DetailView):
         if form.is_valid():
             app_id = request.POST.get('app_id')
             action = request.POST.get('action')
-            
+
             application = get_object_or_404(JobApplication, id=app_id)
-            
-            if(action =='accept'):
+
+            if (action == 'accept'):
                 application.status = 'A'
-            elif(action =='reject'):
+            elif (action == 'reject'):
                 application.status = 'R'
 
             application.save()
-            
-            if(self.object.manpowerRequired == self.object.jobApplication.filter(status='A').count()):
-                for jobApp in self.object.jobApplication.filter(status='P'):
-                    jobApp.status = 'R'
-                    jobApp.save()
+
+            if (self.object.manpower_required
+                    == self.object.jobApplication.filter(status='A').count()):
+                for job_app in self.object.jobApplication.filter(status='P'):
+                    job_app.status = 'R'
+                    job_app.save()
                 self.object.status = 'F'
-            
+
             self.object.save()
             commission = self.object.commission
 
-            if(commission.jobs.filter(status='F').count() == commission.jobs.all().count()):
+            if (commission.jobs.filter(status='F').count()
+                    == commission.jobs.all().count()):
                 commission.status = 'F'
                 commission.save()
-            
+
             return redirect(self.object.get_absolute_url())
         else:
             context = self.get_context_data(**kwargs)
             context['form'] = form
 
             return self.render_to_response(context)
+
 
 class CreateCommissionView(LoginRequiredMixin, CreateView):
     model = Commission
@@ -148,6 +151,7 @@ class CreateCommissionView(LoginRequiredMixin, CreateView):
         return reverse_lazy("commissions:commission-detail",
                             kwargs={"pk": self.object.pk})
 
+
 class CommissionUpdateView(UpdateView):
     model = Commission
     form_class = CommissionForm
@@ -156,7 +160,8 @@ class CommissionUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if self.request.POST:
-            context['job_formset'] = JobFormSet(self.request.POST, instance=self.object)
+            context['job_formset'] = JobFormSet(
+                self.request.POST, instance=self.object)
         else:
             context['job_formset'] = JobFormSet(instance=self.object)
         return context
@@ -167,17 +172,17 @@ class CommissionUpdateView(UpdateView):
         if job_formset.is_valid():
             self.object = form.save()
             job_formset.instance = self.object
-            job_formset.save()  
+            job_formset.save()
 
-            commFull = False
+            comm_full = False
             for job in self.object.jobs.all():
                 if job.status != 'F':
-                    commFull = False
+                    comm_full = False
                     break
                 else:
-                    commFull= True 
+                    comm_full = True
 
-            if(commFull):
+            if (comm_full):
                 self.object.status = 'F'
 
             self.object.save()

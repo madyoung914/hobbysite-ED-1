@@ -59,10 +59,11 @@ class ArticleDetailView(FormMixin, DetailView):
             context = self.get_context_data()
             context['form'] = form
             return self.render_to_response(context)
-    
+
     def get_success_url(self):
-        return reverse_lazy("blog:article-detail", kwargs={"pk": self.object.pk})
-    
+        return reverse_lazy("blog:article-detail", 
+                            kwargs={"pk": self.object.pk})
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['related_articles'] = Article.objects.filter(
@@ -138,7 +139,7 @@ class ImageGalleryUpdateView(LoginRequiredMixin, UpdateView):
     model = ImageGallery
     form_class = ImageGalleryForm
     template_name = 'blog/image_gallery.html'
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         image_instance = self.get_object()
