@@ -3,7 +3,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, FormMixin
 from .models import Thread, ThreadCategory, Comment
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404, redirect
 from .forms import CommentForm
 from .models import Profile
@@ -15,10 +15,11 @@ class ThreadListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        categories = ThreadCategory.objects.all().prefetch_related('thread_set')
-        context['grouped_threads'] = categories
+        categories = ThreadCategory.objects.all()
+        related_categories = categories.prefetch_related('thread_set')
+        context['grouped_threads'] = related_categories
 
-        made_threads = self.request.user.profile.threads.all().count() 
+        made_threads = self.request.user.profile.threads.all().count()
         context['made_threads'] = made_threads
         return context
 
@@ -29,7 +30,8 @@ class ThreadDetailView(FormMixin, DetailView):
     form_class = CommentForm
 
     def get_success_url(self):
-        return reverse_lazy('forum:thread-detail', kwargs={'pk': self.object.pk})
+        return reverse_lazy('forum:thread-detail',
+                            kwargs={'pk': self.object.pk})
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -43,7 +45,6 @@ class ThreadDetailView(FormMixin, DetailView):
         context['form'] = self.get_form()
         return context
 
-    
     def post(self, request, *args, **kwargs):
         thread = self.get_object()
         profile = get_object_or_404(Profile, user=request.user)

@@ -27,7 +27,7 @@ class Article(models.Model):
         on_delete=models.SET_NULL,
         null=True
     )
-    header_image = models.ImageField(null=False, upload_to='images/')
+    header_image = models.ImageField(null=False, upload_to='images/blog/')
     entry = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
@@ -68,5 +68,5 @@ class ImageGallery(models.Model):
         related_name='images',
         on_delete=models.CASCADE,
     )
-    image = models.ImageField(upload_to='images/', null=False,)
+    image = models.ImageField(upload_to='images/blog/', null=False,)
     description = models.CharField(max_length=255, blank=True, null=True)

@@ -7,7 +7,7 @@ class Profile(models.Model):
     name = models.TextField(max_length=63)
     email = models.EmailField()
     profile_image = models.ImageField(
-        upload_to='user_management/',
+        upload_to='images/user_management/',
         null=True,
         blank=True,
     )
