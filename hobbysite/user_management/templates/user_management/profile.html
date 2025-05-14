@@ -27,7 +27,9 @@
             <hr>
             <p class="ms-3">
                 Username: {{ profile_user }}<br>
-                Email: {{ profile_user.profile.email }}
+                {% if request.user.is_authenticated and request.user == profile_user %}
+                    Email: {{ profile_user.profile.email }}
+                {% endif %}
             </p> 
                 
         </div>
@@ -55,6 +57,7 @@
             {% for wiki in wikis %}
                 <li><a href={{ wiki.get_absolute_url }}> {{ wiki.title }} </a></li>
             {% endfor %}
+            <a class="col-sm-4 offset-4 btn btn-primary mt-5" href="{% url 'wiki:article-add' %}"> Create a new Article </a>
             <br> 
 
             <h3>Blog Articles Created</h3>
