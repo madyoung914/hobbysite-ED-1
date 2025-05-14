@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="fs-6">
-            Author: {{object.author}} - <a href="{% url 'user_management:profile' username=object.author.user.username %}">@{{ object.author.user }}</a><br>
+            Author: {{object.author}} - <a class="btn-author" href="{% url 'user_management:profile' username=object.author.user.username %}">@{{ object.author.user }}</a><br>
             Created On: {{object.createdOn}}<br>
             Updated On: {{object.updatedOn}}<br>
         </div>
@@ -42,7 +42,7 @@
             {% if request.user.profile != object.author %}
             {% if job.id in applied_job_ids %}
             <br>
-            <b>Applied</b>
+            <b>Applied</b> <br>
             {% else %}
             <form method="POST">
                 {% csrf_token %}
