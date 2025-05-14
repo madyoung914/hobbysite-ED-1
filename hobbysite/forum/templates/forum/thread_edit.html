@@ -4,15 +4,21 @@
 {% block title %}{{ object.title }} edit{% endblock %}
 
 {% block content %}
-    <h2><u>{{ object.title }}</u> Thread Edit</h2>
+    <div class="container app-content">
+        <h3>Edit my thread</h3>
+        <hr>
 
-    <form method="post" enctype="multipart/form-data">
+        <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         
-        <button type="submit">Save Changes</button>
+        <button type="submit">Post</button>
     </form>
 
     <br>
-    <a href="{% url 'forum:threads-list' %}">Back to Thread List</a>
+    <a class="btn btn-primary rounded-pill" href="{% url 'forum:threads-list' %}">Back to thread List</a>
+
+
+    </div>
+    
 {% endblock %}

@@ -4,52 +4,104 @@
 {% block title %}{{ object.title }}{% endblock %}
 
 {% block content %}
-    <h2>{{ object.title }}</h2>
-    <p>Category: {{ object.category }} | Created On: {{ object.created_on }} | 
-        Updated On: {{ object.updated_on }} | Created By: {{ object.author.name }}</p>
-    <p>{{ object.entry }} </p>
+    <div class="container app-content">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap;">
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <h1>{{ object.title }}</h1>
+                    <span style="background-color: #4f98a1; color: #ffffff; padding: 2px 10px; border-radius: 10px; font-size: 0.9em;">{{ object.category.name }}</span>
+                </div>
 
-    {% if object.image %}
-        <img src="{{ object.image.url }}" alt="Thread image" style="max-width: 100%;">
-    {% endif %}
-    <br>
-    {% if user.is_authenticated and object.author == request.user.profile %}
-        <a href="{% url 'forum:thread-edit' thread.pk %}">Edit Thread</a>
-    {% endif %}
-    <hr>
 
-    <h4>Comments:</h4>
-    {% for comment in comments %}
-    <p>From: {{ comment.author.name }} | Created: {{ comment.created_on }} | Updated: {{ comment.updated_on }} </p>
-    <p>- {{ comment.entry }}</p>
-    {% empty %}
-    <p>- Be the first to add a comment! </p>
-    <br>
-    {% endfor %}
-    {% if request.user.is_authenticated %}
-    <form method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Submit">
-    </form>
-    {% else %}
-        <p>You must be logged in.</p>
-    {% endif %}
-    <hr>
+                {% if user.is_authenticated and object.author.user == user %}
+                    <a class="btn btn-item" href="{% url 'forum:thread-edit' pk=object.pk %}" style = "background-color: #87C9CF; padding: 5px 8px;">
+                        Edit thread
+                    </a>
+                {% endif %}
+            </div>
 
-    <h4>Some related <u>{{ object.category.name }}</u> threads:</h4>
-    <ul>
-    {% for thread in related_threads %}
-    <li>
-        <a href="{{ thread.get_absolute_url }}">{{ thread.title }}</a>
-    </li>
-    {% empty %}
-    <li>No other threads in this category.</li>
-    {% endfor %}
-    </ul>
-    <br>
-    <a href="{% url 'forum:threads-list' %}">Back to Thread List</a>
-    <br>
+            <p style="margin-top: 10px;">
+                By: {{ object.author.name }} - <a href="{% url 'user_management:profile' username=object.author.user.username %}">@{{ object.author.user }}</a> <br>
+                Created on: {{ object.created_on }} <br>
+                Last Updated on: {{ object.updated_on }}
+            </p>
+            <hr>
+        </div>
+
+        <div style="margin-top: 2em;" class="container">
+            <p>{{ object.entry }}</p>
+        </div>    
+
+        <div style="margin-top: 2em;" class="container">
+            {% if object.image %}
+                <div style="background-color: #ffffff; border: 1px solid #d6d6d6; padding: 10px; margin-bottom: 15px; border-radius: 5px; align-items: center;">
+                    <img src="{{ object.image.url }}" alt="{{ object.image.url }}" style="width: 500px; height: 500px; object-fit: cover; align-items: center;">
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="container">
+            <h3 style="margin-top: 2em;">Other Threads about {{ object.category.name }}</h3>
+            <hr>
+                <ul>
+                    {% for thread in related_threads %}
+                        <li><a href="{{ thread.get_absolute_url }}">{{ thread.title }}</a></li>
+                    {% empty %}
+                        <li>No other threads in this category.</li>
+                    {% endfor %}
+                </ul>
+            <a class="btn btn-primary rounded-pill" href="{% url 'forum:threads-list' %}">Go back to Thread List</a>
+        </div>
+       
+        <div class="container">
+            <h3 style="margin-top: 2em;">Leave a Comment:</h3>
+            <hr>
+            {% if user.is_authenticated %}
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Post Comment</button>
+                </form>
+            {% else %}
+                <p>You must be logged in.</p>
+            {% endif %}
+        </div>
+
+        <div class="container">
+            <h3 style="margin-top: 2em;" >Comments</h3>
+            <hr>
+            {% for comment in comments %}
+                <div style="background-color: #ffffff; padding: 10px; margin-bottom: 15px; border-radius: 5px;">
+                    {% if user.is_authenticated and comment.author.user == user and request.GET.comment_id == comment.id|stringformat:"s" %}
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                            <textarea name="entry" style="width: 100%;">{{ comment.entry }}</textarea>
+                            <br>
+                            <button type="submit">Update</button>
+                            <a href="{% url 'wiki:article-detail' article.pk %}">Cancel</a>
+                        </form>
+
+                    {% else %}
+                        <b>@{{ comment.author.user }}</b> | <small>{{ comment.created_on }}</small>
+                        {% if comment.updated_on != comment.created_on %}
+                            <em><small>(Edited: {{ comment.updated_on }})</small></em>
+                        {% endif %}
+
+                        {% if user.is_authenticated and comment.author.user == user %}
+                            <a class="btn btn-item rounded-pill" href="?comment_id={{ comment.id }}" style="background-color: #a6b1ff; padding: 5px 8px;">
+                                <small>Edit</small>
+                            </a>
+                        {% endif %}
+                       
+                        <p>{{ comment.entry }}</p>
+                    {% endif %}
+                </div>
+            {% empty %}
+                <p>No comments yet.</p>
+            {% endfor %}
+        </div>
+    </div>
 
 {% endblock %}
 

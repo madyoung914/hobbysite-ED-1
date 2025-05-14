@@ -1,17 +1,24 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}New Thread{% endblock %}
+{% block title %}Create a new thread{% endblock %}
 
 {% block content %}
-    <h4> Create New Thread </h4>
 
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form }}
-        <button type="submit">Create thread</button>
-    </form>
+    <div class="container app-content">
+        <h3>Create a new threwad</h3>
+        <hr>
 
-    <a href="{% url 'forum:threads-list' %}">Back to thread list</a>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit">Post</button>
+        </form>
+
+        <br>
+        <a class="btn btn-primary rounded-pill" href="{% url 'forum:threads-list' %}">Back to thread list</a>
+
+
+    </div>
    
 {% endblock %}
