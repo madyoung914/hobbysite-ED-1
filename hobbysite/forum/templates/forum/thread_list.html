@@ -16,14 +16,16 @@
                 <hr>
 
                 {% if object_list %}
+                <ul>
                     {% for thread in object_list %}
-                        {% if request.user.profile == thread.author %}
-                            <li class="row mb-2">
-                                <a class="col-sm-10 btn btn-item" href="{{ thread.get_absolute_url }}">{{ thread.title }}</a>
-                            </li>
-                        {% endif %}
+                    {% if request.user.profile == thread.author %}
+                    <li class="row mb-2">
+                        <a class="col-sm-10 btn btn-item" href="{{ thread.get_absolute_url }}">{{ thread.title }}</a>
+                    </li>
+                    {% endif %}
                     {% endfor %}
-                {% else %}
+                </ul>
+                    {% else %}
                     <p>You have not written any threads.</p>
                 {% endif %}
 
