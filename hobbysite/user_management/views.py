@@ -46,22 +46,3 @@ class ProfileUpdateView(UpdateView):
             kwargs={'username': self.object.user.username}
         )
 
-
-class ProfileTemplateView(TemplateView):
-    template_name = 'user_management/dashboard.html'
-    slug_field = 'user__username'
-    slug_url_kwarg = 'username'
-    
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        profile = self.request.user.profile
-        context['threads'] = profile.threads.all()
-        context['buyerTransactions'] = profile.transactions.all()
-        context['sellerTransactions'] = Transaction.objects.filter(product__owner=profile)
-        context['blogs'] = profile.blogs.all()
-        context['wikis'] = profile.wikis.all()
-        context['commissionsCreated'] = profile.commissions.all()
-        context['jobsJoined'] = profile.JobApplications.all()
-        return context
-
-
