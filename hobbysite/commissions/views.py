@@ -28,8 +28,8 @@ class CommissionListView(ListView):
                 if (not (apps.job.commission in applied_commissions)):
                     applied_commissions.append(apps.job.commission)
 
-            ctx['createdCommissions'] = created_commissions
-            ctx['appliedCommissions'] = applied_commissions
+            ctx['created_commissions'] = created_commissions
+            ctx['applied_commissions'] = applied_commissions
 
         return ctx
 
