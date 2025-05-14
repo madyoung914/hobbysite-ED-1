@@ -71,6 +71,16 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.owner = self.request.user.profile
+        if form.instance.sale_percent:
+                form.instance.sale_price = form.instance.price - (form.instance.price * (form.instance.sale_percent)/100)
+                form.instance.status = 'SALE'
+        else:
+            form.instance.status = 'AVL'
+
+        if form.instance.stock == 0:
+            form.instance.status = 'OOS'
+            
+        form.save()
         return super().form_valid(form)
 
     def get_success_url(self):
