@@ -19,6 +19,16 @@ class ProfileDetailView(DetailView):
         ctx = super().get_context_data(**kwargs)
         username = self.kwargs.get('username')
         ctx['profile_user'] = get_object_or_404(User, username=username)
+        
+        if self.request.user.is_authenticated:
+            profile = self.request.user.profile
+            ctx['threads'] = profile.threads.all()
+            ctx['buyerTransactions'] = profile.transactions.all()
+            ctx['sellerTransactions'] = Transaction.objects.filter(product__owner=profile)
+            ctx['blogs'] = profile.blogs.all()
+            ctx['wikis'] = profile.wikis.all()
+            ctx['commissionsCreated'] = profile.commissions.all()
+            ctx['jobsJoined'] = profile.JobApplications.all()
         return ctx
 
 
