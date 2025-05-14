@@ -31,6 +31,7 @@ class Article(models.Model):
     entry = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
+    hello = models.textField()
 
     def get_absolute_url(self):
         return reverse('blog:article-detail', args=[self.pk])
