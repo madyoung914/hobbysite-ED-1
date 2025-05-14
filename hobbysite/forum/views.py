@@ -17,6 +17,9 @@ class ThreadListView(ListView):
         context = super().get_context_data(**kwargs)
         categories = ThreadCategory.objects.all().prefetch_related('thread_set')
         context['grouped_threads'] = categories
+
+        made_threads = self.request.user.profile.threads.all().count() 
+        context['made_threads'] = made_threads
         return context
 
 
