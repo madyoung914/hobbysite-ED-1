@@ -40,7 +40,7 @@
             <hr>
             <h3 class="row category-header">Your Products</h3>
             <hr>
-            {% if product %}
+            {% if object_list %}
                 {% for product_type in object_list %}
                         {% for product in product_type.type.all %}
                             {% if product.owner.user == user %}
