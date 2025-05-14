@@ -78,16 +78,6 @@
         </ul>
         <hr>
     </div>
-        
-        
-    <div class="container">
-        {% if request.user.is_authenticated %}
-        <br>
-        <a class="btn btn-primary rounded-pill my-1" href="{% url 'user_management:profile' username=user.username %}">Go back to profile</a>
-        {% endif %}
-        <br>
-        <a class="btn btn-primary rounded-pill my-1" href="{% url 'main_interface:homepage'%}">Go back to homepage</a>
 
     </div>
-    </div>
-    {% endblock %}
+{% endblock %}
