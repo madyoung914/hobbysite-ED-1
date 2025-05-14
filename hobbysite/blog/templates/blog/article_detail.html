@@ -107,7 +107,7 @@
                             <textarea name="entry" style="width: 100%;">{{ comment.entry }}</textarea>
                             <br>
                             <button type="submit">Update</button>
-                            <a href="{% url 'wiki:article-detail' article.pk %}">Cancel</a>
+                            <a href="{% url 'blog:article-detail' article.pk %}">Cancel</a>
                         </form>
 
                     {% else %}

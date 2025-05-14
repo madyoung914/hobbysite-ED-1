@@ -36,6 +36,24 @@
                 <h4 class="text-end"><a class="btn btn-primary rounded-pill" href="{% url 'merchstore:merch-cart' %}">My Cart</a></h4>
             </div>
             <br>
+            
+            <hr>
+            <h3 class="row category-header">Your Products for Sale</h3>
+            <hr>
+            {% if object_list %}
+                {% for product_type in object_list %}
+                        {% for product in product_type.type.all %}
+                            {% if product.owner.user == user and product.status == 'SALE' %}
+                            <li>
+                                <a href="{{ product.get_absolute_url }}">{{ product.producttype }}: {{ product.name }}</a>
+                            </li>
+                            {% endif %}
+                        {% endfor %}
+                {% endfor %}
+            {% else %}
+                <p>You have not made any product.</p>
+            {% endif %}
+
 
             <hr>
             <h3 class="row category-header">Your Products</h3>
@@ -43,7 +61,7 @@
             {% if object_list %}
                 {% for product_type in object_list %}
                         {% for product in product_type.type.all %}
-                            {% if product.owner.user == user %}
+                            {% if product.owner.user == user and product.status != 'SALE' %}
                             <li>
                                 <a href="{{ product.get_absolute_url }}">{{ product.producttype }}: {{ product.name }}</a>
                             </li>
