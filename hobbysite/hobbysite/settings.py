@@ -27,7 +27,8 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['hobbysite-app-mquq4.ondigitalocean.app']
+ALLOWED_HOSTS = []
+
 
 # Application definition
 
@@ -83,21 +84,13 @@ WSGI_APPLICATION = 'hobbysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-from urllib.parse import urlparse
-DATABASE_URL = os.environ.get('DATABASE_URL')
-db_info = urlparse(DATABASE_URL)
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'db',
-        'USER': db_info.username,
-        'PASSWORD': db_info.password,
-        'HOST': db_info.hostname,
-        'PORT': db_info.port,
-        'OPTIONS': {'sslmode': 'require'},
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -134,9 +127,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
