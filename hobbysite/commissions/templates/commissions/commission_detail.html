@@ -37,29 +37,32 @@
     <div class="container">
         {% for job in object.jobs.all %}
         <div class="container p-4 border rounded bg-light shadow">
-        <p>
-            <h4><b>{{job.role}}</b></h4>
-            Number of People: {{job.manpowerRequired}} <br>
-            Status: {{job.get_status_display}}
-            {% if request.user.is_authenticated%}
-            {% if request.user.profile != object.author %}
-            {% if job.id in applied_job_ids %}
-            <br>
-            <b>Applied</b> <br>
-            {% else %}
-            <form method="POST">
-                {% csrf_token %}
-                <input type="hidden" name="job_id" value="{{ job.id }}">
-                {{ form.as_p }}
-                <button class="btn btn-primary" type="submit">Apply Job</button>
-            </form>
-            {% endif %}
-            {% else %}
-            <br>
-            <a class="btn btn-primary ml-5" href={{job.get_absolute_url}}>Check Applicants</a>
-            {% endif %}
-            {% endif %}
-        </p>
+            <p>
+                <h4><b>{{job.role}}</b></h4>
+                Number of People: {{job.manpowerRequired}} <br>
+                Status: {{job.get_status_display}}
+                <br>
+                {% if request.user.is_authenticated%}
+                {% if request.user.profile != object.author %}
+                {% if job.id in applied_job_ids %}
+
+                <b>Applied</b> <br>
+                {% elif job.status == 'F' %}
+                <b>All slots taken</b> <br>
+                {% else %}
+                <form method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="job_id" value="{{ job.id }}">
+                    {{ form.as_p }}
+                    <button class="btn btn-primary" type="submit">Apply Job</button>
+                </form>
+                {% endif %}
+                {% else %}
+                <br>
+                <a class="btn btn-primary ml-5" href={{job.get_absolute_url}}>Check Applicants</a>
+                {% endif %}
+                {% endif %}
+            </p>
         </div>
         <br>
         {% endfor %}
