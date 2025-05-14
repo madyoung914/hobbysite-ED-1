@@ -6,17 +6,18 @@
 <div class="container app-content">
     <h2>My Cart</h2>
     <br>
-    
-    {% for transaction in object_list %}
-    {% if transaction.buyer.user == user %}
-        <h4>{{ transaction.product }}</h4>
-        <hr>
-        <li>Amount: {{ transaction.amount }}</li>
-        <li>Status: {{ transaction.status }}</li>
-        <li>Bought on: {{ transaction.created_on }}</li>
-        <br>
-    {% endif %}
 
+    {% regroup user_transactions by product.owner as owner_list %}
+    {% for owner in owner_list %}
+        <h3>{{ owner.grouper }}</h3>
+        <hr>
+            {% for transaction in owner.list %}
+                <h4>{{ transaction.product.name }}</h4>
+                <li>Amount: {{ transaction.amount }}</li>
+                <li>Status: {{ transaction.status }}</li>
+                <li>Bought on: {{ transaction.created_on }}</li>
+            <br>
+            {% endfor %}
     {% endfor %}
 
     <br>

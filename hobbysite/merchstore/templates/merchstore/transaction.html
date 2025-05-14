@@ -7,16 +7,17 @@
     <h2>My Transactions</h2>
     <br>
 
-    {% for transaction in object_list %}
-        {% if transaction.product.owner.user == user %}
-            <h4>{{ transaction.product }} bought by {{ transaction.buyer }}</h4>
-            <hr>
-            <li>Amount: {{ transaction.amount }}</li>
-            <li>Status: {{ transaction.status }}</li>
-            <li>Bought on: {{ transaction.created_on }}</li>
+    {% regroup user_transactions by buyer as buyer_list %}
+    {% for buyer in buyer_list %}
+        <h3>{{ buyer.grouper }}</h3>
+        <hr>
+            {% for transaction in buyer.list %}
+                <h4>{{ transaction.product }}</h4>
+                <li>Amount: {{ transaction.amount }}</li>
+                <li>Status: {{ transaction.status }}</li>
+                <li>Bought on: {{ transaction.created_on }}</li>
             <br>
-        {% endif %} 
-
+            {% endfor %}
     {% endfor %}
 
     <a class="btn btn-primary rounded-pill" href="{% url 'merchstore:merchstore-list' %}">Go back to products list</a>
