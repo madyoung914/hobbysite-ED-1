@@ -15,6 +15,7 @@
         <hr>
         <ul class="mt-4 mb-5">
 
+        {% if createdCommissions %}
             {% for commission in createdCommissions %}
             <li class="row mb-3">
                 <a class="col-sm-10 btn btn-item" href={{commission.get_absolute_url}}>
@@ -24,8 +25,11 @@
                     <p>{{commission.description}}</p>
                 </a> 
             </li>
-            
             {% endfor %}
+        {% else %}
+            <p>You have no created any commissions.</p>
+        {% endif %}
+
         </ul>
         {% if request.user.is_authenticated %}
         <div class="row mb-3">
@@ -39,6 +43,7 @@
         <h3 class="row category-header">Applied:</h3>
         <hr>
         <ul class="mt-4 mb-5">
+        {% if appliedCommissions %}
             {% for commission in appliedCommissions %}
             <li class="row mb-3">
                 <a class="col-sm-10 btn btn-item" href={{commission.get_absolute_url}}>
@@ -48,8 +53,10 @@
                     <p>{{commission.description}}</p>
                 </a>
             </li>
-            
             {% endfor %}
+        {% else %}
+            <p>You have not applied to any commissions.</p>
+        {% endif %}
         </ul>
 
 
