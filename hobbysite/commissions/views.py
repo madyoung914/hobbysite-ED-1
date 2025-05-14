@@ -46,6 +46,19 @@ class CommissionDetailView(DetailView):
             user_profile = self.request.user.profile
             applied_job_ids = JobApplication.objects.filter(applicant=user_profile).values_list('job_id', flat=True)
 
+            ManpowerRequired = 0
+            TakenSlots = 0
+
+            for job in self.object.jobs.all():
+                ManpowerRequired += job.manpowerRequired
+                for jobApp in job.jobApplication.all():
+                    if jobApp.status == 'A':
+                        TakenSlots+=1
+
+            AvlSlots = ManpowerRequired-TakenSlots
+
+            ctx['ManpowerRequired'] = ManpowerRequired
+            ctx['AvlSlots'] = AvlSlots
             ctx['applied_job_ids'] = set(applied_job_ids)
             ctx['form'] = JobApplicationForm()
         return ctx

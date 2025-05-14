@@ -26,7 +26,7 @@ class Commission(models.Model):
                     default=models.Value(5),
                     output_field=models.IntegerField(),
                 )
-            ).order_by('status_order')
+            ).order_by('status_order', '-createdOn')
 
     title = models.CharField(max_length=255)
     description = models.TextField()
@@ -99,6 +99,21 @@ class JobApplication(models.Model):
         PENDING = 'P', 'Pending'
         ACCEPTED = 'A', 'Accepted'
         REJECTED = 'R', 'Rejected'
+    
+    class JobAppManager(models.Manager):
+        def get_queryset(self):
+            return super().get_queryset().annotate(
+                status_order=models.Case(
+                    models.When(status=JobApplication.AppStatus.PENDING,
+                                then=models.Value(1)),
+                    models.When(status=JobApplication.AppStatus.ACCEPTED,
+                                then=models.Value(2)),
+                    models.When(status=JobApplication.AppStatus.REJECTED,
+                                then=models.Value(3)),
+                    default=models.Value(4),
+                    output_field=models.IntegerField(),
+                )
+            ).order_by('status_order','appliedOn')
 
     job = models.ForeignKey(
         Job,
@@ -118,5 +133,5 @@ class JobApplication(models.Model):
     )
     appliedOn = models.DateTimeField(auto_now_add=True)
 
-    class Meta:
-        ordering = ['-appliedOn']
+    objects = JobAppManager()
+    
