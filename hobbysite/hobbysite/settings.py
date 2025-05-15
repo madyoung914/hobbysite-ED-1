@@ -133,11 +133,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'https://%s/%s/' % (AWS_S3_ENDPOINT_URL, 'hobbysite-static')
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 from .cdn.conf import * #noqa
+
+STATIC_URL = 'https://%s/%s/' % (AWS_S3_ENDPOINT_URL, 'hobbysite-static')
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
