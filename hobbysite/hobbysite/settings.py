@@ -136,7 +136,6 @@ USE_TZ = True
 
 #STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-from .cdn.conf import * #noqa
 
 STATIC_URL = f"{AWS_S3_ENDPOINT_URL}/static/"
 MEDIA_URL = f"{AWS_S3_ENDPOINT_URL}/media/"
@@ -154,3 +153,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #MEDIA_ROOT = BASE_DIR/'staticfiles'/"uploads"
 #MEDIA_URL = '/media/'
+from .cdn.conf import * #noqa
+
