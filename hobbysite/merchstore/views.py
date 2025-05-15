@@ -12,19 +12,20 @@ from user_management.models import Profile
 class ProductTypeListView(ListView):
     model = ProductType
     template_name = "merchstore/merch_list.html"
+
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        
         if self.request.user.is_authenticated:
-            MadeProduct = self.request.user.profile.products.all().count() 
-            OnSaleProduct = self.request.user.profile.products.filter(status='SALE').count()
+            MadeProduct = self.request.user.profile.products.all().count()
+            OnSaleProduct = self.request.user.profile.products.filter(
+                status='SALE').count()
 
             hasProduct = False
             hasSale = False
 
-            if MadeProduct-OnSaleProduct >0:
+            if MadeProduct - OnSaleProduct > 0:
                 hasProduct = True
-            if OnSaleProduct>0:
+            if OnSaleProduct > 0:
                 hasSale = True
             ctx['hasProduct'] = hasProduct
             ctx['hasSale'] = hasSale
@@ -43,7 +44,8 @@ class ProductDetailView(DetailView):
 
     def process_transaction_form(self, form_data):
         form = TransactionForm(form_data)
-        if form.is_valid() and form.instance.amount <= self.object.stock and form.instance.amount != 0:
+        if (form.is_valid() and form.instance.amount <= self.object.stock
+                and form.instance.amount != 0):
             self.object.stock -= form.instance.amount
 
             transaction = form.save(commit=False)
@@ -91,14 +93,16 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.owner = self.request.user.profile
         if form.instance.sale_percent:
-                form.instance.sale_price = form.instance.price - (form.instance.price * (form.instance.sale_percent)/100)
-                form.instance.status = 'SALE'
+            form.instance.sale_price = form.instance.price - (
+                form.instance.price * (form.instance.sale_percent)/100
+                )
+            form.instance.status = 'SALE'
         else:
             form.instance.status = 'AVL'
 
         if form.instance.stock == 0:
             form.instance.status = 'OOS'
-            
+
         form.save()
         return super().form_valid(form)
 
@@ -114,14 +118,16 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
 
     def form_valid(self, form):
         if form.instance.sale_percent:
-                form.instance.sale_price = self.object.price - (self.object.price * (form.instance.sale_percent)/100)
-                form.instance.status = 'SALE'
+            form.instance.sale_price = self.object.price - (
+                self.object.price * (form.instance.sale_percent)/100
+                )
+            form.instance.status = 'SALE'
         else:
             form.instance.status = 'AVL'
 
         if form.instance.stock == 0:
             form.instance.status = 'OOS'
-            
+
         form.save()
         return super().form_valid(form)
 
@@ -137,7 +143,8 @@ class CartView (LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         transaction_buyer = Profile.objects.get(user=self.request.user)
-        ctx['user_transactions'] = Transaction.objects.filter(buyer = transaction_buyer)
+        ctx['user_transactions'] = Transaction.objects.filter(
+            buyer=transaction_buyer)
         return ctx
 
 
@@ -148,7 +155,8 @@ class TransactionListView (LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         transaction_owner = Profile.objects.get(user=self.request.user)
-        
-        ctx['user_transactions'] = Transaction.objects.filter(product__owner = transaction_owner).order_by('-created_on')
+
+        ctx['user_transactions'] = Transaction.objects.filter(
+            product__owner=transaction_owner).order_by('-created_on')
 
         return ctx

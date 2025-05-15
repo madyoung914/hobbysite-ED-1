@@ -42,7 +42,8 @@ class ArticleDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         article = self.get_object()
-        comments = Comment.objects.filter(article=article).order_by('-created_on')
+        comments = Comment.objects.filter(article=article).order_by(
+            '-created_on')
 
         related_articles = Article.objects.filter(
             category=article.category
@@ -129,7 +130,7 @@ class ArticleUpdateView(LoginRequiredMixin, UpdateView):
 class ImageGalleryView(LoginRequiredMixin, CreateView):
     model = ImageGallery
     fields = ['image', 'description']
-    template_name = 'wiki/image_gallery.html'  
+    template_name = 'wiki/image_gallery.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -138,7 +139,9 @@ class ImageGalleryView(LoginRequiredMixin, CreateView):
         return context
 
     def form_valid(self, form):
-        form.instance.article = get_object_or_404(Article, pk=self.kwargs['pk'])
+        form.instance.article = get_object_or_404(
+            Article, pk=self.kwargs['pk']
+            )
         return super().form_valid(form)
 
     def get_success_url(self):

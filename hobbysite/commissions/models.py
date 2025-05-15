@@ -136,3 +136,6 @@ class JobApplication(models.Model):
     applied_on = models.DateTimeField(auto_now_add=True)
 
     objects = JobAppManager()
+
+    def __str__(self):
+        return f"Application of {self.applicant} for {self.job}"

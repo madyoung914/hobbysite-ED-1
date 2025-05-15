@@ -15,5 +15,5 @@ class ThreadForm(forms.ModelForm):
     class Meta:
         model = Thread
         exclude = ['author', 'image']
-    
+
     image = forms.ImageField(required=False)
