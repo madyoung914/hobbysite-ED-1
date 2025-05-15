@@ -134,11 +134,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+#STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 from .cdn.conf import * #noqa
 
-STATIC_URL = AWS_S3_ENDPOINT_URL
+STATIC_URL = f"{AWS_S3_ENDPOINT_URL}/static/"
+MEDIA_URL = f"{AWS_S3_ENDPOINT_URL}/media/"
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
@@ -151,5 +152,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-MEDIA_ROOT = BASE_DIR/'staticfiles'/"uploads"
-MEDIA_URL = '/media/'
+#MEDIA_ROOT = BASE_DIR/'staticfiles'/"uploads"
+#MEDIA_URL = '/media/'
