@@ -22,7 +22,7 @@
         <h2>Applicants:</h2>
         <hr>
         
-            {% for application in object.jobApplication.all %}
+            {% for application in object.job_application.all %}
         <div class="container p-4 border rounded bg-light shadow my-2">
             <p>
                 <h4> {{application.applicant.name}}</h4>

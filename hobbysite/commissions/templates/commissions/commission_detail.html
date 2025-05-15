@@ -14,8 +14,8 @@
         </div>
         <div class="fs-6">
             Author: {{object.author}} - <a class="btn-author" href="{% url 'user_management:profile' username=object.author.user.username %}">@{{ object.author.user }}</a><br>
-            Created On: {{object.createdOn}}<br>
-            Updated On: {{object.updatedOn}}<br>
+            Created On: {{object.created_on}}<br>
+            Updated On: {{object.updated_on}}<br>
         </div>
         
         <p class="fs-5">
@@ -39,7 +39,7 @@
         <div class="container p-4 border rounded bg-light shadow">
             <p>
                 <h4><b>{{job.role}}</b></h4>
-                Number of People: {{job.manpowerRequired}} <br>
+                Number of People: {{job.manpower_required}} <br>
                 Status: {{job.get_status_display}}
                 <br>
                 {% if request.user.is_authenticated%}

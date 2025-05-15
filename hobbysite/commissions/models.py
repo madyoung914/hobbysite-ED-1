@@ -38,11 +38,11 @@ class Commission(models.Model):
     )
     author = models.ForeignKey(
         Profile,
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
         null=True,
         related_name='commissions')
-    created_on = models.DateTimeField(auto_now_add=True)#
-    updated_on = models.DateTimeField(auto_now=True)#
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title
@@ -78,13 +78,13 @@ class Job(models.Model):
         related_name='jobs'
     )
     role = models.CharField(max_length=255)
-    manpower_required = models.IntegerField()#
+    manpower_required = models.PositiveIntegerField()
     status = models.CharField(
         max_length=255,
         choices=JobStatus.choices,
         default=JobStatus.OPEN
     )
-    created_on = models.DateTimeField(auto_now_add=True)#
+    created_on = models.DateTimeField(auto_now_add=True)
 
     objects = JobManager()
 
@@ -133,6 +133,6 @@ class JobApplication(models.Model):
         choices=AppStatus.choices,
         default=AppStatus.PENDING
     )
-    applied_on = models.DateTimeField(auto_now_add=True)#
+    applied_on = models.DateTimeField(auto_now_add=True)
 
     objects = JobAppManager()
