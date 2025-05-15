@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages',
     'wiki',
     'forum',
     'merchstore',
@@ -129,11 +130,25 @@ USE_I18N = True
 
 USE_TZ = True
 
+AUTH_USER_MODEL = 'account.Account'
+
+
+
+AWS_ACCESS_KEY_ID = 'DO00WKTP2VAMYBVQMK2C'
+AWS_SECRET_ACCESS_KEY = 'jKgcNlNYtV4bjGnE+DhcWkMKhmh3qt/h2iXIUy5ESOc'
+AWS_STORAGE_BUCKET_NAME = 'hobbysite-space'
+AWS_S3_ENDPOINT_URL = 'https://hobbysite-space.sgp1.digitaloceanspaces.com'
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+AWS_LOCATION = 'hobbysite-static'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'https://%s/%s/' % (AWS_S3_ENDPOINT_URL, AWS_LOCATION)
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
