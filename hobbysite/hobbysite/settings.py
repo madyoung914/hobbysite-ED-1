@@ -144,8 +144,8 @@ AWS_S3_OBJECT_PARAMETERS = {
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
-STATIC_URL = '%s' % (AWS_S3_ENDPOINT_URL)
-MEDIA_URL = '%s' % (AWS_S3_ENDPOINT_URL)
+STATIC_URL = '%s/static' % (AWS_S3_ENDPOINT_URL)
+MEDIA_URL = '%s/media' % (AWS_S3_ENDPOINT_URL)
 
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
