@@ -138,7 +138,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 from .cdn.conf import * #noqa
 
-STATIC_URL = 'https://%s/%s/' % (AWS_S3_ENDPOINT_URL, 'hobbysite-static')
+STATIC_URL = 'AWS_S3_ENDPOINT_URL'
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
