@@ -10,6 +10,8 @@
 
     <div class="container-fluid mx-0 app-content">
         <div class="container">
+        
+        {% if request.user.is_authenticated %}
             <hr>
             <h3 class="row category-header">Your Articles</h3>
             <hr>
@@ -29,6 +31,7 @@
             <div class="row">
                 <a class="col-sm-4 offset-4 btn btn-primary mt-5" href="{% url 'blog:article-add' %}"> Create a new Article </a>
             </div>
+        {% endif %}
         </div>
 
         <div class="container">

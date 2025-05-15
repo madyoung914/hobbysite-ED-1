@@ -75,7 +75,7 @@
             {% for thread in threads %}
             <li><a href={{ thread.get_absolute_url }}> {{ thread.title }} </a></li>
             {% endfor %}
-            <a class="col-sm-4 offset-4 btn btn-primary mt-5" href="{% url 'forum:thread-add' %}"> Create a new Article </a>
+            <a class="col-sm-4 offset-4 btn btn-primary mt-5" href="{% url 'forum:thread-add' %}"> Create a new Thread </a>
             <br>
         </div>
         <div class="container p-4 border rounded bg-light shadow my-4 border-dark">
@@ -83,7 +83,7 @@
             {% for commission in commissionsCreated %}
             <li><a href={{ commission.get_absolute_url }}> {{ commission.title }} </a></li>
             {% endfor %}
-            <a class="col-sm-4 offset-4 btn btn-primary mt-5" href="{% url 'commissions:commission-add' %}"> Create a new Article </a>
+            <a class="col-sm-4 offset-4 btn btn-primary mt-5" href="{% url 'commissions:commission-add' %}"> Create a new Commission </a>
             <br>
         </div>
         <div class="container p-4 border rounded bg-light shadow my-4 border-dark">
