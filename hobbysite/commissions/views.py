@@ -41,24 +41,26 @@ class CommissionDetailView(DetailView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
 
+        manpower_required = 0
+        taken_slots = 0
+
+        for job in self.object.jobs.all():
+            manpower_required += job.manpower_required
+            for job_app in job.job_application.all():
+                if job_app.status == 'A':
+                    taken_slots += 1
+
+        avl_slots = manpower_required-taken_slots
+
+        ctx['ManpowerRequired'] = manpower_required
+        ctx['AvlSlots'] = avl_slots
+
         if (self.request.user.is_authenticated):
             user_profile = self.request.user.profile
             applied_job_ids = JobApplication.objects.filter(
                 applicant=user_profile).values_list('job_id', flat=True)
 
-            manpower_required = 0
-            taken_slots = 0
-
-            for job in self.object.jobs.all():
-                manpower_required += job.manpower_required
-                for job_app in job.job_application.all():
-                    if job_app.status == 'A':
-                        taken_slots += 1
-
-            avl_slots = manpower_required-taken_slots
-
-            ctx['ManpowerRequired'] = manpower_required
-            ctx['AvlSlots'] = avl_slots
+            
             ctx['applied_job_ids'] = set(applied_job_ids)
             ctx['form'] = JobApplicationForm()
         return ctx
