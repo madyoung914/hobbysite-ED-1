@@ -143,8 +143,25 @@ class CreateCommissionView(LoginRequiredMixin, CreateView):
     form_class = CommissionForm
     template_name = 'commissions/commission_add.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.POST:
+            context['job_formset'] = JobFormSet(
+                self.request.POST, instance=self.object)
+        else:
+            context['job_formset'] = JobFormSet(instance=self.object)
+        return context
+
     def form_valid(self, form):
         form.instance.author = self.request.user.profile
+
+        context = self.get_context_data()
+        job_formset = context['job_formset']
+        if job_formset.is_valid():
+            self.object = form.save()
+            job_formset.instance = self.object
+            job_formset.save()
+
         return super().form_valid(form)
 
     def get_success_url(self):

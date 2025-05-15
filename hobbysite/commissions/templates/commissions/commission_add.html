@@ -6,6 +6,22 @@
     <h4>Create new Commission</h4>
     {% csrf_token %}
     {{ form.as_p }}
+
+    <br>
+
+    <p>
+        Jobs:
+
+        {{ job_formset.management_form }}
+        {% for form in job_formset %}
+        <div class="container p-4 border rounded bg-light shadow my-2 border-dark">
+            {{ form.as_p }}
+            <br>
+
+        </div>
+    </p>
+    {% endfor %}
+
     <button class="btn btn-primary rounded-pill" type="submit">Submit</button>
 </form>
 
