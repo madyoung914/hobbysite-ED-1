@@ -133,26 +133,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-from .cdn.conf import * #noqa
-
-STATIC_URL = f"{AWS_S3_ENDPOINT_URL}/static/"
-MEDIA_URL = f"{AWS_S3_ENDPOINT_URL}/media/"
+AWS_ACCESS_KEY_ID=os.environ.get("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = '5Npq/S/7tX2IqBl51p3QEAMJuuGvHuFH4680Cl59M3s'
+AWS_STORAGE_BUCKET_NAME=os.environ.get("AWS_STORAGE_BUCKET_NAME")
+AWS_S3_ENDPOINT_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.sgp1.digitaloceanspaces.com'
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    os.path.join(BASE_DIR, 'static'),
 ]
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+STATIC_URL = '%s' % (AWS_S3_ENDPOINT_URL)
+MEDIA_URL = '%s' % (AWS_S3_ENDPOINT_URL)
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-#MEDIA_ROOT = BASE_DIR/'staticfiles'/"uploads"
-#MEDIA_URL = '/media/'
-print(STATICFILES_STORAGE)
-
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
