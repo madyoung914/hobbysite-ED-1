@@ -7,7 +7,7 @@ from merchstore.models import Transaction
 
 class TransactionInline(admin.TabularInline):
     model = Transaction
-    
+
 
 class ProfileInline(admin.StackedInline):
     model = Profile
