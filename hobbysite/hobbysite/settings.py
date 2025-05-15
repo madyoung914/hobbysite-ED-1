@@ -130,8 +130,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-AUTH_USER_MODEL = 'account.Account'
-
+AUTH_USER_MODEL = 'user_management.Profile.user'
 
 
 AWS_ACCESS_KEY_ID = 'DO00WKTP2VAMYBVQMK2C'
