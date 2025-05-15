@@ -132,21 +132,14 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-AWS_ACCESS_KEY_ID=os.environ.get("AWS_ACCESS_KEY_ID")
-AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
-AWS_STORAGE_BUCKET_NAME=os.environ.get("AWS_STORAGE_BUCKET_NAME")
-AWS_S3_ENDPOINT_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.sgp1.digitaloceanspaces.com'
-AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400',
-}
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
-STATIC_URL = f'{AWS_S3_ENDPOINT_URL}/static/'
-MEDIA_URL = f'{AWS_S3_ENDPOINT_URL}/media/'
 
-STATICFILES_STORAGE = 'hobbysite.cdn.backends.StaticRootS3Boto3Storage'
-DEFAULT_FILE_STORAGE = 'hobbysite.cdn.backends.MediaRootS3Boto3Storage'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+from .cdn.conf import * #noqa
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
