@@ -38,7 +38,7 @@ class Product(models.Model):
                                     null=True,
                                     related_name="type")
     owner = models.ForeignKey(Profile,
-                              on_delete=models.CASCADE, null=True,
+                              on_delete=models.CASCADE, null=False,
                               related_name='products')
     stock = models.PositiveIntegerField()
     status = models.CharField(max_length=15,
