@@ -45,7 +45,7 @@ class Product(models.Model):
                               choices=PRODUCT_STATUS,
                               default="AVL")
     merch_image = models.ImageField(
-        upload_to='merchstore/',
+        upload_to='/images/merchstore/',
         null=True,
         blank=True,
     )
