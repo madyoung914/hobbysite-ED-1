@@ -57,5 +57,8 @@ class Comment(models.Model):
     created_on = models.DateTimeField(auto_now_add=True, null=True)
     updated_on = models.DateTimeField(auto_now=True, null=True)
 
+    def __str__(self):
+        return f"Comment by {self.author} on {self.thread}"
+
     class Meta:
         ordering = ['created_on']
