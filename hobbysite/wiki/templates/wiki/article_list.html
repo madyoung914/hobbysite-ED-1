@@ -10,6 +10,7 @@
        
     <div class="container-fluid mx-0 app-content">
         <div class="container">
+        {% if request.user.is_authenticated %}
             <hr>
             <h3 class="row category-header">Your Articles</h3>
             <hr>
@@ -31,6 +32,7 @@
             </div>
         </div>
 
+        {% endif %}
         <div class="container">
             <hr>
             <h3 class="row category-header">All Articles</h3>
