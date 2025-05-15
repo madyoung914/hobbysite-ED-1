@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
+from urllib.parse import urlparse
 import os
 from pathlib import Path
 from dotenv import load_dotenv
@@ -84,7 +85,6 @@ WSGI_APPLICATION = 'hobbysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-from urllib.parse import urlparse
 DATABASE_URL = os.environ.get('DATABASE_URL')
 db_info = urlparse(DATABASE_URL)
 
@@ -132,6 +132,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
+
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
@@ -140,6 +141,6 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-from .cdn.conf import * #noqa
+from .cdn.conf import *  # noqa
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
